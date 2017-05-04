@@ -1070,12 +1070,22 @@
                         <legend>Advantages and Perks</legend>
                         <article class="row align-items-end">
                             <div class="form-group col">
-                                <label for="advantage0">Acute Hearing (2pts/level)</label>
+                                <label for="advantage0">Acute Hearing (2pts/level):
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Acute Sense"
+                                       data-content="Each Acute Sense is a separate advantage
+                                                that gives +1 per level to all Sense rolls
+                                                you make – or the GM makes
+                                                for you – using that one sense."
+
+                                    ></i>
+                                </label>
                                 <input type="number" inputmode="numeric"
                                        class="form-control"
                                        name="advantage[0]" id="advantage0" value="0"
                                        min="0"
                                        data-costper="2" data-previous="0">
+
 
                             </div>
                             <div class="form-group col">
@@ -1103,24 +1113,77 @@
                                        data-costper="2" data-previous="0">
                             </div>
                             <div class="form-group col">
-                                <label for="advantage19">Hard to Kill (2pts/level):</label>
+                                <label for="advantage19">Hard to Kill (2pts/level, Max 2):
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Hard to Kill"
+                                       data-content="You are incredibly difficult to kill.
+                                    Each level of Hard to Kill gives +1 to
+                                    HT rolls made for survival at -HP or
+                                    below, and on any HT roll where failure
+                                    means instant death (due to heart
+                                    failure, poison, etc.). If this bonus
+                                    makes the difference between success
+                                    and failure, you collapse, apparently
+                                    dead (or disabled), but come to in the
+                                    usual amount of time."
+
+                                    ></i>
+
+                                </label>
                                 <input type="number"
+                                       min="0" max="2"
                                        inputmode="numeric"
                                        class="form-control"
                                        name="advantage[19]" id="advantage19" value="0"
                                        data-costper="2" data-previous="0">
                             </div>
                             <div class="form-group col">
-                                <label for="advantage27">Night Vision (1pt/level)</label>
+                                <label for="advantage27">Night Vision (1pt/level, Max 9)
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Night Vision"
+                                       data-content="Your eyes adapt rapidly to darkness.
+                                                    Each level of this ability (maximum
+                                                    nine levels) allows you to ignore
+                                                    -1 in combat or vision penalties due to
+                                                    darkness, provided there is at least
+                                                    some light.
+                                                    Example: Night Vision 4 would
+                                                    completely eliminate darkness penalties
+                                                    up to -4, and would reduce a
+                                                    penalty of -7 to only -3.
+                                                    Regardless of level, Night Vision
+                                                    only works in partial darkness. It has
+                                                    no effect on the -10 for total darkness
+                                                    (for that, get Dark Vision."
+
+                                    ></i>
+
+                                </label>
                                 <input type="number"
                                        class="form-control"
                                        inputmode="numeric"
                                        min="0"
+                                       max="9"
                                        name="advantage[27]" id="advantage27" value="0"
                                        data-costper="1" data-previous="0">
                             </div>
                             <div class="form-group col">
-                                <label for="advantage16">Fearlessness (2pts/level)</label>
+                                <label for="advantage16">Fearlessness (2pts/level)
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Night Vision"
+                                       data-content=" You are difficult to frighten or
+                                                    intimidate! Add your level of
+                                                    Fearlessness to your Will whenever
+                                                    you make a Fright Check or must
+                                                    resist the Intimidation skill.
+                                                    You also subtract your
+                                                    Fearlessness level from all Intimidation
+                                                    rolls made against you.  You cannot have both
+                                                    fearlessness and fearfulness."
+
+                                    ></i>
+
+                                </label>
                                 <input type="number"
                                        class="form-control"
                                        inputmode="numeric"
@@ -1129,7 +1192,7 @@
                             </div>
 
                         </article>
-                        <article class="row">
+                        <article class="row align-items-start">
                             <div class="form-check col">
                                 <label for="advantage4" class="form-check-label custom-control custom-checkbox">
                                     <input type="checkbox"
@@ -1137,7 +1200,20 @@
                                            name="advantage[4]" id="advantage4" value="on" data-cost="5"
                                            data-previous="0">
                                     <span class="custom-control-indicator"></span>
-                                    Ambidextrous (5pts)
+                                    Ambidexterity (5pts)
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Night Vision"
+                                       data-content="You can fight or otherwise act
+                                                    equally well with either hand, and
+                                                    never suffer the -4 DX penalty for
+                                                    using the “off” hand. Note
+                                                    that this does not allow you to take
+                                                    extra actions in combat – that’s Extra
+                                                    Attack. Should some accident
+                                                    befall one of your arms or hands,
+                                                    assume it is the left one."
+
+                                    ></i>
                                 </label>
                             </div>
                             <div class="form-check col">
@@ -1149,6 +1225,28 @@
                                            data-previous="0">
                                     <span class="custom-control-indicator"></span>
                                     Animal Empathy (5pts)
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Night Vision"
+                                       data-content="You are unusually talented at reading
+                                                    the motivations of animals. When
+                                                    you meet an animal, the GM rolls
+                                                    against your IQ and tells you what you
+                                                    “feel.” This reveals the beast’s emotional
+                                                    state – friendly, frightened, hostile,
+                                                    hungry, etc. – and whether it is
+                                                    under supernatural control. You may
+                                                    also use your Influence skills on animals
+                                                    just as you would
+                                                    on sapient beings, which usually
+                                                    ensures a positive reaction.
+                                                    This ability frequently accompanies
+                                                    some level of Animal Friend,
+                                                    and often Sense of Duty
+                                                    (Animals) or Vow (Vegetarianism)."
+
+                                    ></i>
+
+
                                 </label>
                             </div>
                             <div class="form-check col">
@@ -1158,6 +1256,19 @@
                                            data-previous="0">
                                     <span class="custom-control-indicator"></span>
                                     Catfall (10pts)
+
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Catfall"
+                                       data-content="You subtract five yards from a fall
+                                                    automatically (treat this as an automatic
+                                                    Acrobatics success – don’t check
+                                                    again for it). In addition, a successful
+                                                    DX roll halves damage from any fall.
+                                                    To enjoy these benefits, your limbs
+                                                    must be unbound and your body free
+                                                    to twist as you fall."
+
+                                    ></i>
                                 </label>
                             </div>
                             <div class="form-check col">
@@ -1168,7 +1279,25 @@
                                             data-cost="15"
                                             data-previous="0">
                                     <span class="custom-control-indicator"></span>
-                                    Combat Reflexes (15pts)
+                                    Combat Reflexes (15pts) <i class="fa fa-question-circle"
+                                                               data-toggle="popover" data-trigger="hover" title="Combat Reflexes"
+                                                               data-content="You have extraordinary reactions,
+                                                                            and are rarely surprised for more than
+                                                                            a moment. You get +1 to all active
+                                                                            defense rolls,
+                                                                            +1 to Fast-Draw skill, and +2 to Fright
+                                                                            Checks. You never “freeze” in a surprise situation,
+                                                                            and get +6 on all IQ rolls to wake up,
+                                                                            or to recover from surprise or mental
+                                                                            'stun.' Your side gets +1 on initiative
+                                                                            rolls to avoid a surprise attack – +2 if
+                                                                            you are the leader.
+                                                                            Combat Reflexes is included in
+                                                                            Enhanced Time Sense. If you
+                                                                            have ETS, you cannot also take
+                                                                            Combat Reflexes."
+
+                                ></i>
                                 </label>
                             </div>
                             <div class="form-check col">
@@ -1179,7 +1308,27 @@
                                             data-cost="15"
                                             data-previous="0">
                                     <span class="custom-control-indicator"></span>
-                                    Danger Sense (15pts)
+                                    Danger Sense (15pts) <i class="fa fa-question-circle"
+                                                            data-toggle="popover" data-trigger="hover" title="Combat Reflexes"
+                                                            data-content="You can’t depend on it, but sometimes
+                                                                            you get this prickly feeling right
+                                                                            at the back of your neck, and you
+                                                                            know something’s wrong . . . If you
+                                                                            have Danger Sense, the GM rolls
+                                                                            once against your Perception, secretly,
+                                                                            in any situation involving an
+                                                                            ambush, impending disaster, or similar
+                                                                            hazard. On a success, you get
+                                                                            enough of a warning that you can
+                                                                            take action. A roll of 3 or 4 means you
+                                                                            get a little detail as to the nature of
+                                                                            the danger.
+                                                                            Danger Sense is included in
+                                                                            Precognition; if you have the
+                                                                            latter trait, you cannot also have
+                                                                            Danger Sense."></i>
+
+
                                 </label>
                             </div>
 
@@ -1192,7 +1341,17 @@
                                            id="advantage9" value="on" data-cost="15"
                                            data-previous="0">
                                     <span class="custom-control-indicator"></span>
-                                    Daredevil (15pts)
+                                    Daredevil (15pts) <i class="fa fa-question-circle"
+                                                         data-toggle="popover" data-trigger="hover" title="Combat Reflexes"
+                                                         data-content="Fortune seems to smile on you
+                                                                        when you take risks! Any time you
+                                                                        take an unnecessary risk (in the GM’s
+                                                                        opinion), you get a +1 to all skill rolls.
+                                                                        Furthermore, you may reroll any critical
+                                                                        failure that occurs during such
+                                                                        high-risk behavior."></i>
+
+
                                 </label>
                             </div>
 
@@ -1204,7 +1363,25 @@
                                            name="advantage[10]" id="advantage10" value="on"
                                            data-cost="15" data-previous="0">
                                     <span class="custom-control-indicator"></span>
-                                    Empathy (15pts)
+                                    Empathy
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Empathy"
+                                       data-content="You have a “feeling” for people.
+                                                    When you first meet someone – or are
+                                                    reunited after an absence – you may
+                                                    ask the GM to roll against your IQ. He
+                                                    will tell you what you “feel” about that
+                                                    person. On a failed IQ roll, he will lie!
+
+                                                    Your ability works at full
+                                                    IQ, and the bonus to Detect Lies,
+                                                    Fortune-Telling, and Psychology is +3.
+
+                                                    This advantage works only on sapient
+                                                    (IQ 6+), natural beings."></i>
+
+
+
                                 </label>
                             </div>
                             <div class="form-check col">
@@ -1215,7 +1392,15 @@
                                             type="checkbox" name="advantage[11]" id="advantage11" value="on"
                                             data-cost="5" data-previous="0">
                                     <span class="custom-control-indicator"></span>
-                                    Enhanced Block (5pts)
+                                    Enhanced Block
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Enhanced Block"
+                                       data-content="You have +1 to
+                                                    your Block score with either Cloak or
+                                                    Shield skill. You must specialize in
+                                                    one particular Block defense."></i>
+
+
                                 </label>
                             </div>
                             <div class="form-check col">
@@ -1227,6 +1412,10 @@
                                             data-cost="15" data-previous="0">
                                     <span class="custom-control-indicator"></span>
                                     Enhanced Dodge (15pts)
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Enhanced Dodge"
+                                       data-content="You have +1 to
+                                                     your Dodge score."></i>
                                 </label>
                             </div>
                             <div class="form-check col">
@@ -1237,6 +1426,12 @@
                                             data-cost="5" data-previous="0">
                                     <span class="custom-control-indicator"></span>
                                     Enhanced Parry - Unarmed (5pts)
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Enhanced Parry (Unarmed)"
+                                       data-content="You have +1 to
+                                                    your Parry score for bare hands.  You must be an expert in
+                                                    either brawling or Karate to take this skill."></i>
+
                                 </label>
                             </div>
                             <div class="w-100"></div>
@@ -1248,7 +1443,12 @@
                                             type="checkbox" name="advantage[14]" id="advantage14" value="on"
                                             data-cost="5" data-previous="0">
                                     <span class="custom-control-indicator"></span>
-                                    Enhanced Parry - one Melee Weapon (5pts)
+                                    Enhanced Parry - One Melee (5pts)
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Enhanced Parry (Unarmed)"
+                                       data-content="You have +1 to
+                                                    your Parry score for one type of melee fighting.  You must be an expert in
+                                                    one form of Melee weapons to take this skill."></i>
                                 </label>
                             </div>
                             <div class="form-check col">
@@ -1259,7 +1459,13 @@
                                             type="checkbox" name="advantage[15]" id="advantage15" value="on"
                                             data-cost="10" data-previous="0">
                                     <span class="custom-control-indicator"></span>
-                                    <span class="labeltext">Enhanced Parry - all (10pts)</span>
+                                    <span class="labeltext">Enhanced Parry - all (10pts)
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Enhanced Parry (All)"
+                                       data-content="You have +1 to
+                                                    your Parry score for bare hands and melee.  You must be an expert in
+                                                    all forms of Melee weapons and either brawling/karate expert to take this skill."></i>
+                                    </span>
                                 </label>
                             </div>
 
@@ -1272,6 +1478,21 @@
                                            data-cost="5" data-previous="0">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Flexibility (5pts)</span>
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Flexibility"
+                                       data-content=" Your body is unusually flexible.
+
+                                                    You get +3 on Climbing
+                                                    rolls; on Escape rolls to get free of
+                                                    ropes, handcuffs, and similar
+                                                    restraints; on Erotic Art skill; and on
+                                                    all attempts to break free in close combat.
+                                                    You may ignore up to
+                                                    -3 in penalties for working in close
+                                                    quarters (including many Explosives
+                                                    and Mechanic rolls).  This is the weaker version of double-jointed,
+                                                    cannot claim both."></i>
+
                                 </label>
                             </div>
                             <div class="form-check col">
@@ -1282,6 +1503,17 @@
                                            data-cost="15" data-previous="0">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Double-Jointed (15pts)</span>
+                                    <i class="fa fa-question-circle"
+                                       data-toggle="popover" data-trigger="hover" title="Double-Jointed"
+                                       data-content=" You cannot stretch or
+                                                    squeeze yourself abnormally, but any
+                                                    part of your body may bend any way.
+                                                    You get +5 on Climbing, Erotic Art,
+                                                    and Escape rolls, and on attempts to
+                                                    break free. You may ignore up to -5 in
+                                                    penalties for close quarters.  This is the stronger version of flexibility,
+                                                    cannot claim both."></i>
+
                                 </label>
                             </div>
                             <div class="form-check col">
@@ -1445,7 +1677,9 @@
                                 </label>
                                 <input class="form-control"
                                        type="number" inputmode="numeric"
-                                       name="disadvantage[16]" id="disadvantage16" value="" size="3"
+                                       min="0"
+                                       max="9"
+                                       name="disadvantage[16]" id="disadvantage16" value="0"
                                        data-costper="-1">
                             </div>
                             <div class="col"></div>
@@ -2858,19 +3092,16 @@
     };
     Dropzone.options.preview = {
         init: function () {
-            var currentFile = null,
-                maxFilesReached = null;
             this.on("maxfilesexceeded", function(file) {
                 this.removeFile(currentFile);
             });
             this.on('maxfilesreached', function (file) {
-                maxFilesReached = true;
+
             });
             this.on("addedfile", function(file) {
-                if (maxFilesReached && currentFile) {
-                    this.removeFile(currentFile);
+                if (this.files[1]) {
+                    this.removeFile(this.files[0]);
                 }
-                currentFile = file;
             });
 
         },
