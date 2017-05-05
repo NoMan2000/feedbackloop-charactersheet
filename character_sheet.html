@@ -29,14 +29,42 @@
     <section class="container-fluid">
 
         <div class="row">
+            <section class="card col m-3">
+                <article class="card-block">
+                    <h4 class="card-title">How this page works</h4>
+                    <p>
+                        This page is designed to help you get up and running quickly with a new character build.
+                        All of the points and deductions are calculated <i>automatically</i>.  You can hover over
+                        the question marks or expand the details sections by clicking on the arrow to get more information, but you never
+                        need to worry about how to calculate statistics, how many points you have left, etc.  All of this will
+                        be handled automatically and reactively.  As you change something, everything will update accordingly.
+                        Anything hidden in a details section will automatically be updated when you change the appropriate stats.
+                        If you can't see it, you don't need to worry about it.
+                    </p>
+                    <p>
+                        Some attributes have a <span class="text-muted">Greyish text like this</span> on them.
+                        In those cases, the skills/attributes/etc. have been <i>disabled</i> for game play.  Some of the other
+                        attributes might not be immediately selectable.  They will not have a grey text on them.  This means that
+                        you either lack a <b>prerequisite</b> or have an <b>incompatible</b> talent.
+                    </p>
+                    <p>
+                        For a case of the former, you cannot be an expert in parrying in unarmed combat if you do not
+                        have an expert level in melee combat.  In the case of the latter, you cannot be bloodthirsty and also be a pacifist.
+                        You also cannot <i>stack</i> the same types of advantages or disadvantages.
+                    </p>
+                    <p>When you are done with the character creation, print it out and send it to me.  I will then input the
+                    scores into roll20 so that any rolls are done automatically.</p>
+
+                </article>
+            </section>
 
             <form name="character_sheet"
                   method="post"
                   action="#"
                   id="character_sheet"
                   class="col-sm-12">
-                <div id="fullInstructions" class="card alert-info">
-                    <details>
+                <div id="fullInstructions" class="card">
+                    <details class="card-block alert-info">
                         <summary>About Character Points</summary>
                         <div class="">
                             <dl>
@@ -59,14 +87,8 @@
                                 <dd>Gods.</dd>
                             </dl>
                         </div>
-                    <section id="instruction1" class="col-sm-12 card-block">
+                    <section id="instruction1" class="col-sm-12">
                         <h4>Character Points</h4>
-                        <div class="card">
-                        <details class="card-block alert-info">
-                            <summary>Character Points:</summary>
-
-                        </details>
-                        </div>
                         <table class="table table-striped">
                             <caption>Character points</caption>
                             <thead>
@@ -151,68 +173,16 @@
                         </div>
                     </section>
 
-                    <section id="instruction9">
-                        <table id="skillcosts" class="table table-striped">
-                            <caption>Skills</caption>
 
-                            <thead>
-                            <tr>
-                                <th>Skill level</th>
-                                <th>Easy cost</th>
-                                <th>Average cost</th>
-                                <th>Hard cost</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Attribute-3</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Attribute-2</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>Attribute-1</td>
-                                <td>0</td>
-                                <td>1</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>Attribute</td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <td>Attribute+1</td>
-                                <td>2</td>
-                                <td>4</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>Attribute+2</td>
-                                <td>4</td>
-                                <td>8</td>
-                                <td>12</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </section>
-                    <article>
-                        <p>Skills are rated in terms of difficulty to learn, from Easy through Average to
-                            Hard. Buying certain levels of a skill is dependant on the difficulty according
-                            to the table.
-                        </p>
-                    </article>
 
                     <section class="card alert-info">
                         <details class="card-block">
                             <summary>Glossary</summary>
+                            <p>Skills are rated in terms of difficulty to learn, from Easy through Average to
+                            Hard. Buying certain levels of a skill is dependant on the difficulty.  Like most things,
+                            starting off skills are generally pretty easy to get, but mastery is exceptionally difficult.
+                        </p>
+
                             <dl>
                                 <dt>Advantage:</dt>
                                 <dd>A useful trait that gives you an “edge” over another person
@@ -3071,6 +3041,56 @@
                                     7 16.2% 14 90.7%
                                     8 25.9% 15 95.4%
                                     9 37.5% 16+ 98.1%
+                                </table>
+                                <table id="skillcosts" class="table table-striped">
+                                    <caption>Skills</caption>
+
+                                    <thead>
+                                    <tr>
+                                        <th>Skill level</th>
+                                        <th>Easy cost</th>
+                                        <th>Average cost</th>
+                                        <th>Hard cost</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Attribute-3</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Attribute-2</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Attribute-1</td>
+                                        <td>0</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Attribute</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Attribute+1</td>
+                                        <td>2</td>
+                                        <td>4</td>
+                                        <td>8</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Attribute+2</td>
+                                        <td>4</td>
+                                        <td>8</td>
+                                        <td>12</td>
+                                    </tr>
+                                    </tbody>
                                 </table>
                             </details>
                         </div>
