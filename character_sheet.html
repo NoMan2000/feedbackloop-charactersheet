@@ -29,13 +29,44 @@
     <section class="container-fluid">
 
         <div class="row">
+
             <form name="character_sheet"
                   method="post"
                   action="#"
                   id="character_sheet"
                   class="col-sm-12">
-                <div id="fullInstructions">
-                    <section id="instruction1" class="col-sm-12">
+                <div id="fullInstructions" class="card alert-info">
+                    <details>
+                        <summary>About Character Points</summary>
+                        <div class="">
+                            <dl>
+                                <dt>Feeble:</dt>
+                                <dd>Small children,
+                                    mindless thralls, zombies, etc.</dd>
+                                <dt>Average:</dt>
+                                <dd>Ordinary people</dd>
+                                <dt>Competent:</dt>
+                                <dd>Athletes, cops, wealthy people</dd>
+                                <dt>Exceptional:</dt>
+                                <dd>Star athletes, seasoned cops, military</dd>
+                                <dt>Heroic:</dt>
+                                <dd>Special Operations, world-class scientists, millionairres</dd>
+                                <dt>Larger than life:</dt>
+                                <dd>Think Crouching Tiger-hidden dragon, Harry Dresden, The Demon Accords</dd>
+                                <dt>Legendary</dt>
+                                <dd>Beowulf, Merlin, etc.</dd>
+                                <dt>Supehuman</dt>
+                                <dd>Gods.</dd>
+                            </dl>
+                        </div>
+                    <section id="instruction1" class="col-sm-12 card-block">
+                        <h4>Character Points</h4>
+                        <div class="card">
+                        <details class="card-block alert-info">
+                            <summary>Character Points:</summary>
+
+                        </details>
+                        </div>
                         <table class="table table-striped">
                             <caption>Character points</caption>
                             <thead>
@@ -63,7 +94,9 @@
                             </tr>
                             </tbody>
                         </table>
+
                     </section>
+                    </details>
 
                     <section id="instruction2" class="card">
                         <div class="card-block">
@@ -79,7 +112,10 @@
                     <section id="instruction3" class="card">
                         <div class="card-block">
                             <h4 class="card-title">Secondary characteristics</h4>
-                            <p class="card-text">Secondary characteristics are calculated automatically.</p>
+                            <p class="card-text">Secondary characteristics are calculated automatically, which is to say they are
+                                                 automatically equal to the base level of their corresponding basic attribute.
+                                I.e. the number of hit points you have is directly related to how much health you have, and
+                                you cannot exceed or go below a certain limit for health points.</p>
                         </div>
                     </section>
                     <section id="instruction4" class="card">
@@ -89,15 +125,6 @@
                                 resonant
                                 voice or one
                                 or more odious personal habits then specify them here.</p>
-                        </div>
-                    </section>
-                    <section id="instruction5" class="card">
-                        <div class="card-block">
-                            <h4 class="card-title">Tech-level and Languages</h4>
-                            <p class="card-text">Here you specify how your character's technology knowledge relates to
-                                the
-                                technology
-                                level surrounding your character, and the character's literacy.</p>
                         </div>
                     </section>
                     <section id="instruction6" class="card">
@@ -113,15 +140,6 @@
                             <h4 class="card-title">Advantages and disadvantages</h4>
                             <p class="card-text">Choose the advantages and disadvantages your character has.
                                 Disadvantages total is limited to 50% of total points.
-                            </p>
-                        </div>
-                    </section>
-                    <section id="instruction8" class="card">
-                        <div class="card-block">
-                            <h4 class="card-title">Quirks</h4>
-                            <p class="card-text">You can add up to five 'quirks of character', each will give you an
-                                additional point to
-                                spend, like a -1 point disadvantage.
                             </p>
                         </div>
                     </section>
@@ -447,7 +465,7 @@
                         <div class="form-group col">
                             <label for="st">Strength (±10 pts):
                                 <i class="fa fa-question-circle"
-                                   data-toggle="popover" data-trigger="hover" title="Strength"
+                                   data-toggle="popover" data-trigger="hover" data-placement="right" title="Strength"
                                    data-content="Lifting and throwing things, moving
                                                  quickly with a load, etc. Strength directly
                                                  determines Basic Lift, basic damage,
@@ -511,6 +529,7 @@
                         <div class="form-group col">
                             <label for="ht">Health (±10 pts): <i class="fa fa-question-circle"
                                                                  data-toggle="popover" data-trigger="hover"
+                                                                 data-placement="left"
                                                                  title="Health"
                                                                  data-content="Health measures energy and vitality.
                                                                     It represents stamina, resistance (to
@@ -529,6 +548,7 @@
                         <div class="form-group col">
                             <label for="hp">Hit Points (±2 pts): <i class="fa fa-question-circle"
                                                                     data-toggle="popover" data-trigger="hover"
+                                                                    data-placement="right"
                                                                     title="Hit points"
                                                                     data-content="Ability to absorb damage.  Tied to strength, cannot go above or below 30% of strength calculation."></i>
 
@@ -594,6 +614,7 @@
                         <div class="form-group col">
                             <label for="fp">Basic Speed (±5 pts per .25 Speed): <i class="fa fa-question-circle"
                                                                         data-toggle="popover" data-trigger="hover" title="Basic Speed"
+                                                                                   data-placement="left"
                                                                         data-content="Your Basic Speed is a measure of
                                                                                         your reflexes and general physical
                                                                                         quickness. It helps determine your
@@ -730,6 +751,16 @@
                             <summary>
                                 Damage Table:
                             </summary>
+                            <div>
+                                <p>Damage is divided into three types:  Thrust, Swing, and Thrown.  This will just show the
+                                ratio between strength and thrust/swing.  A thrust attack is a basic attack like
+                                a punch, kick, or bite, or an
+                                attack with a thrusting weapon such
+                                as a spear or a rapier.</p>
+                                <p>
+                                    Swinging damage is any damage that uses a lever to increase force, an axe, club, baseball bat, hammer, sword, etc.
+                                </p>
+                            </div>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -739,94 +770,264 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1d-6</td>
+                                        <td>1d-5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>1d-6</td>
+                                        <td>1d-5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>1d-5</td>
+                                        <td>1d-4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>1d-5</td>
+                                        <td>1d-4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>1d-4</td>
+                                        <td>1d-3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>1d-4</td>
+                                        <td>1d-3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>1d-3</td>
+                                        <td>1d-2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>1d-3</td>
+                                        <td>1d-2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>1d-2</td>
+                                        <td>1d-1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>1d-2</td>
+                                        <td>1d</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11</td>
+                                        <td>1d-1</td>
+                                        <td>1d+1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12</td>
+                                        <td>1d-1</td>
+                                        <td>1d+2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>13</td>
+                                        <td>1d</td>
+                                        <td>2d</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14</td>
+                                        <td>1d </td>
+                                        <td>2d</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15</td>
+                                        <td>1d+1</td>
+                                        <td>2d+1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td>1d+2</td>
+                                        <td>2d+2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>17</td>
+                                        <td>1d+2</td>
+                                        <td>3d-1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>18</td>
+                                        <td>1d+2</td>
+                                        <td>3d</td>
+                                    </tr>
+                                    <tr>
+                                        <td>19</td>
+                                        <td>2d-1</td>
+                                        <td>3d+1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>20</td>
+                                        <td>2d-1</td>
+                                        <td>3d+2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>21</td>
+                                        <td>2d</td>
+                                        <td>4d-1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>22</td>
+                                        <td>2d</td>
+                                        <td>4d</td>
+                                    </tr>
+                                    <tr>
+                                        <td>23</td>
+                                        <td>2d+1</td>
+                                        <td>4d+1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>24</td>
+                                        <td>2d+1</td>
+                                        <td>4d+2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>25</td>
+                                        <td>2d+2</td>
+                                        <td>5d-1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>26</td>
+                                        <td>2d+2</td>
+                                        <td>5d</td>
+                                    </tr>
+                                    <tr>
+                                        <td>27</td>
+                                        <td>3d-1</td>
+                                        <td>5d+1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>28</td>
+                                        <td>3d-1</td>
+                                        <td>5d+1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>29</td>
+                                        <td>3d</td>
+                                        <td>5d+2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30</td>
+                                        <td>3d</td>
+                                        <td>5d+2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>31</td>
+                                        <td>3d+1</td>
+                                        <td>6d-1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>32</td>
+                                        <td>3d+1</td>
+                                        <td>6d-1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>33</td>
+                                        <td>3d+2</td>
+                                        <td>6d</td>
+                                    </tr>
+                                    <tr>
+                                        <td>34</td>
+                                        <td>3d+2</td>
+                                        <td>6d</td>
+                                    </tr>
+                                    <tr>
+                                        <td>35</td>
+                                        <td>4d-1</td>
+                                        <td>6d+1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>36</td>
+                                        <td>4d-1</td>
+                                        <td>6d+1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>37</td>
+                                        <td>4d</td>
+                                        <td>6d+2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>38</td>
+                                        <td>4d</td>
+                                        <td>6d+2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>39</td>
+                                        <td>4d+1</td>
+                                        <td>7d-1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>40</td>
+                                        <td>4d+1</td>
+                                        <td>7d-1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+
+
+                        </details>
+                        <details class="card-block alert-info">
+                            <summary>Strength and Encumbrance</summary>
+                            <table id="encumberancetable" class="table table-striped">
+                                <caption>Encumbrance Levels</caption>
+                                <thead>
                                 <tr>
-                                    <td>1</td>
-                                    <td>1d-6</td>
-                                    <td>1d-5</td>
+                                    <th>Encumbrance</th>
+                                    <th>Weight</th>
+                                    <th>Move</th>
+                                    <th>Dodge</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>None(0)</th>
+                                    <td><output id="tenc0">20</output> lbs</td>
+                                    <td><output id="tmove0">5</output></td>
+                                    <td><output id="tdodge0">8</output></td>
                                 </tr>
                                 <tr>
-                                    <td>2</td>
-                                    <td>1d-6</td>
-                                    <td>1d-5</td>
+                                    <th>Light(1)</th>
+                                    <td><output id="tenc1">40</output> lbs</td>
+                                    <td><output id="tmove1">4</output></td>
+                                    <td><output id="tdodge1">7</output></td>
                                 </tr>
                                 <tr>
-                                    <td>3</td>
-                                    <td>1d-5</td>
-                                    <td>1d-4</td>
+                                    <th>Medium(2)</th>
+                                    <td><output id="tenc2">60</output> lbs</td>
+                                    <td><output id="tmove2">3</output></td>
+                                    <td><output id="tdodge2">6</output></td>
+                                </tr>
+                                <tr>
+                                    <th>Heavy(3)</th>
+                                    <td><output id="tenc3">120</output> lbs</td>
+                                    <td><output id="tmove3">2</output></td>
+                                    <td><output id="tdodge3">5</output></td>
+                                </tr>
+                                <tr>
+                                    <th>X-Heavy(4)</th>
+                                    <td><output id="tenc4">200</output> lbs</td>
+                                    <td><output id="tmove4">1</output></td>
+                                    <td><output id="tdodge4">4</output></td>
                                 </tr>
                                 </tbody>
                             </table>
-                            ST Thrust Swing ST Thrust Swing
-                             27 3d-1 5d+1
-                             1d-5 28 3d-1 5d+1
-                            3 1d-5 1d-4 29 3d 5d+2
-                            4 1d-5 1d-4 30 3d 5d+2
-                            5 1d-4 1d-3 31 3d+1 6d-1
-                            6 1d-4 1d-3 32 3d+1 6d-1
-                            7 1d-3 1d-2 33 3d+2 6d
-                            8 1d-3 1d-2 34 3d+2 6d
-                            9 1d-2 1d-1 35 4d-1 6d+1
-                            10 1d-2 1d 36 4d-1 6d+1
-                            11 1d-1 1d+1 37 4d 6d+2
-                            12 1d-1 1d+2 38 4d 6d+2
-                            13 1d 2d-1 39 4d+1 7d-1
-                            14 1d 2d 40 4d+1 7d-1
-                            15 1d+1 2d+1 45 5d 7d+1
-                            16 1d+1 2d+2 50 5d+2 8d-1
-                            17 1d+2 3d-1 55 6d 8d+1
-                            18 1d+2 3d 60 7d-1 9d
-                            19 2d-1 3d+1 65 7d+1 9d+2
-                            20 2d-1 3d+2 70 8d 10d
-                            21 2d 4d-1 75 8d+2 10d+2
-                            22 2d 4d 80 9d 11d
-                            23 2d+1 4d+1 85 9d+2 11d+2
-                            24 2d+1 4d+2 90 10d 12d
-                            25 2d+2 5d-1 95 10d+2 12d+2
-                            26 2d+2 5d 100 11d 13d
                         </details>
                     </article>
+
                 </fieldset>
                 <p></p>
 
-                <table id="encumberancetable" class="table table-striped">
-                    <tbody>
-                    <tr>
-                        <th colspan="2">ENCUMBERANCE</th>
-                        <th>MOVE</th>
-                        <th>DODGE</th>
-                    </tr>
-                    <tr>
-                        <th>None(0)</th>
-                        <td><span id="tenc0">20</span> lbs</td>
-                        <td><span id="tmove0">5</span></td>
-                        <td><span id="tdodge0">8</span></td>
-                    </tr>
-                    <tr>
-                        <th>Light(1)</th>
-                        <td><span id="tenc1">40</span> lbs</td>
-                        <td><span id="tmove1">4</span></td>
-                        <td><span id="tdodge1">7</span></td>
-                    </tr>
-                    <tr>
-                        <th>Medium(2)</th>
-                        <td><span id="tenc2">60</span> lbs</td>
-                        <td><span id="tmove2">3</span></td>
-                        <td><span id="tdodge2">6</span></td>
-                    </tr>
-                    <tr>
-                        <th>Heavy(3)</th>
-                        <td><span id="tenc3">120</span> lbs</td>
-                        <td><span id="tmove3">2</span></td>
-                        <td><span id="tdodge3">5</span></td>
-                    </tr>
-                    <tr>
-                        <th>X-Heavy(4)</th>
-                        <td><span id="tenc4">200</span> lbs</td>
-                        <td><span id="tmove4">1</span></td>
-                        <td><span id="tdodge4">4</span></td>
-                    </tr>
-                    </tbody>
-                </table>
 
 
                 <section>
