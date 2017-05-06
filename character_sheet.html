@@ -52,6 +52,11 @@
                         have an expert level in melee combat.  In the case of the latter, you cannot be bloodthirsty and also be a pacifist.
                         You also cannot <i>stack</i> the same types of advantages or disadvantages.
                     </p>
+                    <p>
+                        There are some differences in this ruleset.  I.e. <i>The Feedback Loop</i> doesn't have any requirements for
+                        backpacks, and there's no indication of encumbrance statistics.  Hence, we will not use them in our game, but
+                        they will still be included as reference material.
+                    </p>
                     <p>When you are done with the character creation, print it out and send it to me.  I will then input the
                     scores into roll20 so that any rolls are done automatically.</p>
 
@@ -257,36 +262,36 @@
                                 About your Personal History
                             </summary>
                             <ul>
-                                <li> Where was he born and where
-                                    did he grow up? Where does he live
+                                <li> Where were they born and where
+                                    did they grow up? Where do they live
                                     now?
                                 </li>
-                                <li> Who were his parents? (Does he
+                                <li> Who were their parents? (Do they
                                     know?) Are they still alive? If not,
-                                    what became of them? If so, does he
+                                    what became of them? If so, do they
                                     get along with them?
                                 </li>
-                                <li> What training does he have? Was
-                                    he an apprentice? A student? Or is he
+                                <li> What training do they have? Were
+                                    they an apprentice? A student? Or are they
                                     self-taught?
                                 </li>
-                                <li> What is his current occupation?
-                                    What other jobs has he held?
+                                <li> What is their current occupation?
+                                    What other jobs have they held?
                                 </li>
-                                <li> What social class does he belong
-                                    to? How wealthy is he?
+                                <li> What social class do they belong
+                                    to? How wealthy are they?
                                 </li>
-                                <li> Who are his friends? His enemies?
-                                    His closest professional associates?
+                                <li> Who are their friends? Their enemies?
+                                    Their closest professional associates?
                                 </li>
                                 <li> What were the most important
-                                    moments of his life?
+                                    moments of their life?
                                 </li>
-                                <li> What are his likes and dislikes?
+                                <li> What are their likes and dislikes?
                                     Hobbies and interests? Morals and
                                     beliefs?
                                 </li>
-                                <li> What are his motivations? Plans
+                                <li> What are their motivations? Plans
                                     for the future?
                                 </li>
                             </ul>
@@ -949,8 +954,191 @@
                         </details>
                         <details class="card-block alert-info">
                             <summary>Strength and Encumbrance</summary>
+                            <div>
+                                Remember that encumbrance isn't used in this game, but the chart is
+                                handy to see where your character would have fallen.  A tallied table will be kept.
+                            </div>
+                            <table class="table table-striped" summary="Encumbrance by Strength">
+                                <caption>
+                                    Encumbrance
+                                </caption>
+                                <thead>
+                                <tr>
+                                    <th>Strength</th>
+                                    <th>None</th>
+                                    <th>Light</th>
+                                    <th>Medium</th>
+                                    <th>Heavy</th>
+                                    <th>X-Heavy</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <td>1</td>
+                                    <td>0.2</td>
+                                    <td>0.4</td>
+                                    <td>0.6</td>
+                                    <td>1.2</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>0.8</td>
+                                    <td>1.6</td>
+                                    <td>2.4</td>
+                                    <td>4.8</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>1.8</td>
+                                    <td>3.6</td>
+                                    <td>5.4</td>
+                                    <td>10.8</td>
+                                    <td>18</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>3.2</td>
+                                    <td>6.4</td>
+                                    <td>9.6</td>
+                                    <td>19.2</td>
+                                    <td>32</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>5</td>
+                                    <td>10</td>
+                                    <td>15</td>
+                                    <td>30</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>7.2</td>
+                                    <td>14.4</td>
+                                    <td>21.6</td>
+                                    <td>43.2</td>
+                                    <td>72</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>9.8</td>
+                                    <td>19.6</td>
+                                    <td>29.4</td>
+                                    <td>58.8</td>
+                                    <td>98</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>13</td>
+                                    <td>26</td>
+                                    <td>39</td>
+                                    <td>78</td>
+                                    <td>130</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>16</td>
+                                    <td>32</td>
+                                    <td>48</td>
+                                    <td>96</td>
+                                    <td>160</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>20</td>
+                                    <td>40</td>
+                                    <td>60</td>
+                                    <td>120</td>
+                                    <td>200</td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>24</td>
+                                    <td>48</td>
+                                    <td>72</td>
+                                    <td>144</td>
+                                    <td>240</td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>29</td>
+                                    <td>58</td>
+                                    <td>87</td>
+                                    <td>174</td>
+                                    <td>290</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>34</td>
+                                    <td>68</td>
+                                    <td>102</td>
+                                    <td>204</td>
+                                    <td>340</td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>39</td>
+                                    <td>78</td>
+                                    <td>117</td>
+                                    <td>234</td>
+                                    <td>390</td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td>45</td>
+                                    <td>90</td>
+                                    <td>135</td>
+                                    <td>270</td>
+                                    <td>450</td>
+                                </tr>
+                                <tr>
+                                    <td>16</td>
+                                    <td>51</td>
+                                    <td>102</td>
+                                    <td>153</td>
+                                    <td>306</td>
+                                    <td>510</td>
+                                </tr>
+                                <tr>
+                                    <td>17</td>
+                                    <td>58</td>
+                                    <td>116</td>
+                                    <td>174</td>
+                                    <td>348</td>
+                                    <td>580</td>
+                                </tr>
+                                <tr>
+                                    <td>18</td>
+                                    <td>65</td>
+                                    <td>130</td>
+                                    <td>195</td>
+                                    <td>390</td>
+                                    <td>650</td>
+                                </tr>
+                                <tr>
+                                    <td>19</td>
+                                    <td>72</td>
+                                    <td>144</td>
+                                    <td>216</td>
+                                    <td>432</td>
+                                    <td>720</td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td>80</td>
+                                    <td>160</td>
+                                    <td>240</td>
+                                    <td>480</td>
+                                    <td>800</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
                             <table id="encumberancetable" class="table table-striped">
-                                <caption>Encumbrance Levels</caption>
+                                <caption>Your Character's Encumbrance Chart</caption>
                                 <thead>
                                 <tr>
                                     <th>Encumbrance</th>
@@ -1007,6 +1195,7 @@
                             <div class="form-group col">
                                 <label for="appearance">Appearance:
                                     <i class="fa fa-question-circle"
+                                       data-placement="right"
                                        data-toggle="popover" data-trigger="hover" title="Appearance"
                                        data-content="Appearance is rated in levels. Most
                                     people have 'Average' appearance, for
@@ -1075,6 +1264,7 @@
                             <div class="form-group col">
                                 <label for="voice">Resonant Voice (10pts):
                                     <i class="fa fa-question-circle"
+                                       data-placement="left"
                                        data-toggle="popover" data-trigger="hover" title="Voice"
                                        data-content="You have a naturally clear, resonant,
                                     and attractive voice. This gives
@@ -1211,6 +1401,7 @@
                                 <label for="reputationscore">Reputation (5pts/level)
 
                                     <i class="fa fa-question-circle"
+                                       data-placement="left"
                                        data-toggle="popover" data-trigger="hover" title="Reputation"
                                        data-content="Reputation is something you are known for to a particualr group,
                                                      giving favorable or disfavorable reputation to people who know why you are famous.
@@ -1245,6 +1436,7 @@
                             <div class="form-group col">
                                 <label for="advantage0">Acute Hearing (2pts/level):
                                     <i class="fa fa-question-circle"
+                                       data-placement="right"
                                        data-toggle="popover" data-trigger="hover" title="Acute Sense"
                                        data-content="Each Acute Sense is a separate advantage
                                                 that gives +1 per level to all Sense rolls
@@ -1285,8 +1477,8 @@
                                        name="advantage[3]" id="advantage3" value="0"
                                        data-costper="2" data-previous="0">
                             </div>
-                            <div class="form-group col">
-                                <label for="advantage19">Hard to Kill (2pts/level, Max 2):
+                            <div class="form-group col text-muted">
+                                <label for="hardToKill">Hard to Kill (2pts/level, Max 2):
                                     <i class="fa fa-question-circle"
                                        data-toggle="popover" data-trigger="hover" title="Hard to Kill"
                                        data-content="You are incredibly difficult to kill.
@@ -1298,16 +1490,19 @@
                                     makes the difference between success
                                     and failure, you collapse, apparently
                                     dead (or disabled), but come to in the
-                                    usual amount of time."
+                                    usual amount of time.
+                                    Disabled because the Feedback loop just restarts you to the same day.
+                                    "
 
                                     ></i>
 
                                 </label>
                                 <input type="number"
+                                       disabled
                                        min="0" max="2"
                                        inputmode="numeric"
                                        class="form-control"
-                                       name="advantage[19]" id="advantage19" value="0"
+                                       name="hardToKill" id="hardToKill" value="0"
                                        data-costper="2" data-previous="0">
                             </div>
                             <div class="form-group col">
@@ -1343,7 +1538,8 @@
                             <div class="form-group col">
                                 <label for="advantage16">Fearlessness (2pts/level)
                                     <i class="fa fa-question-circle"
-                                       data-toggle="popover" data-trigger="hover" title="Night Vision"
+                                       data-placement="left"
+                                       data-toggle="popover" data-trigger="hover" title="Fearlessness"
                                        data-content=" You are difficult to frighten or
                                                     intimidate! Add your level of
                                                     Fearlessness to your Will whenever
@@ -1375,7 +1571,8 @@
                                     <span class="custom-control-indicator"></span>
                                     Ambidexterity (5pts)
                                     <i class="fa fa-question-circle"
-                                       data-toggle="popover" data-trigger="hover" title="Night Vision"
+                                       data-placement="right"
+                                       data-toggle="popover" data-trigger="hover" title="Ambidexterity"
                                        data-content="You can fight or otherwise act
                                                     equally well with either hand, and
                                                     never suffer the -4 DX penalty for
@@ -1482,6 +1679,7 @@
                                             data-previous="0">
                                     <span class="custom-control-indicator"></span>
                                     Danger Sense (15pts) <i class="fa fa-question-circle"
+                                                            data-placement="left"
                                                             data-toggle="popover" data-trigger="hover" title="Combat Reflexes"
                                                             data-content="You can’t depend on it, but sometimes
                                                                             you get this prickly feeling right
@@ -1508,14 +1706,15 @@
                             <div class="w-100"></div>
 
                             <div class="form-check col">
-                                <label for="advantage9" class="form-check-label custom-control custom-checkbox">
-                                    <input type="checkbox" name="advantage[9]"
+                                <label for="daredevil" class="form-check-label custom-control custom-checkbox">
+                                    <input type="checkbox" name="daredevil"
                                            class="form-check-input custom-control-input"
-                                           id="advantage9" value="on" data-cost="15"
+                                           id="daredevil" value="on" data-cost="15"
                                            data-previous="0">
                                     <span class="custom-control-indicator"></span>
                                     Daredevil (15pts) <i class="fa fa-question-circle"
-                                                         data-toggle="popover" data-trigger="hover" title="Combat Reflexes"
+                                                         data-placement="right"
+                                                         data-toggle="popover" data-trigger="hover" title="Daredevil"
                                                          data-content="Fortune seems to smile on you
                                                                         when you take risks! Any time you
                                                                         take an unnecessary risk (in the GM’s
