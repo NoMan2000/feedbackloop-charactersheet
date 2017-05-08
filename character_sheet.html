@@ -21,6 +21,16 @@
         label {
             font-weight: normal;
         }
+        .stickyFooter {
+            position: fixed;
+            bottom: 0;
+            margin-left:40%;
+            padding: 1vh;
+            text-align: center;
+        }
+        .modal-dialog {
+            max-width:90%;
+        }
 
     </style>
 </head>
@@ -358,7 +368,7 @@
                                    readonly
                                    class="form-control"
                                    required id="advantagepoints" name="advantagepoints"
-                                   value="0">
+                                   v-model.number="advantages">
                         </div>
                         <div class="w-100"></div>
                         <div class="form-group col">
@@ -367,7 +377,7 @@
                                    readonly
                                    class="form-control"
                                    id="disadvantagepoints" name="disadvantagepoints"
-                                   value="0">
+                                   v-model.number="disadvantages">
                         </div>
                         <div class="form-group col">
                             <label for="unspentpoints">Remaining points: </label>
@@ -1628,7 +1638,7 @@
                                        name="acuteHearing" id="acuteHearing"
                                        v-model.number="hearing"
                                        min="0"
-                                       data-costper="2" data-previous="0">
+                                       data-costper="2" >
 
 
                             </div>
@@ -1638,7 +1648,7 @@
                                        class="form-control"
                                        name="advantage[1]" id="advantage1"
                                        v-model.number="taste"
-                                       data-costper="2" data-previous="0">
+                                       data-costper="2" >
                             </div>
                             <div class="form-group col">
                                 <label for="touch">Acute Touch (2pts/level)</label>
@@ -1647,7 +1657,7 @@
                                        name="touch" id="touch"
                                        v-model.number="touch"
                                        min="0"
-                                       data-costper="2" data-previous="0">
+                                       data-costper="2" >
                             </div>
                             <div class="w-100"></div>
                             <div class="form-group col">
@@ -1657,7 +1667,7 @@
                                        class="form-control"
                                        name="vision" id="vision"
                                        v-model.number="vision"
-                                       data-costper="2" data-previous="0">
+                                       data-costper="2" >
                             </div>
                             <div class="form-group col text-muted">
                                 <label for="hardToKill">Hard to Kill (2pts/level, Max 2):
@@ -1685,7 +1695,7 @@
                                        inputmode="numeric"
                                        class="form-control"
                                        name="hardToKill" id="hardToKill" value="0"
-                                       data-costper="2" data-previous="0">
+                                       data-costper="2" >
                             </div>
                             <div class="form-group col">
                                 <label for="nightvision">Night Vision (1pt/level, Max 9)
@@ -1716,10 +1726,10 @@
                                        max="9"
                                        name="nightvision" id="nightvision"
                                        v-model.number="nightvision"
-                                       data-costper="1" data-previous="0">
+                                       data-costper="1" >
                             </div>
                             <div class="form-group col">
-                                <label for="advantage16">Fearlessness (2pts/level)
+                                <label for="fearlessness">Fearlessness (2pts/level)
                                     <i class="fa fa-question-circle"
                                        data-placement="left"
                                        data-toggle="popover" data-trigger="hover" title="Fearlessness"
@@ -1739,8 +1749,10 @@
                                 <input type="number"
                                        class="form-control"
                                        inputmode="numeric"
-                                       name="advantage[16]" id="advantage16" value="0"
-                                       data-costper="2" data-previous="0">
+                                       name="fearlessness" id="fearlessness"
+                                       v-model.number="fearlessness"
+                                       min="0"
+                                       data-costper="2" >
                             </div>
 
                         </article>
@@ -1749,8 +1761,10 @@
                                 <label for="advantage4" class="form-check-label custom-control custom-checkbox">
                                     <input type="checkbox"
                                            class="form-check-input custom-control-input"
-                                           name="advantage[4]" id="advantage4" value="on" data-cost="5"
-                                           data-previous="0">
+                                           name="advantage[4]" id="advantage4"
+                                           v-model="ambidexterity"
+                                           data-cost="5"
+                                           >
                                     <span class="custom-control-indicator"></span>
                                     Ambidexterity (5pts)
                                     <i class="fa fa-question-circle"
@@ -1770,12 +1784,13 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="advantage5" class="form-check-label custom-control custom-checkbox">
+                                <label for="animal_empathy" class="form-check-label custom-control custom-checkbox">
 
                                     <input type="checkbox"
                                            class="form-check-input custom-control-input"
-                                           name="advantage[5]" id="advantage5" value="on" data-cost="5"
-                                           data-previous="0">
+                                           name="animal_empathy" id="animal_empathy"
+                                           v-model="animal_empathy" data-cost="5"
+                                           >
                                     <span class="custom-control-indicator"></span>
                                     Animal Empathy (5pts)
                                     <i class="fa fa-question-circle"
@@ -1805,8 +1820,9 @@
                             <div class="form-check col">
                                 <label for="catfall" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="catfall" id="catfall" value="on" data-cost="10"
-                                           data-previous="0">
+                                           type="checkbox" name="catfall" id="catfall"
+                                           v-model="catfall" data-cost="10"
+                                           >
                                     <span class="custom-control-indicator"></span>
                                     Catfall (10pts)
 
@@ -1828,9 +1844,11 @@
                                 <label for="combat_reflexes" class="form-check-label custom-control custom-checkbox">
                                     <input
                                             class="form-check-input custom-control-input"
-                                            type="checkbox" name="combat_reflexes" id="combat_reflexes" value="on"
+                                            type="checkbox"
+                                            v-model="combat_reflexes"
+                                            name="combat_reflexes" id="combat_reflexes"
                                             data-cost="15"
-                                            data-previous="0">
+                                            >
                                     <span class="custom-control-indicator"></span>
                                     Combat Reflexes (15pts) <i class="fa fa-question-circle"
                                                                data-toggle="popover" data-trigger="hover"
@@ -1858,9 +1876,10 @@
                                 <label for="danger_sense" class="form-check-label custom-control custom-checkbox">
                                     <input
                                             class="form-check-input custom-control-input"
-                                            type="checkbox" name="danger_sense" id="danger_sense" value="on"
+                                            type="checkbox" name="danger_sense" id="danger_sense"
+                                            v-model="danger_sense"
                                             data-cost="15"
-                                            data-previous="0">
+                                            >
                                     <span class="custom-control-indicator"></span>
                                     Danger Sense (15pts) <i class="fa fa-question-circle"
                                                             data-placement="left"
@@ -1894,8 +1913,9 @@
                                 <label for="daredevil" class="form-check-label custom-control custom-checkbox">
                                     <input type="checkbox" name="daredevil"
                                            class="form-check-input custom-control-input"
-                                           id="daredevil" value="on" data-cost="15"
-                                           data-previous="0">
+                                           id="daredevil"
+                                           v-model="daredevil" data-cost="15"
+                                           >
                                     <span class="custom-control-indicator"></span>
                                     Daredevil (15pts) <i class="fa fa-question-circle"
                                                          data-placement="right"
@@ -1913,12 +1933,13 @@
                             </div>
 
                             <div class="form-check col">
-                                <label for="advantage10" class="form-check-label custom-control custom-checkbox">
+                                <label for="empathy" class="form-check-label custom-control custom-checkbox">
 
                                     <input type="checkbox"
                                            class="form-check-input custom-control-input"
-                                           name="advantage[10]" id="advantage10" value="on"
-                                           data-cost="15" data-previous="0">
+                                           name="empathy" id="empathy"
+                                           v-model="empathy"
+                                           data-cost="15">
                                     <span class="custom-control-indicator"></span>
                                     Empathy
                                     <i class="fa fa-question-circle"
@@ -1941,12 +1962,13 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="advantage11" class="form-check-label custom-control custom-checkbox">
+                                <label for="enhanced_block" class="form-check-label custom-control custom-checkbox">
 
                                     <input
                                             class="form-check-input custom-control-input"
-                                            type="checkbox" name="advantage[11]" id="advantage11" value="on"
-                                            data-cost="5" data-previous="0">
+                                            type="checkbox" name="enhanced_block" id="enhanced_block"
+                                            v-model="enhanced_block"
+                                            data-cost="5">
                                     <span class="custom-control-indicator"></span>
                                     Enhanced Block
                                     <i class="fa fa-question-circle"
@@ -1960,12 +1982,15 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="advantage12" class="form-check-label custom-control custom-checkbox">
+                                <label for="enhanced_dodge" class="form-check-label custom-control custom-checkbox">
 
                                     <input
                                             class="form-check-input custom-control-input"
-                                            type="checkbox" name="advantage[12]" id="advantage12" value="on"
-                                            data-cost="15" data-previous="0">
+                                            type="checkbox"
+                                            name="enhanced_dodge"
+                                            id="enhanced_dodge"
+                                            v-model="enhanced_dodge"
+                                            data-cost="15">
                                     <span class="custom-control-indicator"></span>
                                     Enhanced Dodge (15pts)
                                     <i class="fa fa-question-circle"
@@ -1975,11 +2000,12 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="advantage13" class="form-check-label custom-control custom-checkbox">
+                                <label for="enhanced_parry_unarmed" class="form-check-label custom-control custom-checkbox">
                                     <input
                                             class="form-check-input custom-control-input"
-                                            type="checkbox" name="advantage[13]" id="advantage13" value="on"
-                                            data-cost="5" data-previous="0">
+                                            type="checkbox" name="enhanced_parry_unarmed" id="enhanced_parry_unarmed"
+                                            v-model="enhanced_parry_unarmed"
+                                            data-cost="5">
                                     <span class="custom-control-indicator"></span>
                                     Enhanced Parry - Unarmed (5pts)
                                     <i class="fa fa-question-circle"
@@ -1995,11 +2021,13 @@
                             <div class="w-100"></div>
 
                             <div class="form-check col">
-                                <label for="advantage14" class="form-check-label custom-control custom-checkbox">
+                                <label for="enhanced_parry_one_melee" class="form-check-label custom-control custom-checkbox">
                                     <input
                                             class="form-check-input custom-control-input"
-                                            type="checkbox" name="advantage[14]" id="advantage14" value="on"
-                                            data-cost="5" data-previous="0">
+                                            type="checkbox" name="enhanced_parry_one_melee"
+                                            id="enhanced_parry_one_melee"
+                                            v-model="enhanced_parry_one_melee"
+                                            data-cost="5">
                                     <span class="custom-control-indicator"></span>
                                     Enhanced Parry - One Melee (5pts)
                                     <i class="fa fa-question-circle"
@@ -2012,12 +2040,14 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="advantage15" class="form-check-label custom-control custom-checkbox">
+                                <label for="enhanced_parry_all" class="form-check-label custom-control custom-checkbox">
 
                                     <input
                                             class="form-check-input custom-control-input"
-                                            type="checkbox" name="advantage[15]" id="advantage15" value="on"
-                                            data-cost="10" data-previous="0">
+                                            type="checkbox" name="enhanced_parry_all"
+                                            id="enhanced_parry_all"
+                                            v-model="enhanced_parry_all"
+                                            data-cost="10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Enhanced Parry - all (10pts)
                                     <i class="fa fa-question-circle"
@@ -2030,12 +2060,13 @@
                             </div>
 
                             <div class="form-check col">
-                                <label for="advantage17" class="form-check-label custom-control custom-checkbox">
+                                <label for="flexibility" class="form-check-label custom-control custom-checkbox">
 
                                     <input type="checkbox"
                                            class="form-check-input custom-control-input"
-                                           name="advantage[17]" id="advantage17" value="on"
-                                           data-cost="5" data-previous="0">
+                                           name="flexibility" id="flexibility"
+                                           v-model="flexibility"
+                                           data-cost="5">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Flexibility (5pts)</span>
                                     <i class="fa fa-question-circle"
@@ -2056,11 +2087,12 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="advantage18" class="form-check-label custom-control custom-checkbox">
+                                <label for="double_jointed" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="advantage[18]" id="advantage18" value="on"
-                                           data-cost="15" data-previous="0">
+                                           type="checkbox" name="double_jointed" id="double_jointed"
+                                           v-model="double_jointed"
+                                           data-cost="15">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Double-Jointed (15pts)</span>
                                     <i class="fa fa-question-circle"
@@ -2077,11 +2109,12 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="advantage20" class="form-check-label custom-control custom-checkbox">
+                                <label for="high_pain_threshold" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="advantage[20]" id="advantage20" value="on"
-                                           data-cost="10" data-previous="0">
+                                           type="checkbox" name="high_pain_threshold" id="high_pain_threshold"
+                                           v-model="high_pain_threshold"
+                                           data-cost="10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">High Pain Threshold (10pts)</span>
                                     <i class="fa fa-question-circle"
@@ -2106,30 +2139,38 @@
 
                             <div class="w-100"></div>
 
-                            <!--<div class="form-check col">-->
-                            <!--<label for="advantage21" class="form-check-label custom-control custom-checkbox">-->
+                            <div class="form-check col text-muted">
+                            <label for="jumper_time"
+                                   class="form-check-label custom-control custom-checkbox">
 
-                            <!--<input class="form-check-input custom-control-input"-->
-                            <!--type="checkbox" name="advantage[21]" id="advantage21" value="on"-->
-                            <!--data-cost="100" data-previous="0">-->
-                            <!--<span class="labeltext">Jumper - Time (100pts)</span>-->
-                            <!--</label>-->
-                            <!--</div>-->
-                            <!--<div class="form-check col">-->
-                            <!--<label for="advantage22" class="form-check-label custom-control custom-checkbox">-->
+                            <input class="form-check-input custom-control-input"
+                            type="checkbox" name="jumper_time" id="jumper_time"
+                            disabled
+                            data-cost="100">
+                            <span class="labeltext">Jumper - Time (100pts)</span>
+                            </label>
+                            </div>
 
-                            <!--<input class="form-check-input custom-control-input"-->
-                            <!--type="checkbox" name="advantage[22]" id="advantage22" value="on"-->
-                            <!--data-cost="100" data-previous="0">-->
-                            <!--<span class="labeltext">Jumper - World (100pts)</span>-->
-                            <!--</label>-->
-                            <!--</div>-->
-                            <div class="form-check col">
+                            <div class="form-check col text-muted">
+                            <label for="jumper_world" class="form-check-label custom-control custom-checkbox">
+
+                            <input
+                                    disabled
+                                    class="form-check-input custom-control-input"
+                            type="checkbox" name="jumper_world" id="jumper_world"
+
+                            data-cost="100">
+                            <span class="labeltext">Jumper - World (100pts)</span>
+                            </label>
+                            </div>
+
+                            <div class="w-100"></div>
+                            <div class="form-check col text-muted">
                                 <label for="languageTalent" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input" disabled
-                                           type="checkbox" name="languageTalent" id="languageTalent" value="on"
-                                           data-cost="10" data-previous="0">
+                                           type="checkbox" name="languageTalent" id="languageTalent"
+                                           data-cost="10" >
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Language Talent (10pts)</span>
                                     <i class="fa fa-question-circle"
@@ -2149,11 +2190,12 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="advantage24" class="form-check-label custom-control custom-checkbox">
+                                <label for="luck" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="advantage[24]" id="advantage24" value="on"
-                                           data-cost="15" data-previous="0">
+                                           type="checkbox" name="luck" id="luck"
+                                           v-model="luck"
+                                           data-cost="15">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Luck (15pts)</span>
                                     <i class="fa fa-question-circle"
@@ -2169,11 +2211,13 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="advantage25" class="form-check-label custom-control custom-checkbox">
+                                <label for="extraordinary_luck" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="advantage[25]" id="advantage25" value="on"
-                                           data-cost="30" data-previous="0">
+                                           type="checkbox"
+                                           name="extraordinary_luck" id="extraordinary_luck"
+                                           v-model="extraordinary_luck"
+                                           data-cost="30" >
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Extraordinary Luck (30pts)</span>
 
@@ -2192,11 +2236,12 @@
 
 
                             <div class="form-check col">
-                                <label for="advantage26" class="form-check-label custom-control custom-checkbox">
+                                <label for="ridiculous_luck" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="advantage[26]" id="advantage26" value="on"
-                                           data-cost="60" data-previous="0">
+                                           type="checkbox" name="ridiculous_luck" id="ridiculous_luck"
+                                           v-model="ridiculous_luck"
+                                           data-cost="60" >
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Ridiculous Luck (60pts)</span>
                                     <i class="fa fa-question-circle"
@@ -2213,11 +2258,12 @@
                             </div>
 
                             <div class="form-check col">
-                                <label for="advantage28" class="form-check-label custom-control custom-checkbox">
+                                <label for="perfect_balance" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="advantage[28]" id="advantage28" value="on"
-                                           data-cost="15" data-previous="0">
+                                           type="checkbox" name="perfect_balance" id="perfect_balance"
+                                           v-model="perfect_balance"
+                                           data-cost="15" >
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Perfect Balance (15pts)</span>
                                     <i class="fa fa-question-circle"
@@ -2241,11 +2287,13 @@
                             </div>
                             <div class="w-100"></div>
                             <div class="form-check col">
-                                <label for="advantage29" class="form-check-label custom-control custom-checkbox">
+                                <label for="resistant_disease_3" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="advantage[29]" id="advantage29" value="on"
-                                           data-cost="3" data-previous="0">
+                                           type="checkbox" name="resistant_disease_3"
+                                           id="resistant_disease_3"
+                                           v-model="resistant_disease_3"
+                                           data-cost="3" >
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Resistant (Disease +3) (3pts)</span>
                                     <i class="fa fa-question-circle"
@@ -2261,11 +2309,12 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="advantage30" class="form-check-label custom-control custom-checkbox">
+                                <label for="resistant_disease_8" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="advantage[30]" id="advantage30" value="on"
-                                           data-cost="5" data-previous="0">
+                                           type="checkbox" name="resistant_disease_8" id="resistant_disease_8"
+                                           v-model="resistant_disease_8"
+                                           data-cost="5" >
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Resistant (Disease +8) (5pts)</span>
                                     <i class="fa fa-question-circle"
@@ -2280,11 +2329,12 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="advantage31" class="form-check-label custom-control custom-checkbox">
+                                <label for="resistant_poison_3" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="advantage[31]" id="advantage31" value="on"
-                                           data-cost="5" data-previous="0">
+                                           type="checkbox" name="resistant_poison_3" id="resistant_poison_3"
+                                           v-model="resistant_poison_3"
+                                           data-cost="5" >
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Resistant Poison +3 (5pts)</span>
                                     <i class="fa fa-question-circle"
@@ -2299,11 +2349,12 @@
                             </div>
 
                             <div class="form-check col">
-                                <label for="resistPoison8" class="form-check-label custom-control custom-checkbox">
+                                <label for="resistant_poison_8" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="resistPoison8" id="resistPoison8" value="on"
-                                           data-cost="10" data-previous="0">
+                                           type="checkbox" name="resistant_poison_8" id="resistant_poison_8"
+                                           v-model="resistant_poison_8"
+                                           data-cost="10" >
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Resistant Poison +8 (10pts)</span>
                                     <i class="fa fa-question-circle"
@@ -2322,8 +2373,8 @@
                                 <label for="advantage32" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input" disabled
-                                           type="checkbox" name="advantage[32]" id="advantage32" value="on"
-                                           data-cost="10" data-previous="0">
+                                           type="checkbox" name="advantage[32]" id="advantage32"
+                                           data-cost="10" >
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Talent (10pts/level)</span>
                                     <i class="fa fa-question-circle"
@@ -2357,8 +2408,8 @@
                                 <label for="advantage33" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input" disabled
-                                           type="checkbox" name="advantage[33]" id="advantage33" value="on"
-                                           data-cost="15" data-previous="0">
+                                           type="checkbox" name="advantage[33]" id="advantage33"
+                                           data-cost="15" >
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Talent, broad (15pts/level)</span>
                                     <i class="fa fa-question-circle"
@@ -2395,9 +2446,10 @@
                         <legend>Disadvantages</legend>
                         <article class="row align-items-start">
                             <div class="form-check col">
-                                <label for="disadvantage17" class="form-check-label custom-control custom-checkbox">
+                                <label for="total_intolerance" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[17]" id="disadvantage17" value="on"
+                                           type="checkbox" name="total_intolerance" id="total_intolerance"
+                                           v-model="total_intolerance"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Total Intolerance (-10pts)</span>
@@ -2413,7 +2465,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="disadvantage16">
+                                <label for="intolerance">
                                     <span class="labeltext">Intolerance (-1pt/level) </span>
                                     <i class="fa fa-question-circle"
                                        data-toggle="popover" data-trigger="hover" title="Intolerance"
@@ -2426,7 +2478,8 @@
                                        type="number" inputmode="numeric"
                                        min="0"
                                        max="9"
-                                       name="disadvantage[16]" id="disadvantage16" value="0"
+                                       name="intolerance" id="intolerance"
+                                       v-model.number="intolerance"
                                        data-costper="-1">
                             </div>
                             <div class="col"></div>
@@ -2435,9 +2488,10 @@
                             <div class="w-100"></div>
 
                             <div class="form-check col text-muted">
-                                <label for="disadvantage0" class="form-check-label custom-control custom-checkbox">
+                                <label for="bad_sight_c" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" disabled
-                                           type="checkbox" name="disadvantage[0]" id="disadvantage0" value="on"
+                                           type="checkbox" name="bad_sight_c" id="bad_sight_c"
+                                           v-model="bad_sight_c"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Bad Sight - correctable (-10pts)</span>
@@ -2457,12 +2511,12 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="disadvantage1" class="form-check-label custom-control custom-checkbox">
+                                <label for="bad_sight_nc" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[1]"
-                                           id="disadvantage1"
-                                           value="on"
+                                           name="bad_sight_nc"
+                                           id="bad_sight_nc"
+                                           v-model="bad_sight_nc"
                                            data-cost="-25">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Bad Sight - not correctable (-25pts)</span>
@@ -2482,7 +2536,7 @@
                                     <input class="form-check-input custom-control-input" type="checkbox"
                                            name="disadvantage[2]"
                                            id="disadvantage2"
-                                           value="on"
+
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Bad Temper (-10pts)</span>
@@ -2498,11 +2552,11 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="disadvantage3" class="form-check-label custom-control custom-checkbox">
+                                <label for="bloodlust" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[3]"
-                                           id="disadvantage3"
-                                           value="on"
+                                           name="bloodlust"
+                                           id="bloodlust"
+                                           v-model="bloodlust"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Bloodlust (-10pts)</span>
@@ -2525,11 +2579,11 @@
                             </div>
 
                             <div class="form-check col">
-                                <label for="disadvantage4" class="form-check-label custom-control custom-checkbox">
+                                <label for="code_of_honor_informal_peers" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[4]"
-                                           id="disadvantage4"
-                                           value="on"
+                                           name="code_of_honor_informal_peers"
+                                           id="code_of_honor_informal_peers"
+                                           v-model="code_of_honor_informal_peers"
                                            data-cost="-5">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Code of Honour - informal peers (-5pts)</span>
@@ -2547,11 +2601,11 @@
                             <div class="w-100"></div>
 
                             <div class="form-check col">
-                                <label for="disadvantage5" class="form-check-label custom-control custom-checkbox">
+                                <label for="code_of_honor_formal_peers" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[5]"
-                                           id="disadvantage5"
-                                           value="on"
+                                           name="code_of_honor_formal_peers"
+                                           id="code_of_honor_formal_peers"
+                                           v-model="code_of_honor_formal_peers"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Code of Honour - formal peers/informal always (-10pts)</span>
@@ -2573,11 +2627,11 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="disadvantage6" class="form-check-label custom-control custom-checkbox">
+                                <label for="code_of_honor_formal_always" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[6]"
-                                           id="disadvantage6"
-                                           value="on"
+                                           name="code_of_honor_formal_always"
+                                           id="code_of_honor_formal_always"
+                                           v-model="code_of_honor_formal_always"
                                            data-cost="-15">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Code of Honour - formal always (-15pts)</span>
@@ -2602,11 +2656,11 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="disadvantage7" class="form-check-label custom-control custom-checkbox">
+                                <label for="curious" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[7]"
-                                           id="disadvantage7"
-                                           value="on"
+                                           name="curious"
+                                           id="curious"
+                                           v-model="curious"
                                            data-cost="-5">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Curious (-5pts)</span>
@@ -2620,11 +2674,11 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="disadvantage8" class="form-check-label custom-control custom-checkbox">
+                                <label for="delusions_minor" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[8]"
-                                           id="disadvantage8"
-                                           value="on"
+                                           name="delusions_minor"
+                                           id="delusions_minor"
+                                           v-model="delusions_minor"
                                            data-cost="-5">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Delusions - minor (-5pts)</span>
@@ -2640,11 +2694,11 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="disadvantage9" class="form-check-label custom-control custom-checkbox">
+                                <label for="delusions_major" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[9]"
-                                           id="disadvantage9"
-                                           value="on"
+                                           name="delusions_major"
+                                           id="delusions_major"
+                                           v-model="delusions_major"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Delusions - major (-10pts)</span>
@@ -2664,11 +2718,11 @@
                             <div class="w-100"></div>
 
                             <div class="form-check col text-muted">
-                                <label for="disadvantage10" class="form-check-label custom-control custom-checkbox">
+                                <label for="delusions_severe" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[10]"
-                                           id="disadvantage10"
-                                           value="on"
+                                           name="delusions_severe"
+                                           id="delusions_severe"
+                                           v-model="delusions_severe"
                                            disabled
                                            data-cost="-15">
                                     <span class="custom-control-indicator"></span>
@@ -2686,12 +2740,12 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="disadvantage11" class="form-check-label custom-control custom-checkbox">
+                                <label for="gluttony" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[11]"
-                                           id="disadvantage11"
-                                           value="on"
+                                           name="gluttony"
+                                           id="gluttony"
+                                           v-model="gluttony"
                                            data-cost="-5">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Gluttony (-5pts)</span>
@@ -2710,12 +2764,12 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="disadvantage12" class="form-check-label custom-control custom-checkbox">
+                                <label for="greed" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[12]"
-                                           id="disadvantage12"
-                                           value="on"
+                                           name="greed"
+                                           id="greed"
+                                           v-model="greed"
                                            data-cost="-15">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Greed (-15pts)</span>
@@ -2739,11 +2793,11 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="disadvantage13" class="form-check-label custom-control custom-checkbox">
+                                <label for="hard_of_hearing" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[13]"
-                                           id="disadvantage13"
-                                           value="on"
+                                           name="hard_of_hearing"
+                                           id="hard_of_hearing"
+                                           v-model="hard_of_hearing"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Hard of Hearing (-10pts)</span>
@@ -2760,11 +2814,11 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="disadvantage14" class="form-check-label custom-control custom-checkbox">
+                                <label for="honesty" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[14]"
-                                           id="disadvantage14"
-                                           value="on"
+                                           name="honesty"
+                                           id="honesty"
+                                           v-model="honesty"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Honesty (-10pts)</span>
@@ -2812,11 +2866,11 @@
                             <div class="w-100"></div>
 
                             <div class="form-check col">
-                                <label for="disadvantage15" class="form-check-label custom-control custom-checkbox">
+                                <label for="impulsiveness" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" type="checkbox"
-                                           name="disadvantage[15]"
-                                           id="disadvantage15"
-                                           value="on"
+                                           name="impulsiveness"
+                                           id="impulsiveness"
+                                           v-model="impulsiveness"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Impulsiveness (-10pts)</span>
@@ -2840,9 +2894,10 @@
 
 
                             <div class="form-check col">
-                                <label for="disadvantage18" class="form-check-label custom-control custom-checkbox">
+                                <label for="jealousy" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[18]" id="disadvantage18" value="on"
+                                           type="checkbox" name="jealousy" id="jealousy"
+                                           v-model="jealousy"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Jealousy (-10pts)</span>
@@ -2862,9 +2917,10 @@
                                 </label></div>
 
                             <div class="form-check col">
-                                <label for="disadvantage19" class="form-check-label custom-control custom-checkbox">
+                                <label for="lecherousness" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[19]" id="disadvantage19" value="on"
+                                           type="checkbox" name="lecherousness" id="lecherousness"
+                                           v-model="lecherousness"
                                            data-cost="-15">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Lecherousness (-15pts)</span>
@@ -2902,10 +2958,12 @@
                                 </label>
                             </div>
 
-                            <div class="form-check col">
-                                <label for="disadvantage20" class="form-check-label custom-control custom-checkbox">
+                            <div class="form-check col text-muted">
+                                <label for="obsession_short_term" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" readonly
-                                           type="checkbox" name="disadvantage[20]" id="disadvantage20" value="on"
+                                           type="checkbox" name="obsession_short_term"
+                                           id="obsession_short_term"
+                                           v-model="obsession_short_term"
                                            data-cost="-5">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Obsession - short term (-5pts)</span>
@@ -2940,10 +2998,10 @@
                                 </label>
                             </div>
 
-                            <div class="form-check col">
-                                <label for="disadvantage21" class="form-check-label custom-control custom-checkbox">
+                            <div class="form-check col text-muted">
+                                <label for="obsession_long_term" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input" readonly
-                                           type="checkbox" name="disadvantage[21]" id="disadvantage21" value="on"
+                                           type="checkbox" name="obsession_long_term" id="obsession_long_term"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Obsession - long term* (-10pts)</span>
@@ -2981,9 +3039,10 @@
                             <div class="w-100"></div>
 
                             <div class="form-check col">
-                                <label for="disadvantage22" class="form-check-label custom-control custom-checkbox">
+                                <label for="overconfidence" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[22]" id="disadvantage22" value="on"
+                                           type="checkbox" name="overconfidence" id="overconfidence"
+                                           v-model="overconfidence"
                                            data-cost="-5">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Overconfidence (-5pts)</span>
@@ -3012,9 +3071,10 @@
                             </div>
 
                             <div class="form-check col">
-                                <label for="disadvantage23" class="form-check-label custom-control custom-checkbox">
+                                <label for="reluctant_killer" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[23]" id="disadvantage23" value="on"
+                                           type="checkbox" name="reluctant_killer" id="reluctant_killer"
+                                           v-model="reluctant_killer"
                                            data-cost="-5">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Reluctant Killer (-5pts)</span>
@@ -3047,9 +3107,10 @@
                             </div>
 
                             <div class="form-check col">
-                                <label for="disadvantage24" class="form-check-label custom-control custom-checkbox">
+                                <label for="cannot_harm_innocents" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[24]" id="disadvantage24" value="on"
+                                           type="checkbox" name="cannot_harm_innocents" id="cannot_harm_innocents"
+                                           v-model="cannot_harm_innocents"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Cannot Harm Innocents (-10pts)</span>
@@ -3075,9 +3136,10 @@
                             </div>
 
                             <div class="form-check col">
-                                <label for="disadvantage25" class="form-check-label custom-control custom-checkbox">
+                                <label for="phobia_rare" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[25]" id="disadvantage25" value="on"
+                                           type="checkbox" name="phobia_rare" id="phobia_rare"
+                                           v-model="phobia_rare"
                                            data-cost="-5">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Phobia - rare (-5pts)</span>
@@ -3104,9 +3166,10 @@
                             </div>
 
                             <div class="form-check col">
-                                <label for="disadvantage26" class="form-check-label custom-control custom-checkbox">
+                                <label for="phobia_uncommon" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[26]" id="disadvantage26" value="on"
+                                           type="checkbox" name="phobia_uncommon" id="phobia_uncommon"
+                                           v-model="phobia_uncommon"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Phobia - uncommon (-10pts)</span>
@@ -3135,9 +3198,10 @@
                             <div class="w-100"></div>
 
                             <div class="form-check col">
-                                <label for="disadvantage27" class="form-check-label custom-control custom-checkbox">
+                                <label for="phobia_common" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[27]" id="disadvantage27" value="on"
+                                           type="checkbox" name="phobia_common" id="phobia_common"
+                                           v-model="phobia_common"
                                            data-cost="-15">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Phobia - common (-15pts)</span>
@@ -3162,9 +3226,10 @@
                                                         "></i>
                                 </label></div>
                             <div class="form-check col">
-                                <label for="disadvantage28" class="form-check-label custom-control custom-checkbox">
+                                <label for="sense_of_duty_individual" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[28]" id="disadvantage28" value="on"
+                                           type="checkbox" name="sense_of_duty_individual" id="sense_of_duty_individual"
+                                           v-model="sense_of_duty_individual"
                                            data-cost="-2">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Sense of Duty - individual (-2pts)</span>
@@ -3196,9 +3261,10 @@
 
                                 </label></div>
                             <div class="form-check col">
-                                <label for="disadvantage29" class="form-check-label custom-control custom-checkbox">
+                                <label for="sense_of_duty_small" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[29]" id="disadvantage29" value="on"
+                                           type="checkbox" name="sense_of_duty_small" id="sense_of_duty_small"
+                                           v-model="sense_of_duty_small"
                                            data-cost="-5">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Sense of Duty - small group (-5pts)</span>
@@ -3230,9 +3296,10 @@
                                                         "></i>
                                 </label></div>
                             <div class="form-check col">
-                                <label for="disadvantage30" class="form-check-label custom-control custom-checkbox">
+                                <label for="sense_of_duty_large" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[30]" id="disadvantage30" value="on"
+                                           type="checkbox" name="sense_of_duty_large" id="sense_of_duty_large"
+                                           v-model="sense_of_duty_large"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Sense of Duty - large group (-10pts)</span>
@@ -3264,9 +3331,11 @@
 
                                 </label></div>
                             <div class="form-check col">
-                                <label for="disadvantage31" class="form-check-label custom-control custom-checkbox">
+                                <label for="sense_of_duty_race" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[31]" id="disadvantage31" value="on"
+                                           type="checkbox" name="sense_of_duty_race"
+                                           id="sense_of_duty_race"
+                                           v-model="sense_of_duty_race"
                                            data-cost="-15">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Sense of Duty - entire race (-15pts)</span>
@@ -3299,9 +3368,10 @@
                             <div class="w-100"></div>
 
                             <div class="form-check col">
-                                <label for="disadvantage32" class="form-check-label custom-control custom-checkbox">
+                                <label for="sense_of_duty_every" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[32]" id="disadvantage32" value="on"
+                                           type="checkbox" name="sense_of_duty_every" id="sense_of_duty_every"
+                                           v-model="sense_of_duty_every"
                                            data-cost="-20">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Sense of Duty - every living being (-20pts)</span>
@@ -3332,13 +3402,14 @@
                                 </label>
                             </div>
                             <div class="form-check col">
-                                <label for="disadvantage33" class="form-check-label custom-control custom-checkbox">
+                                <label for="truthfulness" class="form-check-label custom-control custom-checkbox">
                                     <input type="checkbox"
                                            class="form-check-input custom-control-input"
-                                           name="disadvantage[33]" id="disadvantage33" value="on"
+                                           name="truthfulness" id="truthfulness"
+                                           v-model="truthfulness"
                                            data-cost="-5">
                                     <span class="custom-control-indicator"></span>
-                                    <span class="labeltext">Truthfulness* (-5pts)</span>
+                                    <span class="labeltext">Truthfulness (-5pts)</span>
                                     <i class="fa fa-question-circle"
                                        data-toggle="popover" data-trigger="hover" title="Truthfulness"
                                        data-content="You hate to tell a lie – or you are
@@ -3356,9 +3427,10 @@
 
                                 </label></div>
                             <div class="form-check col">
-                                <label for="disadvantage34" class="form-check-label custom-control custom-checkbox">
+                                <label for="unluckiness" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[34]" id="disadvantage34" value="on"
+                                           type="checkbox" name="unluckiness" id="unluckiness"
+                                           v-model="unluckiness"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Unluckiness (-10pts)</span>
@@ -3380,9 +3452,10 @@
                                                         "></i>
                                 </label></div>
                             <div class="form-check col">
-                                <label for="disadvantage35" class="form-check-label custom-control custom-checkbox">
+                                <label for="vow_minor" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[35]" id="disadvantage35" value="on"
+                                           type="checkbox" name="vow_minor" id="vow_minor"
+                                           v-model="vow_minor"
                                            data-cost="-5">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Vow - minor (-5pts)</span>
@@ -3400,9 +3473,10 @@
                                                         "></i>
                                 </label></div>
                             <div class="form-check col">
-                                <label for="disadvantage36" class="form-check-label custom-control custom-checkbox">
+                                <label for="vow_major" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[36]" id="disadvantage36" value="on"
+                                           type="checkbox" name="vow_major" id="vow_major"
+                                           v-model="vow_major"
                                            data-cost="-10">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Vow - major (-10pts)</span>
@@ -3425,7 +3499,7 @@
                             <div class="form-check col">
                                 <label for="disadvantage37" class="form-check-label custom-control custom-checkbox">
                                     <input class="form-check-input custom-control-input"
-                                           type="checkbox" name="disadvantage[37]" id="disadvantage37" value="on"
+                                           type="checkbox" name="disadvantage[37]" id="disadvantage37"
                                            data-cost="-15">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Vow - great (-15pts)</span>
@@ -3592,206 +3666,235 @@
                         </div>
                         <article class="row align-items-end">
 
-                            <div class="form-group col"> <!-- for="skilllevel0">-->
-                                <label class="labeltext" for="skilllevel0">Acrobatics (DX)</label>
-                                <select name="skill[0]" id="skilllevel0" class="form-control">
-                                    <option value="none" data-cost="0">-6</option>
-                                    <option value="1" data-cost="1">-2 (1)</option>
-                                    <option value="2" data-cost="2">-1 (2)</option>
-                                    <option value="4" data-cost="4">+0 (4)</option>
-                                    <option value="8" data-cost="8">+1 (8)</option>
-                                    <option value="12" data-cost="12">+2 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="acrobatics">Acrobatics (DX)</label>
+                                <select name="acrobatics" id="acrobatics"
+                                        v-model="acrobatics"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-6 + this.dexterity" selected>-6</option>
+                                    <option value="1" data-cost="1" :data-level="-2 + this.dexterity">-2 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="-1 + this.dexterity">-1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="0 + this.dexterity">+0 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="1 + this.dexterity">+1 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="2 + this.dexterity">+2 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel1">-->
-                                <label class="labeltext" for="skilllevel1">Acting (IQ)</label>
-                                <select name="skill[1]" id="skilllevel1" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="acting">Acting (IQ)</label>
+                                <select name="acting" id="acting"
+                                        v-model="acting"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.intelligence">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.intelligence">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.intelligence">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.intelligence">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.intelligence">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.intelligence">+3 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel2">-->
-                                <label class="labeltext" for="skilllevel2">Animal Handling (IQ)</label>
-                                <select name="skill[2]" id="skilllevel2" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="animal_handling">Animal Handling (IQ)</label>
+                                <select name="animal_handling" id="animal_handling"
+                                        v-model="animal_handling"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.intelligence">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.intelligence">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="-0 + this.intelligence">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.intelligence">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.intelligence">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.intelligence">+3 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel3">-->
-                                <label class="labeltext" for="skilllevel3">Area Knowledge (IQ)</label>
-                                <select name="skill[3]" id="skilllevel3" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
-                                    <option value="1" data-cost="1">+0 (1)</option>
-                                    <option value="2" data-cost="2">+1 (2)</option>
-                                    <option value="4" data-cost="4">+2 (4)</option>
-                                    <option value="8" data-cost="8">+3 (8)</option>
-                                    <option value="12" data-cost="12">+4 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="area_knowledge">Area Knowledge (IQ)</label>
+                                <select name="area_knowledge"
+                                        v-model="area_knowledge"
+                                        id="area_knowledge" class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-1 + this.intelligence">-4</option>
+                                    <option value="1" data-cost="1" :data-level="0 + this.intelligence">+0 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="1 + this.intelligence">+1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="2 + this.intelligence">+2 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="3 + this.intelligence">+3 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="4 + this.intelligence">+4 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel4">-->
-                                <label class="labeltext" for="skilllevel4">Armoury/TL (IQ)</label>
-                                <select name="skill[4]" id="skilllevel4" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
-                                </select>
-                            </div>
-
-                            <div class="w-100"></div>
-
-                            <div class="form-group col"> <!-- for="skilllevel5">-->
-                                <label class="labeltext" for="skilllevel5">Brawling (DX)</label>
-                                <select name="skill[5]" id="skilllevel5" class="form-control">
-                                    <option value="none" data-cost="0">none</option>
-                                    <option value="1" data-cost="1">+0 (1)</option>
-                                    <option value="2" data-cost="2">+1 (2)</option>
-                                    <option value="4" data-cost="4">+2 (4)</option>
-                                    <option value="8" data-cost="8">+3 (8)</option>
-                                    <option value="12" data-cost="12">+4 (12)</option>
-                                </select>
-                            </div>
-                            <div class="form-group col"> <!-- for="skilllevel6">-->
-                                <label class="labeltext" for="skilllevel6">Camouflage (IQ)</label>
-                                <select name="skill[6]" id="skilllevel6" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
-                                    <option value="1" data-cost="1">+0 (1)</option>
-                                    <option value="2" data-cost="2">+1 (2)</option>
-                                    <option value="4" data-cost="4">+2 (4)</option>
-                                    <option value="8" data-cost="8">+3 (8)</option>
-                                    <option value="12" data-cost="12">+4 (12)</option>
-                                </select>
-                            </div>
-                            <div class="form-group col"> <!-- for="skilllevel7">-->
-                                <label class="labeltext" for="skilllevel7">Carousing (HT)</label>
-                                <select name="skill[7]" id="skilllevel7" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
-                                    <option value="1" data-cost="1">+0 (1)</option>
-                                    <option value="2" data-cost="2">+1 (2)</option>
-                                    <option value="4" data-cost="4">+2 (4)</option>
-                                    <option value="8" data-cost="8">+3 (8)</option>
-                                    <option value="12" data-cost="12">+4 (12)</option>
-                                </select>
-                            </div>
-                            <div class="form-group col"> <!-- for="skilllevel8">-->
-                                <label class="labeltext" for="skilllevel8">Climbing (DX)</label>
-                                <select name="skill[8]" id="skilllevel8" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
-                                </select>
-                            </div>
-                            <div class="form-group col"> <!-- for="skilllevel9">-->
-                                <label class="labeltext" for="skilllevel9">Computer Operation/TL (IQ)</label>
-                                <select name="skill[9]" id="skilllevel9" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
-                                    <option value="1" data-cost="1">+0 (1)</option>
-                                    <option value="2" data-cost="2">+1 (2)</option>
-                                    <option value="4" data-cost="4">+2 (4)</option>
-                                    <option value="8" data-cost="8">+3 (8)</option>
-                                    <option value="12" data-cost="12">+4 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="armoury">Armoury (IQ)</label>
+                                <select name="armoury"
+                                        v-model="armoury"
+                                        id="armoury" class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.intelligence">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.intelligence">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.intelligence">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.intelligence">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.intelligence">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.intelligence">+3 (12)</option>
                                 </select>
                             </div>
 
                             <div class="w-100"></div>
 
-                            <div class="form-group col"> <!-- for="skilllevel10">-->
-                                <label class="labeltext" for="skilllevel10">Computer Programming/TL (IQ)</label>
-                                <select name="skill[10]" id="skilllevel10" class="form-control">
-                                    <option value="none" data-cost="0">none</option>
-                                    <option value="1" data-cost="1">-2 (1)</option>
-                                    <option value="2" data-cost="2">-1 (2)</option>
-                                    <option value="4" data-cost="4">+0 (4)</option>
-                                    <option value="8" data-cost="8">+1 (8)</option>
-                                    <option value="12" data-cost="12">+2 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="brawling">Brawling (DX)</label>
+                                <select name="brawling"
+                                        v-model="brawling"
+                                        id="brawling" class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-6 + this.dexterity">-6</option>
+                                    <option value="1" data-cost="1" :data-level="0 + this.dexterity">+0 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="1 + this.dexterity">+1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="2 + this.dexterity">+2 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="3 + this.dexterity">+3 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="4 + this.dexterity">+4 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel11">-->
-                                <label class="labeltext" for="skilllevel11">Crewman/TL (IQ)</label>
-                                <select name="skill[11]" id="skilllevel11" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
-                                    <option value="1" data-cost="1">+0 (1)</option>
-                                    <option value="2" data-cost="2">+1 (2)</option>
-                                    <option value="4" data-cost="4">+2 (4)</option>
-                                    <option value="8" data-cost="8">+3 (8)</option>
-                                    <option value="12" data-cost="12">+4 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="camouflage">Camouflage (IQ)</label>
+                                <select name="camouflage"
+                                        v-model="camouflage"
+                                        id="camouflage" class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-4 + this.intelligence">-4</option>
+                                    <option value="1" data-cost="1" :data-level="0 + this.intelligence">+0 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="1 + this.intelligence">+1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="2 + this.intelligence">+2 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="3 + this.intelligence">+3 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="4 + this.intelligence">+4 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel12">-->
-                                <label class="labeltext" for="skilllevel12">Criminology/TL (IQ)</label>
-                                <select name="skill[12]" id="skilllevel12" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="carousing">Carousing (HT)</label>
+                                <select name="carousing"
+                                        v-model="carousing"
+                                        id="carousing" class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-4 + this.health">-4</option>
+                                    <option value="1" data-cost="1" :data-level="0 + this.health">+0 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="1 + this.health">+1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="2 + this.health">+2 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="3 + this.health">+3 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="4 + this.health">+4 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel13">-->
-                                <label class="labeltext" for="skilllevel13">Diagnosis/TL (IQ)</label>
-                                <select name="skill[13]" id="skilllevel13" class="form-control">
-                                    <option value="none" data-cost="0">-6</option>
-                                    <option value="1" data-cost="1">-2 (1)</option>
-                                    <option value="2" data-cost="2">-1 (2)</option>
-                                    <option value="4" data-cost="4">+0 (4)</option>
-                                    <option value="8" data-cost="8">+1 (8)</option>
-                                    <option value="12" data-cost="12">+2 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="climbing">Climbing (DX)</label>
+                                <select name="climbing" id="climbing"
+                                        v-model="climbing"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.dexterity">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.dexterity">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.dexterity">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.dexterity">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.dexterity">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.dexterity">+3 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel14">-->
-                                <label class="labeltext" for="skilllevel14">Disguise/TL (IQ)</label>
-                                <select name="skill[14]" id="skilllevel14" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="computer_operation">Computer Operation (IQ)</label>
+                                <select name="computer_operation" id="computer_operation" class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-4 + this.intelligence">-4</option>
+                                    <option value="1" data-cost="1" :data-level="0 + this.intelligence">+0 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="1 + this.intelligence">+1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="2 + this.intelligence">+2 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="3 + this.intelligence">+3 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="4 + this.intelligence">+4 (12)</option>
                                 </select>
                             </div>
 
                             <div class="w-100"></div>
 
-                            <div class="form-group col"> <!-- for="skilllevel15">-->
-                                <label class="labeltext" for="skilllevel15">Electronics Operation/TL
-                                    (IQ)</label>
-                                <select name="skill[15]" id="skilllevel15" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="computer_programming">Computer Programming (IQ)</label>
+                                <select name="computer_programming" id="computer_programming"
+                                        v-model="computer_programming"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-6 + this.intelligence">-6</option>
+                                    <option value="1" data-cost="1" :data-level="-2 + this.intelligence">-2 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="-1 + this.intelligence">-1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="0 + this.intelligence">+0 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="1 + this.intelligence">+1 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="2 + this.intelligence">+2 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel16">-->
-                                <label class="labeltext" for="skilllevel16">Electronics Repair/TL (IQ)</label>
-                                <select name="skill[16]" id="skilllevel16" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="crewman">Crewman/Ships (IQ)</label>
+                                <select name="crewman"
+                                        v-model="crewman"
+                                        id="crewman" class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-4 + this.intelligence">-4</option>
+                                    <option value="1" data-cost="1" :data-level="0 + this.intelligence">+0 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="1 + this.intelligence">+1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="2 + this.intelligence">+2 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="3 + this.intelligence">+3 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="4 + this.intelligence">+4 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel17">-->
-                                <label class="labeltext" for="skilllevel17">Engineer/TL (IQ)</label>
-                                <select name="skill[17]" id="skilllevel17" class="form-control">
+                            <div class="form-group col">
+                                <label class="labeltext" for="criminology">Criminology (IQ)</label>
+                                <select name="criminology" id="criminology" class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.intelligence">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.intelligence">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.intelligence">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.intelligence">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.intelligence">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.intelligence">+3 (12)</option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label class="labeltext" for="diagnosis">Diagnosis (IQ)</label>
+                                <select name="diagnosis" id="diagnosis"
+                                        v-model="diagnosis"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-6 + this.intelligence">-6</option>
+                                    <option value="1" data-cost="1" :data-level="-2 + this.intelligence">-2 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="-1 + this.intelligence">-1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="0 + this.intelligence">+0 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="1 + this.intelligence">+1 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="2 + this.intelligence">+2 (12)</option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label class="labeltext" for="disguise">Disguise (IQ)</label>
+                                <select name="disguise" id="disguise"
+                                        v-model="disguise"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.intelligence">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.intelligence">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.intelligence">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.intelligence">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.intelligence">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.intelligence">+3 (12)</option>
+                                </select>
+                            </div>
+
+                            <div class="w-100"></div>
+
+                            <div class="form-group col">
+                                <label class="labeltext" for="electronics_operation">Electronics Operation (IQ)</label>
+                                <select name="electronics_operation" id="electronics_operation"
+                                        v-model="electronics_operation"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.intelligence">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.intelligence">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.intelligence">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.intelligence">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.intelligence">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.intelligence">+3 (12)</option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label class="labeltext" for="electronics_repair">Electronics Repair (IQ)</label>
+                                <select name="electronics_repair" id="electronics_repair"
+                                        v-model="electronics_repair"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.intelligence">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.intelligence">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.intelligence">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.intelligence">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.intelligence">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.intelligence">+3 (12)</option>
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label class="labeltext" for="engineer">Engineer (IQ)</label>
+                                <select name="engineer" id="engineer" class="form-control">
                                     <option value="none" data-cost="0">none</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
@@ -4590,6 +4693,73 @@
         </div>
 
     </section>
+    <div class="badge badge-info stickyFooter"
+         @click="listSkills()"
+         data-toggle="modal" data-target="#modal"
+         id="modalDisplay"
+    style=""
+    >
+        Show Stats <i class="fa fa-chevron-up"></i>
+    </div>
+    <section class="modal fade" id="modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">All Roll Stats</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <article class="row align-items-end">
+                            <div class="col card">
+                                <div class="card-block"><span>Character Points: </span><output>{{characterPoints}}</output>
+                                </div>
+                            </div>
+                            <div class="col card">
+                                <div class="card-block"><span>Strength: </span><output>{{strength}}</output>
+                                </div>
+                            </div>
+                            <div class="col card">
+                                <div class="card-block"><span>Remaining Points: </span><output>{{remainingCharacterPoints}}</output>
+                                </div>
+                                </div>
+                            <div class="col card">
+                                <div class="card-block"><span>Disadvantages:</span><output>{{disadvantages}}</output>
+                                </div>
+                                </div>
+                            <div class="col card">
+                                <div class="card-block"><span>Max Disadvantages:</span><output>{{maxDisadvantages}}</output>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col card">
+                                <div class="card-block"><span>Disadvantages:</span><br>
+                                <ul v-for="disadvantage in listDisadvantages()"><li>{{disadvantage.name}} ({{disadvantage.dataset.cost}})</li></ul>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col card">
+                                <div class="card-block"><span>Advantages:</span><br>
+                                <ul v-for="advantage in listAdvantages()"><li>{{advantage.name}} ({{advantage.dataset.cost}})</li></ul>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col card">
+                                <div class="card-block"><span>Advantages:</span><br>
+                                    <ul v-for="skill in skill_list">
+                                        <li>
+                                        Skill:  {{skill.name}} Level: {{skill.level}} Cost:({{skill.cost}})
+                                    </li></ul>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                </div>
+            </div>
+
+    </section>
 </main>
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
         integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
@@ -4657,6 +4827,8 @@
             age: 30,
             fatiguepoints: 10,
             remainingCharacterPoints: 100,
+            disadvantages: 0,
+            advantages: 0,
             basicLift: 20,
             damageThrown: '1d-2',
             damageSwung: '1d',
@@ -4676,9 +4848,95 @@
             touch: 0,
             vision: 0,
             nightvision: 0,
+            fearlessness: 0,
+            ambidexterity: false,
+            animal_empathy: false,
+            catfall: false,
+            combat_reflexes: false,
+            danger_sense: false,
+            daredevil: false,
+            empathy: false,
+            enhanced_block: false,
+            enhanced_dodge: false,
+            enhanced_parry_unarmed: false,
+            enhanced_parry_one_melee: false,
+            enhanced_parry_all: false,
+            flexibility: false,
+            double_jointed: false,
+            high_pain_threshold: false,
+            luck: false,
+            extraordinary_luck: false,
+            ridiculous_luck: false,
+            perfect_balance: false,
+            resistant_disease_3: false,
+            resistant_disease_8: false,
+            resistant_poison_3: false,
+            resistant_poison_8: false,
+            total_intolerance: false,
+            intolerance: 0,
+            bad_sight_c: false,
+            bad_sight_nc: false,
+            bloodlust: false,
+            code_of_honor_informal_peers: false,
+            code_of_honor_formal_peers: false,
+            code_of_honor_formal_always: false,
+            curious: false,
+            delusions_minor: false,
+            delusions_major: false,
+            delusions_severe: false,
+            gluttony: false,
+            greed: false,
+            hard_of_hearing: false,
+            honesty: false,
+            impulsiveness: false,
+            jealousy: false,
+            lecherousness: false,
+            obsession_short_term: false,
+            obsession_long_term: false,
+            overconfidence: false,
+            reluctant_killer: false,
+            cannot_harm_innocents: false,
+            phobia_rare: false,
+            phobia_uncommon: false,
+            phobia_common: false,
+            sense_of_duty_individual: false,
+            sense_of_duty_small: false,
+            sense_of_duty_large: false,
+            sense_of_duty_race: false,
+            sense_of_duty_every: false,
+            truthfulness: false,
+            unluckiness: false,
+            vow_minor: false,
+            vow_major: false,
+            acrobatics: 0,
+            acting: 0,
+            animal_handling: 0,
+            area_knowledge: 0,
+            armoury: 0,
+            brawling: 0,
+            camouflage: 0,
+            carousing: 0,
+            climbing: 0,
+            computer_operation: 0,
+            computer_programming: 0,
+            crewman: 0,
+            criminology: 0,
+            diagnosis: 0,
+            disguise: 0,
+            electronics_operation: 0,
+            electronics_repair: 0,
+            engineer: 0,
+            skill_list: [],
             error: null
         },
         methods: {
+            getSelectedSkillsInformation: function (el) {
+                return {
+                    level: parseInt(Number(el.options[el.selectedIndex].dataset.level), 10),
+                    name: el.name,
+                    cost: parseInt(Number(el.options[el.selectedIndex].dataset.cost), 10)
+                };
+            },
             canUpdateValue: function (offset, baseCost) {
                 baseCost = Number(baseCost);
                 offset *= baseCost;
@@ -4690,15 +4948,6 @@
                 this.remainingCharacterPoints -= offset;
                 return canChange;
             },
-            /**
-             *
-             * @param val
-             * @param oldVal
-             * @param offset
-             * @param min
-             * @param max
-             * @return {*}
-             */
             sanitizeNumbers: function(val, oldVal, offset, min, max) {
                 val = Number(val);
                 oldVal = Number(oldVal);
@@ -4727,6 +4976,22 @@
                     val: val,
                     oldVal: oldVal
                 }
+            },
+            sanitizeCheckbox: function(val, oldVal, offset) {
+                if (val === true) {
+                    val = Number(offset);
+                } else {
+                    val = 0;
+                }
+                if (oldVal === true) {
+                    oldVal = Number(offset);
+                } else {
+                    oldVal = 0;
+                }
+                return this.canUpdateValue(
+                    1,
+                    val - oldVal
+                );
             },
             updateBasicLift: function () {
                 this.basicLift = Math.pow(this.strength, 2) / 5;
@@ -4798,10 +5063,57 @@
             updateBasicMoveAndDodge: function () {
                 this.basicMove = Math.floor(this.basicSpeed);
                 this.dodge = this.basicMove + 3;
+            },
+            greaterThanMaxDisadvantages: function (offset) {
+                return (this.disadvantages + offset) < this.maxDisadvantages;
+            },
+            _maxdis: function (offset) {
+                return this.greaterThanMaxDisadvantages(offset);
+            },
+            listDisadvantages: function () {
+                var list = [].slice.call(document.querySelector('#disadvantages').querySelectorAll('input select'));
+                var filtered = list.filter(function (val) {
+                    var trueVal = val.checked || val.selected;
+                    if (val.type === 'number' || val.type === 'text') {
+                        return Number(val.value);
+                    }
+                    return trueVal;
+                });
+                this.disadvantages = filtered.length;
+                return filtered;
+            },
+            listAdvantages: function () {
+                var list = [].slice.call(document.querySelector('#advantages-perks').querySelectorAll('input select'));
+                var filtered = list.filter(function (val) {
+                    var trueVal = val.checked || val.selected;
+                    if (val.type === 'number' || val.type === 'text') {
+                        return Number(val.value);
+                    }
+                    return trueVal;
+                });
+                this.advantages = filtered.length;
+                return filtered;
+            },
+            listSkills: function () {
+                var list = [].slice.call(document.querySelector('#skills').querySelectorAll('select'));
+                var vue = this;
+                var map = list.map(function (val) {
+                    return vue.getSelectedSkillsInformation(val);
+                });
+                this.skill_list = map;
+                return map;
             }
         },
-        computed: {},
+        computed: {
+            maxDisadvantages: function () {
+                return -(this.characterPoints / 2);
+            }
+
+        },
         watch: {
+            characterPoints: function (val, oldVal) {
+                this.remainingCharacterPoints += val - oldVal;
+            },
             strength: function (val, oldVal) {
                 var canChange = this.canUpdateValue(
                     val - oldVal,
@@ -4927,7 +5239,7 @@
             appearance: function (val, oldVal) {
                 val = Number(val);
                 oldVal = Number(oldVal);
-                debugger;
+
                 var canUpdate = this.canUpdateValue(
                     1,
                     val - oldVal
@@ -5089,9 +5401,865 @@
                 } else {
                     this.nightvision = vals.oldVal;
                 }
-            }
+            },
+            fearlessness: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    2,
+                    0
+                );
+                if (vals.canUpdate) {
+                    this.fearlessness = vals.val;
+                } else {
+                    this.fearlessness = vals.oldVal;
+                }
+            },
+            ambidexterity: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(
+                    val,
+                    oldVal,
+                    5
+                );
+                if (canUpdate) {
+                    this.ambidexterity = val;
+                } else {
+                    this.ambidexterity = oldVal;
+                }
+            },
+            animal_empathy: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 5);
+                if (canUpdate) {
+                    this.animal_empathy = val;
+                } else {
+                    this.animal_empathy = oldVal;
+                }
+            },
+            catfall: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 10);
+                if (canUpdate) {
+                    this.catfall = val;
+                } else {
+                    this.catfall = oldVal;
+                }
+            },
+            combat_reflexes: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 15);
+                if (canUpdate) {
+                    this.combat_reflexes = val;
+                } else {
+                    this.combat_reflexes = oldVal;
+                }
+            },
+            danger_sense: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 15);
+                if (canUpdate) {
+                    this.danger_sense = val;
+                } else {
+                    this.danger_sense = oldVal;
+                }
+            },
+            daredevil: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 15);
+                if (canUpdate) {
+                    this.daredevil = val;
+                } else {
+                    this.daredevil = oldVal;
+                }
+            },
+            empathy: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 15);
+                if (canUpdate) {
+                    this.empathy = val;
+                } else {
+                    this.empathy = oldVal;
+                }
+            },
+            enhanced_block: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 5);
+                if (canUpdate) {
+                    this.enhanced_block = val;
+                } else {
+                    this.enhanced_block = oldVal;
+                }
+            },
+            enhanced_dodge: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 15);
+                if (canUpdate) {
+                    this.enhanced_dodge = val;
+                } else {
+                    this.enhanced_dodge = oldVal;
+                }
+            },
+            enhanced_parry_unarmed: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 5);
+                if (canUpdate) {
+                    this.enhanced_parry_unarmed = val;
+                } else {
+                    this.enhanced_parry_unarmed = oldVal;
+                }
+            },
+            enhanced_parry_one_melee: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 5);
+                if (canUpdate) {
+                    this.enhanced_parry_one_melee = val;
+                } else {
+                    this.enhanced_parry_one_melee = oldVal;
+                }
+            },
+            enhanced_parry_all: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 10);
+                if (canUpdate) {
+                    this.enhanced_parry_all = val;
+                } else {
+                    this.enhanced_parry_all = oldVal;
+                }
+            },
+            flexibility: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 5);
+                if (canUpdate) {
+                    this.flexibility = val;
+                } else {
+                    this.flexibility = oldVal;
+                }
+            },
+            double_jointed: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 15);
+                if (canUpdate) {
+                    this.double_jointed = val;
+                } else {
+                    this.double_jointed = oldVal;
+                }
+            },
+            high_pain_threshold: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 15);
+                if (canUpdate) {
+                    this.high_pain_threshold = val;
+                } else {
+                    this.high_pain_threshold = oldVal;
+                }
+            },
+            luck: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 15);
+                if (canUpdate) {
+                    this.luck = val;
+                } else {
+                    this.luck = oldVal;
+                }
+            },
+            extraordinary_luck: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 30);
+                if (canUpdate) {
+                    this.extraordinary_luck = val;
+                } else {
+                    this.extraordinary_luck = oldVal;
+                }
+            },
+            ridiculous_luck: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 60);
+                if (canUpdate) {
+                    this.ridiculous_luck = val;
+                } else {
+                    this.ridiculous_luck = oldVal;
+                }
+            },
+            perfect_balance: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 15);
+                if (canUpdate) {
+                    this.perfect_balance = val;
+                } else {
+                    this.perfect_balance = oldVal;
+                }
+            },
+            resistant_disease_3: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 3);
+                if (canUpdate) {
+                    this.resistant_disease_3 = val;
+                } else {
+                    this.resistant_disease_3 = oldVal;
+                }
+            },
+            resistant_disease_8: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 5);
+                if (canUpdate) {
+                    this.resistant_disease_8 = val;
+                } else {
+                    this.resistant_disease_8 = oldVal;
+                }
+            },
+            resistant_poison_3: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 5);
+                if (canUpdate) {
+                    this.resistant_poison_3 = val;
+                } else {
+                    this.resistant_poison_3 = oldVal;
+                }
+            },
+            resistant_poison_8: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, 10);
+                if (canUpdate) {
+                    this.resistant_poison_8 = val;
+                } else {
+                    this.resistant_poison_8 = oldVal;
+                }
+            },
+            total_intolerance: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.total_intolerance = val;
+                    } else {
+
+                        this.total_intolerance = oldVal;
+                    }
+                }
+            },
+            intolerance: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    -1,
+                    0,
+                    9
+                );
+                if (vals.canUpdate) {
+                    this.intolerance = vals.val;
+                } else {
+                    this.intolerance = vals.oldVal;
+                }
+            },
+            bad_sight_nc: function (val, oldVal) {
+                var canUpdate = this.sanitizeCheckbox(val, oldVal, -25);
+                if (canUpdate) {
+                    this.bad_sight_nc = val;
+                } else {
+                    this.bad_sight_nc = oldVal;
+                }
+            },
+            bloodlust: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.bloodlust = val;
+                    } else {
+
+                        this.bloodlust = oldVal;
+                    }
+                }
+            },
+            code_of_honor_informal_peers: function (val, oldVal) {
+                var offset = -5,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.code_of_honor_informal_peers = val;
+                    } else {
+
+                        this.code_of_honor_informal_peers = oldVal;
+                    }
+                }
+            },
+            code_of_honor_formal_peers: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.code_of_honor_formal_peers = val;
+                    } else {
+
+                        this.code_of_honor_formal_peers = oldVal;
+                    }
+                }
+            },
+            code_of_honor_formal_always: function (val, oldVal) {
+                var offset = -15,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.code_of_honor_formal_always = val;
+                    } else {
+
+                        this.code_of_honor_formal_always = oldVal;
+                    }
+                }
+            },
+            curious: function (val, oldVal) {
+                var offset = -5,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.curious = val;
+                    } else {
+
+                        this.curious = oldVal;
+                    }
+                }
+            },
+            delusions_minor: function (val, oldVal) {
+                var offset = -5,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.delusions_minor = val;
+                    } else {
+
+                        this.delusions_minor = oldVal;
+                    }
+                }
+            },
+            delusions_major: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.delusions_major = val;
+                    } else {
+
+                        this.delusions_major = oldVal;
+                    }
+                }
+            },
+            gluttony: function (val, oldVal) {
+                var offset = -5,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.gluttony = val;
+                    } else {
+
+                        this.gluttony = oldVal;
+                    }
+                }
+            },
+            greed: function (val, oldVal) {
+                var offset = -15,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.greed = val;
+                    } else {
+
+                        this.greed = oldVal;
+                    }
+                }
+            },
+            hard_of_hearing: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.hard_of_hearing = val;
+                    } else {
+
+                        this.hard_of_hearing = oldVal;
+                    }
+                }
+            },
+            honesty: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.honesty = val;
+                    } else {
+
+                        this.honesty = oldVal;
+                    }
+                }
+            },
+            impulsiveness: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.impulsiveness = val;
+                    } else {
+
+                        this.impulsiveness = oldVal;
+                    }
+                }
+            },
+            jealousy: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.jealousy = val;
+                    } else {
+
+                        this.jealousy = oldVal;
+                    }
+                }
+            },
+            lecherousness: function (val, oldVal) {
+                var offset = -15,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.lecherousness = val;
+                    } else {
+
+                        this.lecherousness = oldVal;
+                    }
+                }
+            },
+            obsession_short_term: function (val, oldVal) {
+                var offset = -5,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.obsession_short_term = val;
+                    } else {
+
+                        this.obsession_short_term = oldVal;
+                    }
+                }
+            },
+            obsession_long_term: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.obsession_long_term = val;
+                    } else {
+
+                        this.obsession_long_term = oldVal;
+                    }
+                }
+            },
+            overconfidence: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.overconfidence = val;
+                    } else {
+
+                        this.overconfidence = oldVal;
+                    }
+                }
+            },
+            reluctant_killer: function (val, oldVal) {
+                var offset = -5,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.reluctant_killer = val;
+                    } else {
+
+                        this.reluctant_killer = oldVal;
+                    }
+                }
+            },
+            cannot_harm_innocents: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.cannot_harm_innocents = val;
+                    } else {
+
+                        this.cannot_harm_innocents = oldVal;
+                    }
+                }
+            },
+            phobia_rare: function (val, oldVal) {
+                var offset = -5,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.phobia_rare = val;
+                    } else {
+
+                        this.phobia_rare = oldVal;
+                    }
+                }
+            },
+            phobia_uncommon: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.phobia_uncommon = val;
+                    } else {
+
+                        this.phobia_uncommon = oldVal;
+                    }
+                }
+            },
+            phobia_common: function (val, oldVal) {
+                var offset = -15,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.phobia_common = val;
+                    } else {
+
+                        this.phobia_common = oldVal;
+                    }
+                }
+            },
+            sense_of_duty_individual: function (val, oldVal) {
+                var offset = -2,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.sense_of_duty_individual = val;
+                    } else {
+
+                        this.sense_of_duty_individual = oldVal;
+                    }
+                }
+            },
+            sense_of_duty_small: function (val, oldVal) {
+                var offset = -5,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.sense_of_duty_small = val;
+                    } else {
+
+                        this.sense_of_duty_small = oldVal;
+                    }
+                }
+            },
+            sense_of_duty_large: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.sense_of_duty_large = val;
+                    } else {
+
+                        this.sense_of_duty_large = oldVal;
+                    }
+                }
+            },
+            sense_of_duty_race: function (val, oldVal) {
+                var offset = -15,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.sense_of_duty_race = val;
+                    } else {
+                        this.disadvantages -= offset;
+                        this.sense_of_duty_race = oldVal;
+                    }
+                }
+            },
+            sense_of_duty_every: function (val, oldVal) {
+                var offset = -20,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+
+                        this.sense_of_duty_every = val;
+                    } else {
+
+                        this.sense_of_duty_every = oldVal;
+                    }
+                }
+            },
+            truthfulness: function (val, oldVal) {
+                var offset = -5,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+                        this.truthfulness = val;
+                    } else {
+                        this.truthfulness = oldVal;
+                    }
+                }
+            },
+            unluckiness: function (val, oldVal) {
+                var offset = -10,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+                        this.unluckiness = val;
+                    } else {
+                        this.unluckiness = oldVal;
+                    }
+                }
+            },
+            vow_minor: function (val, oldVal) {
+                var offset = -5,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+                        this.unluckiness = val;
+                    } else {
+                        this.unluckiness = oldVal;
+                    }
+                }
+            },
+            vow_major: function (val, oldVal) {
+                var offset = -5,
+                    canUpdate;
+                if (!this._maxdis(offset)) {
+                    canUpdate = this.sanitizeCheckbox(val, oldVal, offset);
+                    if (canUpdate) {
+                        this.unluckiness = val;
+                    } else {
+                        this.unluckiness = oldVal;
+                    }
+                }
+            },
+            acrobatics: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.acrobatics = vals.val;
+                } else {
+                    this.acrobatics = vals.oldVal;
+                }
+            },
+            acting: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.acting = vals.val;
+                } else {
+                    this.acting = vals.oldVal;
+                }
+            },
+            animal_handling: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.animal_handling = vals.val;
+                } else {
+                    this.animal_handling = vals.oldVal;
+                }
+            },
+            area_knowledge: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.area_knowledge = vals.val;
+                } else {
+                    this.area_knowledge = vals.oldVal;
+                }
+            },
+            armoury: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.armoury = vals.val;
+                } else {
+                    this.armoury = vals.oldVal;
+                }
+            },
+            brawling: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.brawling = vals.val;
+                } else {
+                    this.brawling = vals.oldVal;
+                }
+            },
+            camouflage: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.camouflage = vals.val;
+                } else {
+                    this.camouflage = vals.oldVal;
+                }
+            },
+            carousing: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.carousing = vals.val;
+                } else {
+                    this.carousing = vals.oldVal;
+                }
+            },
+            climbing: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.climbing = vals.val;
+                } else {
+                    this.climbing = vals.oldVal;
+                }
+            },
+            computer_operation: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.computer_operation = vals.val;
+                } else {
+                    this.computer_operation = vals.oldVal;
+                }
+            },
+            crewman: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.crewman = vals.val;
+                } else {
+                    this.crewman = vals.oldVal;
+                }
+            },
+            criminology: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.criminology = vals.val;
+                } else {
+                    this.criminology = vals.oldVal;
+                }
+            },
+            diagnosis: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.diagnosis = vals.val;
+                } else {
+                    this.diagnosis = vals.oldVal;
+                }
+            },
+            disguise: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.disguise = vals.val;
+                } else {
+                    this.disguise = vals.oldVal;
+                }
+            },
+            electronics_operation: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.electronics_operation = vals.val;
+                } else {
+                    this.electronics_operation = vals.oldVal;
+                }
+            },
+            electronics_repair: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.electronics_repair = vals.val;
+                } else {
+                    this.electronics_repair = vals.oldVal;
+                }
+            },
         },
         mounted: function () {
+                $("#acrobatics").trigger('change');
         }
     });
     $('[data-toggle="popover"]').popover({
