@@ -3894,146 +3894,162 @@
                             </div>
                             <div class="form-group col">
                                 <label class="labeltext" for="engineer">Engineer (IQ)</label>
-                                <select name="engineer" id="engineer" class="form-control">
-                                    <option value="none" data-cost="0">none</option>
-                                    <option value="1" data-cost="1">-2 (1)</option>
-                                    <option value="2" data-cost="2">-1 (2)</option>
-                                    <option value="4" data-cost="4">+0 (4)</option>
-                                    <option value="8" data-cost="8">+1 (8)</option>
-                                    <option value="12" data-cost="12">+2 (12)</option>
+                                <select name="engineer" id="engineer"
+                                        v-model="engineer"
+                                        class="form-control">
+                                    <option value="0" data-cost="0"  :data-level="-6 + this.intelligence">-6</option>
+                                    <option value="1" data-cost="1" :data-level="-2 + this.intelligence">-2 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="-1 + this.intelligence">-1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="0 + this.intelligence">+0 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="1 + this.intelligence">+1 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="2 + this.intelligence">+2 (12)</option>
                                 </select>
                             </div>
 
-                            <div class="form-group col"> <!-- for="skilllevel19">-->
-                                <label class="labeltext" for="skilllevel19">Escape (DX)</label>
-                                <select name="skill[19]" id="skilllevel19" class="form-control">
-                                    <option value="none" data-cost="0">-6</option>
-                                    <option value="1" data-cost="1">-2 (1)</option>
-                                    <option value="2" data-cost="2">-1 (2)</option>
-                                    <option value="4" data-cost="4">+0 (4)</option>
-                                    <option value="8" data-cost="8">+1 (8)</option>
-                                    <option value="12" data-cost="12">+2 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="escape">Escape (DX)</label>
+                                <select name="escape" id="escape"
+                                        v-model="escape"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-6 + this.dexterity">-6</option>
+                                    <option value="1" data-cost="1" :data-level="-2 + this.dexterity">-2 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="-1 + this.dexterity">-1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="0 + this.dexterity">+0 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="1 + this.dexterity">+1 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="2 + this.dexterity">+2 (12)</option>
                                 </select>
                             </div>
 
-                            <div class="form-group col"> <!-- for="skilllevel20">-->
-                                <label class="labeltext" for="skilllevel20">Explosives/TL (IQ)</label>
-                                <select name="skill[20]" id="skilllevel20" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="explosives">Explosives (IQ)</label>
+                                <select name="explosives" id="explosives" class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.intelligence">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.intelligence">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.intelligence">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.intelligence">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.intelligence">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="-3 + this.intelligence">+3 (12)</option>
                                 </select>
                             </div>
                             <div class="w-100"></div>
-                            <div class="form-group col"> <!-- for="skilllevel21">-->
-                                <label class="labeltext" for="skilllevel21">First Aid/TL (IQ)</label>
-                                <select name="skill[21]" id="skilllevel21" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
-                                    <option value="1" data-cost="1">+0 (1)</option>
-                                    <option value="2" data-cost="2">+1 (2)</option>
-                                    <option value="4" data-cost="4">+2 (4)</option>
-                                    <option value="8" data-cost="8">+3 (8)</option>
-                                    <option value="12" data-cost="12">+4 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="first_aid">First Aid (IQ)</label>
+                                <select name="first_aid" id="first_aid" class="form-control">
+                                    <option value="0" data-cost="0"  :data-level="-4 + this.intelligence">-4</option>
+                                    <option value="1" data-cost="1" :data-level="0 + this.intelligence">+0 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="1 + this.intelligence">+1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="2 + this.intelligence">+2 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="3 + this.intelligence">+3 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="4 + this.intelligence">+4 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel22">-->
-                                <label class="labeltext" for="skilllevel22">Forgery/TL (IQ)</label>
-                                <select name="skill[22]" id="skilllevel22" class="form-control">
-                                    <option value="none" data-cost="0">-6</option>
-                                    <option value="1" data-cost="1">-2 (1)</option>
-                                    <option value="2" data-cost="2">-1 (2)</option>
-                                    <option value="4" data-cost="4">+0 (4)</option>
-                                    <option value="8" data-cost="8">+1 (8)</option>
-                                    <option value="12" data-cost="12">+2 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="forgery">Forgery (IQ)</label>
+                                <select name="forgery" id="forgery"
+                                        v-model="forgery"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-6 + this.intelligence">-6</option>
+                                    <option value="1" data-cost="1" :data-level="-2 + this.intelligence">-2 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="-1 + this.intelligence">-1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="0 + this.intelligence">+0 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="1 + this.intelligence">+1 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="2 + this.intelligence">+2 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel23">-->
-                                <label class="labeltext" for="skilllevel23">Gambling (IQ)</label>
-                                <select name="skill[23]" id="skilllevel23" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="gambling">Gambling (IQ)</label>
+                                <select name="gambling" id="gambling"
+                                        v-model="gambling"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.intelligence">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.intelligence">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.intelligence">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.intelligence">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.intelligence">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.intelligence">+3 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel24">-->
-                                <label class="labeltext" for="skilllevel24">Hiking (HT)</label>
-                                <select name="skill[24]" id="skilllevel24" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="hiking">Hiking (HT)</label>
+                                <select name="hiking" id="hiking"
+                                        v-model="hiking"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.health">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.health">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.health">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.health">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.health">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.health">+3 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel25">-->
-                                <label class="labeltext" for="skilllevel25">Holdout (IQ)</label>
-                                <select name="skill[25]" id="skilllevel25" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="holdout">Holdout | Concealing items from searches (IQ)</label>
+                                <select name="holdout" id="holdout"
+                                        v-model="holdout"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.intelligence">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.intelligence">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.intelligence">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.intelligence">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.intelligence">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.intelligence">+3 (12)</option>
                                 </select>
                             </div>
                             <div class="w-100"></div>
-                            <div class="form-group col"> <!-- for="skilllevel27">-->
-                                <label class="labeltext" for="skilllevel27">Influence - Diplomacy (IQ)</label>
-                                <select name="skill[27]" id="skilllevel27" class="form-control">
-                                    <option value="none" data-cost="0">-6</option>
-                                    <option value="1" data-cost="1">-2 (1)</option>
-                                    <option value="2" data-cost="2">-1 (2)</option>
-                                    <option value="4" data-cost="4">+0 (4)</option>
-                                    <option value="8" data-cost="8">+1 (8)</option>
-                                    <option value="12" data-cost="12">+2 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="influence_diplomacy">Influence - Diplomacy (IQ)</label>
+                                <select name="influence_diplomacy" id="influence_diplomacy"
+                                        v-model="influence_diplomacy"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-6 + this.intelligence">-6</option>
+                                    <option value="1" data-cost="1" :data-level="-2 + this.intelligence">-2 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="-1 + this.intelligence">-1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="0 + this.intelligence">+0 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="1 + this.intelligence">+1 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="2 + this.intelligence">+2 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel28">-->
-                                <label class="labeltext" for="skilllevel28">Influence - Fast-Talk (IQ)</label>
-                                <select name="skill[28]" id="skilllevel28" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="influence_fast_talk">Influence - Fast-Talk (IQ)</label>
+                                <select name="influence_fast_talk" id="influence_fast_talk"
+                                        v-model="influence_fast_talk"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.intelligence">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.intelligence">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.intelligence">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.intelligence">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.intelligence">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.intelligence">+3 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel29">-->
-                                <label class="labeltext" for="skilllevel29">Influence - Intimidation
-                                    (IQ)</label>
-                                <select name="skill[29]" id="skilllevel29" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
-                                    <option value="1" data-cost="1">-1 (1)</option>
-                                    <option value="2" data-cost="2">+0 (2)</option>
-                                    <option value="4" data-cost="4">+1 (4)</option>
-                                    <option value="8" data-cost="8">+2 (8)</option>
-                                    <option value="12" data-cost="12">+3 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="influence_intimidation">Influence - Intimidation (IQ)</label>
+                                <select name="influence_intimidation" id="influence_intimidation"
+                                        v-model="influence_intimidation"
+                                        class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-5 + this.intelligence">-5</option>
+                                    <option value="1" data-cost="1" :data-level="-1 + this.intelligence">-1 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="0 + this.intelligence">+0 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="1 + this.intelligence">+1 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="2 + this.intelligence">+2 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="3 + this.intelligence">+3 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel30">-->
-                                <label class="labeltext" for="skilllevel30">Influence - Savoir-Faire
-                                    (IQ)</label>
-                                <select name="skill[30]" id="skilllevel30" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
-                                    <option value="1" data-cost="1">+0 (1)</option>
-                                    <option value="2" data-cost="2">+1 (2)</option>
-                                    <option value="4" data-cost="4">+2 (4)</option>
-                                    <option value="8" data-cost="8">+3 (8)</option>
-                                    <option value="12" data-cost="12">+4 (12)</option>
+                            <div class="form-group col">
+                                <label class="labeltext" for="influence_savoir_faire">Influence - Savoir-Faire (IQ)</label>
+                                <select name="influence_savoir_faire" id="influence_savoir_faire" class="form-control">
+                                    <option value="0" data-cost="0" :data-level="-4 + this.intelligence">-4</option>
+                                    <option value="1" data-cost="1" :data-level="0 + this.intelligence">+0 (1)</option>
+                                    <option value="2" data-cost="2" :data-level="1 + this.intelligence">+1 (2)</option>
+                                    <option value="4" data-cost="4" :data-level="2 + this.intelligence">+2 (4)</option>
+                                    <option value="8" data-cost="8" :data-level="3 + this.intelligence">+3 (8)</option>
+                                    <option value="12" data-cost="12" :data-level="4 + this.intelligence">+4 (12)</option>
                                 </select>
                             </div>
-                            <div class="form-group col"> <!-- for="skilllevel31">-->
+                            <div class="form-group col">
                                 <label class="labeltext" for="skilllevel31">Influence - Sex Appeal (HT)</label>
                                 <select name="skill[31]" id="skilllevel31" class="form-control">
-                                    <option value="none" data-cost="0">-3</option>
+                                    <option value="0" data-cost="0">-3</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4045,7 +4061,7 @@
                             <div class="form-group col"> <!-- for="skilllevel32">-->
                                 <label class="labeltext" for="skilllevel32">Influence - Streetwise (IQ)</label>
                                 <select name="skill[32]" id="skilllevel32" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4056,7 +4072,7 @@
                             <div class="form-group col"> <!-- for="skilllevel33">-->
                                 <label class="labeltext" for="skilllevel33">Interrogation (IQ)</label>
                                 <select name="skill[33]" id="skilllevel33" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4067,7 +4083,7 @@
                             <div class="form-group col"> <!-- for="skilllevel34">-->
                                 <label class="labeltext" for="skilllevel34">Jumping (DX)</label>
                                 <select name="skill[34]" id="skilllevel34" class="form-control">
-                                    <option value="none" data-cost="0">none</option>
+                                    <option value="0" data-cost="0">0</option>
                                     <option value="1" data-cost="1">+0 (1)</option>
                                     <option value="2" data-cost="2">+1 (2)</option>
                                     <option value="4" data-cost="4">+2 (4)</option>
@@ -4078,7 +4094,7 @@
                             <div class="form-group col"> <!-- for="skilllevel35">-->
                                 <label class="labeltext" for="skilllevel35">Karate (DX)</label>
                                 <select name="skill[35]" id="skilllevel35" class="form-control">
-                                    <option value="none" data-cost="0">none</option>
+                                    <option value="0" data-cost="0">0</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
                                     <option value="4" data-cost="4">+0 (4)</option>
@@ -4089,7 +4105,7 @@
                             <div class="form-group col"> <!-- for="skilllevel36">-->
                                 <label class="labeltext" for="skilllevel36">Law (IQ)</label>
                                 <select name="skill[36]" id="skilllevel36" class="form-control">
-                                    <option value="none" data-cost="0">-6</option>
+                                    <option value="0" data-cost="0">-6</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
                                     <option value="4" data-cost="4">+0 (4)</option>
@@ -4101,7 +4117,7 @@
                             <div class="form-group col"> <!-- for="skilllevel37">-->
                                 <label class="labeltext" for="skilllevel37">Leadership (IQ)</label>
                                 <select name="skill[37]" id="skilllevel37" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4112,7 +4128,7 @@
                             <div class="form-group col"> <!-- for="skilllevel38">-->
                                 <label class="labeltext" for="skilllevel38">Lockpicking/TL (IQ)</label>
                                 <select name="skill[38]" id="skilllevel38" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4123,7 +4139,7 @@
                             <div class="form-group col"> <!-- for="skilllevel39">-->
                                 <label class="labeltext" for="skilllevel39">Mathematics/TL (IQ)</label>
                                 <select name="skill[39]" id="skilllevel39" class="form-control">
-                                    <option value="none" data-cost="0">-6</option>
+                                    <option value="0" data-cost="0">-6</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
                                     <option value="4" data-cost="4">+0 (4)</option>
@@ -4134,7 +4150,7 @@
                             <div class="form-group col"> <!-- for="skilllevel40">-->
                                 <label class="labeltext" for="skilllevel40">Mechanic/TL (IQ)</label>
                                 <select name="skill[40]" id="skilllevel40" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4145,14 +4161,12 @@
                             <div class="form-group col multiskill"> <!-- for="skill41levelnewtext" -->
                                 <label class="labeltext" for="skill41levelnew">Melee Weapon - Easy
                                     (DX)
-                                    <output name="skill[41][level][1][name]" id="skill41levelnewtext"
-                                            data-skill="41"></output>
                                 </label>
                                 <select
                                         class="form-control"
                                         name="skill[41][level][1][level]" id="skill41levelnew"
                                 >
-                                    <option value="none" data-cost="0">-4</option>
+                                    <option value="0" data-cost="0">-4</option>
                                     <option value="1" data-cost="1">+0 (1)</option>
                                     <option value="2" data-cost="2">+1 (2)</option>
                                     <option value="4" data-cost="4">+2 (4)</option>
@@ -4164,15 +4178,14 @@
                             <div class="w-100"></div>
                             <div class="form-group col multiskill"> <!-- for="skill42levelnewtext" -->
                                 <label class="labeltext" for="skill42levelnew">Melee Weapon - Average (DX)
-                                    <output name="skill[42][level][1][name]" id="skill42levelnewtext"
-                                            data-skill="42"></output>
+
                                 </label>
 
                                 <select
                                         class="form-control"
                                         name="skill[42][level][1][level]" id="skill42levelnew"
                                 >
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4185,14 +4198,13 @@
                             <div class="form-group col multiskill"> <!-- for="skill43levelnewtext" -->
                                 <label class="labeltext" for="skill43levelnew">Melee Weapon - Hard
                                     (DX)
-                                    <output name="skill[43][level][1][name]" id="skill43levelnewtext"
-                                            data-skill="43"></output>
+
                                 </label>
 
                                 <select class="form-control"
                                         name="skill[43][level][1][level]" id="skill43levelnew"
                                 >
-                                    <option value="none" data-cost="0">-6</option>
+                                    <option value="0" data-cost="0">-6</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
                                     <option value="4" data-cost="4">+0 (4)</option>
@@ -4205,7 +4217,7 @@
                             <div class="form-group col"> <!-- for="skilllevel44">-->
                                 <label class="labeltext" for="skilllevel44">Merchant (IQ)</label>
                                 <select name="skill[44]" id="skilllevel44" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4216,12 +4228,11 @@
                             <div class="form-group col multiskill"> <!-- for="skill45levelnewtext" -->
                                 <label class="labeltext" for="skill45levelnew">Missile Weapon - Gunner
                                     (DX)
-                                    <output name="skill[45][level][1][name]" id="skill45levelnewtext"
-                                            data-skill="45"></output>
+
                                 </label>
 
                                 <select class="form-control" name="skill[45][level][1][level]" id="skill45levelnew">
-                                    <option value="none" data-cost="0">-4</option>
+                                    <option value="0" data-cost="0">-4</option>
                                     <option value="1" data-cost="1">+0 (1)</option>
                                     <option value="2" data-cost="2">+1 (2)</option>
                                     <option value="4" data-cost="4">+2 (4)</option>
@@ -4234,14 +4245,13 @@
                             <div class="form-group col multiskill"> <!-- for="skill46levelnewtext" -->
                                 <label class="labeltext" for="skill46levelnew">Missile Weapon - Guns
                                     (DX)
-                                    <output name="skill[46][level][1][name]" id="skill46levelnewtext"
-                                            data-skill="46"></output>
+
                                 </label>
 
                                 <select class="form-control"
                                         name="skill[46][level][1][level]" id="skill46levelnew"
                                 >
-                                    <option value="none" data-cost="0">-4</option>
+                                    <option value="0" data-cost="0">-4</option>
                                     <option value="1" data-cost="1">+0 (1)</option>
                                     <option value="2" data-cost="2">+1 (2)</option>
                                     <option value="4" data-cost="4">+2 (4)</option>
@@ -4254,7 +4264,7 @@
                                 <label class="labeltext" for="skilllevel47">Missile Weapon - Flamethrower
                                     (DX)</label>
                                 <select name="skill[47]" id="skilllevel47" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
+                                    <option value="0" data-cost="0">-4</option>
                                     <option value="1" data-cost="1">+0 (1)</option>
                                     <option value="2" data-cost="2">+1 (2)</option>
                                     <option value="4" data-cost="4">+2 (4)</option>
@@ -4266,7 +4276,7 @@
                                 <label class="labeltext" for="skilllevel48">Missile Weapon - Blowpipe
                                     (DX)</label>
                                 <select name="skill[48]" id="skilllevel48" class="form-control">
-                                    <option value="none" data-cost="0">-6</option>
+                                    <option value="0" data-cost="0">-6</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
                                     <option value="4" data-cost="4">+0 (4)</option>
@@ -4277,7 +4287,7 @@
                             <div class="form-group col"> <!-- for="skilllevel49">-->
                                 <label class="labeltext" for="skilllevel49">Missile Weapon - Bow (DX)</label>
                                 <select name="skill[49]" id="skilllevel49" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4289,7 +4299,7 @@
                                 <label class="labeltext" for="skilllevel50">Missile Weapon - Crossbow
                                     (DX)</label>
                                 <select name="skill[50]" id="skilllevel50" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
+                                    <option value="0" data-cost="0">-4</option>
                                     <option value="1" data-cost="1">+0 (1)</option>
                                     <option value="2" data-cost="2">+1 (2)</option>
                                     <option value="4" data-cost="4">+2 (4)</option>
@@ -4300,13 +4310,12 @@
                             <div class="form-group col multiskill"> <!-- for="skill51levelnewtext" -->
                                 <label class="labeltext" for="skill51levelnew">Natural Sciences/TL
                                     (IQ)
-                                    <output name="skill[51][level][1][name]" id="skill51levelnewtext"
-                                            data-skill="51"></output>
+
                                 </label>
 
                                 <select class="form-control"
                                         name="skill[51][level][1][level]" id="skill51levelnew">
-                                    <option value="none" data-cost="0">-6</option>
+                                    <option value="0" data-cost="0">-6</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
                                     <option value="4" data-cost="4">+0 (4)</option>
@@ -4318,7 +4327,7 @@
                             <div class="form-group col"> <!-- for="skilllevel52">-->
                                 <label class="labeltext" for="skilllevel52">Naturalist (IQ)</label>
                                 <select name="skill[52]" id="skilllevel52" class="form-control">
-                                    <option value="none" data-cost="0">-6</option>
+                                    <option value="0" data-cost="0">-6</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
                                     <option value="4" data-cost="4">+0 (4)</option>
@@ -4328,14 +4337,13 @@
                             </div>
                             <div class="form-group col multiskill"> <!-- for="skill53levelnewtext" -->
                                 <label class="labeltext" for="skill53levelnew">Navigation/TL (IQ)
-                                    <output name="skill[53][level][1][name]" id="skill53levelnewtext"
-                                            data-skill="53"></output>
+
                                 </label>
 
                                 <select class="form-control"
                                         name="skill[53][level][1][level]" id="skill53levelnew"
                                 >
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4346,7 +4354,7 @@
                             <div class="form-group col"> <!-- for="skilllevel54">-->
                                 <label class="labeltext" for="skilllevel54">Observation (IQ)</label>
                                 <select name="skill[54]" id="skilllevel54" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4357,7 +4365,7 @@
                             <div class="form-group col"> <!-- for="skilllevel55">-->
                                 <label class="labeltext" for="skilllevel55">Occultism (IQ)</label>
                                 <select name="skill[55]" id="skilllevel55" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4368,7 +4376,7 @@
                             <div class="form-group col"> <!-- for="skilllevel56">-->
                                 <label class="labeltext" for="skilllevel56">Photography/TL (IQ)</label>
                                 <select name="skill[56]" id="skilllevel56" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4380,7 +4388,7 @@
                             <div class="form-group col"> <!-- for="skilllevel57">-->
                                 <label class="labeltext" for="skilllevel57">Physician/TL (IQ)</label>
                                 <select name="skill[57]" id="skilllevel57" class="form-control">
-                                    <option value="none" data-cost="0">-7</option>
+                                    <option value="0" data-cost="0">-7</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
                                     <option value="4" data-cost="4">+0 (4)</option>
@@ -4391,7 +4399,7 @@
                             <div class="form-group col"> <!-- for="skilllevel58">-->
                                 <label class="labeltext" for="skilllevel58">Pickpocket (DX)</label>
                                 <select name="skill[58]" id="skilllevel58" class="form-control">
-                                    <option value="none" data-cost="0">-6</option>
+                                    <option value="0" data-cost="0">-6</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
                                     <option value="4" data-cost="4">+0 (4)</option>
@@ -4402,7 +4410,7 @@
                             <div class="form-group col"> <!-- for="skilllevel59">-->
                                 <label class="labeltext" for="skilllevel59">Public Speaking (IQ)</label>
                                 <select name="skill[59]" id="skilllevel59" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4413,7 +4421,7 @@
                             <div class="form-group col"> <!-- for="skilllevel60">-->
                                 <label class="labeltext" for="skilllevel60">Research/TL (IQ)</label>
                                 <select name="skill[60]" id="skilllevel60" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4423,13 +4431,12 @@
                             </div>
                             <div class="multiskill form-group col"> <!-- for="skill61levelnewtext" -->
                                 <label class="labeltext" for="skill61levelnew">Riding (DX)
-                                    <output name="skill[61][level][1][name]" id="skill61levelnewtext"
-                                            data-skill="61"></output>
+
                                 </label>
 
                                 <select class="form-control"
                                         name="skill[61][level][1][level]" id="skill61levelnew">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4441,7 +4448,7 @@
                             <div class="form-group col"> <!-- for="skilllevel62">-->
                                 <label class="labeltext" for="skilllevel62">Scrounging (IQ)</label>
                                 <select name="skill[62]" id="skilllevel62" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
+                                    <option value="0" data-cost="0">-4</option>
                                     <option value="1" data-cost="1">+0 (1)</option>
                                     <option value="2" data-cost="2">+1 (2)</option>
                                     <option value="4" data-cost="4">+2 (4)</option>
@@ -4452,7 +4459,7 @@
                             <div class="form-group col"> <!-- for="skilllevel63">-->
                                 <label class="labeltext" for="skilllevel63">Search (IQ)</label>
                                 <select name="skill[63]" id="skilllevel63" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4463,7 +4470,7 @@
                             <div class="form-group col"> <!-- for="skilllevel64">-->
                                 <label class="labeltext" for="skilllevel64">Shadowing (IQ)</label>
                                 <select name="skill[64]" id="skilllevel64" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4474,7 +4481,7 @@
                             <div class="form-group col"> <!-- for="skilllevel65">-->
                                 <label class="labeltext" for="skilllevel65">Shield (DX)</label>
                                 <select name="skill[65]" id="skilllevel65" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
+                                    <option value="0" data-cost="0">-4</option>
                                     <option value="1" data-cost="1">+0 (1)</option>
                                     <option value="2" data-cost="2">+1 (2)</option>
                                     <option value="4" data-cost="4">+2 (4)</option>
@@ -4484,11 +4491,10 @@
                             </div>
                             <div class="multiskill form-group col"> <!-- for="skill66levelnewtext" -->
                                 <label class="labeltext" for="skill66levelnew">Social Sciences (IQ)
-                                    <output name="skill[66][level][1][name]" id="skill66levelnewtext"
-                                            data-skill="66"></output>
+
                                 </label>
                                 <select name="skill[66][level][1][level]" id="skill66levelnew" class="form-control">
-                                    <option value="none" data-cost="0">-6</option>
+                                    <option value="0" data-cost="0">-6</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
                                     <option value="4" data-cost="4">+0 (4)</option>
@@ -4502,7 +4508,7 @@
                             <div class="col form-group"> <!-- for="skilllevel67">-->
                                 <label class="labeltext" for="skilllevel67">Smuggling (IQ)</label>
                                 <select name="skill[67]" id="skilllevel67" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4513,7 +4519,7 @@
                             <div class="form-group col"> <!-- for="skilllevel68">-->
                                 <label class="labeltext" for="skilllevel68">Stealth (DX)</label>
                                 <select name="skill[68]" id="skilllevel68" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4524,7 +4530,7 @@
                             <div class="form-group col"> <!-- for="skilllevel69">-->
                                 <label class="labeltext" for="skilllevel69">Survival (IQ)</label>
                                 <select name="skill[69]" id="skilllevel69" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4535,7 +4541,7 @@
                             <div class="form-group col"> <!-- for="skilllevel70">-->
                                 <label class="labeltext" for="skilllevel70">Swimming (HT)</label>
                                 <select name="skill[70]" id="skilllevel70" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
+                                    <option value="0" data-cost="0">-4</option>
                                     <option value="1" data-cost="1">+0 (1)</option>
                                     <option value="2" data-cost="2">+1 (2)</option>
                                     <option value="4" data-cost="4">+2 (4)</option>
@@ -4546,7 +4552,7 @@
                             <div class="form-group col"> <!-- for="skilllevel71">-->
                                 <label class="labeltext" for="skilllevel71">Tactics (IQ)</label>
                                 <select name="skill[71]" id="skilllevel71" class="form-control">
-                                    <option value="none" data-cost="0">-6</option>
+                                    <option value="0" data-cost="0">-6</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
                                     <option value="4" data-cost="4">+0 (4)</option>
@@ -4558,7 +4564,7 @@
                             <div class="form-group col"> <!-- for="skilllevel72">-->
                                 <label class="labeltext" for="skilllevel72">Throwing (DX)</label>
                                 <select name="skill[72]" id="skilllevel72" class="form-control">
-                                    <option value="none" data-cost="0">-3</option>
+                                    <option value="0" data-cost="0">-3</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4568,11 +4574,10 @@
                             </div>
                             <div class="multiskill form-group col"> <!-- for="skill73levelnewtext" -->
                                 <label class="labeltext" for="skill73levelnew">Thrown Weapon (DX)
-                                    <output name="skill[73][level][1][name]" id="skill73levelnewtext"
-                                            data-skill="73"></output>
+
                                 </label>
                                 <select name="skill[73][level][1][level]" id="skill73levelnew" class="form-control">
-                                    <option value="none" data-cost="0">-4</option>
+                                    <option value="0" data-cost="0">-4</option>
                                     <option value="1" data-cost="1">+0 (1)</option>
                                     <option value="2" data-cost="2">+1 (2)</option>
                                     <option value="4" data-cost="4">+2 (4)</option>
@@ -4583,7 +4588,7 @@
                             <div class="form-group col"> <!-- for="skilllevel74">-->
                                 <label class="labeltext" for="skilllevel74">Tracking (IQ)</label>
                                 <select name="skill[74]" id="skilllevel74" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4594,7 +4599,7 @@
                             <div class="form-group col"> <!-- for="skilllevel75">-->
                                 <label class="labeltext" for="skilllevel75">Traps/TL (IQ)</label>
                                 <select name="skill[75]" id="skilllevel75" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4605,13 +4610,12 @@
                             <div class="multiskill form-group col"> <!-- for="skill76levelnewtext" -->
                                 <label class="labeltext" for="skill76levelnew">Vehicle Skills - Easy
                                     (DX)
-                                    <output name="skill[76][level][1][name]" id="skill76levelnewtext"
-                                            data-skill="76"></output>
+
                                 </label>
 
                                 <select class="form-control"
                                         name="skill[76][level][1][level]" id="skill76levelnew">
-                                    <option value="none" data-cost="0">-4</option>
+                                    <option value="0" data-cost="0">-4</option>
                                     <option value="1" data-cost="1">+0 (1)</option>
                                     <option value="2" data-cost="2">+1 (2)</option>
                                     <option value="4" data-cost="4">+2 (4)</option>
@@ -4626,14 +4630,13 @@
 
                             <div class="multiskill form-group col"> <!-- for="skill77levelnewtext" -->
                                 <label class="labeltext" for="skill77levelnew">Vehicle Skills - Average (DX)
-                                    <output name="skill[77][level][1][name]" id="skill77levelnewtext"
-                                            data-skill="77"></output>
+
                                 </label>
 
 
                                 <select class="form-control"
                                         name="skill[77][level][1][level]" id="skill77levelnew">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4646,13 +4649,12 @@
                             <div class="multiskill col form-group"> <!-- for="skill78levelnewtext" -->
                                 <label class="labeltext" for="skill78levelnew">Vehicle Skills - Hard
                                     (DX)
-                                    <output name="skill[78][level][1][name]" id="skill78levelnewtext"
-                                            data-skill="78"></output>
+
                                 </label>
 
                                 <select class="form-control"
                                         name="skill[78][level][1][level]" id="skill78levelnew">
-                                    <option value="none" data-cost="0">-6</option>
+                                    <option value="0" data-cost="0">-6</option>
                                     <option value="1" data-cost="1">-2 (1)</option>
                                     <option value="2" data-cost="2">-1 (2)</option>
                                     <option value="4" data-cost="4">+0 (4)</option>
@@ -4665,7 +4667,7 @@
                             <div class="form-group col"> <!-- for="skilllevel79">-->
                                 <label class="labeltext" for="skilllevel79">Writing (IQ)</label>
                                 <select name="skill[79]" id="skilllevel79" class="form-control">
-                                    <option value="none" data-cost="0">-5</option>
+                                    <option value="0" data-cost="0">-5</option>
                                     <option value="1" data-cost="1">-1 (1)</option>
                                     <option value="2" data-cost="2">+0 (2)</option>
                                     <option value="4" data-cost="4">+1 (4)</option>
@@ -4694,7 +4696,7 @@
 
     </section>
     <div class="badge badge-info stickyFooter"
-         @click="listSkills()"
+         @click="listSkills();listAdvantages();listDisadvantages();"
          data-toggle="modal" data-target="#modal"
          id="modalDisplay"
     style=""
@@ -4735,22 +4737,28 @@
                             <div class="w-100"></div>
                             <div class="col card">
                                 <div class="card-block"><span>Disadvantages:</span><br>
-                                <ul v-for="disadvantage in listDisadvantages()"><li>{{disadvantage.name}} ({{disadvantage.dataset.cost}})</li></ul>
+                                <ul><li v-for="disadvantage in disadvantage_list">{{disadvantage.name}} ({{disadvantage.dataset.cost}})</li></ul>
                                 </div>
                             </div>
                             <div class="w-100"></div>
                             <div class="col card">
                                 <div class="card-block"><span>Advantages:</span><br>
-                                <ul v-for="advantage in listAdvantages()"><li>{{advantage.name}} ({{advantage.dataset.cost}})</li></ul>
+                                <ul>
+                                    <li v-for="advantage in advantage_list">{{advantage.name}} ({{advantage.dataset.cost}})
+                                    </li>
+                                </ul>
                                 </div>
                             </div>
                             <div class="w-100"></div>
                             <div class="col card">
                                 <div class="card-block"><span>Advantages:</span><br>
-                                    <ul v-for="skill in skill_list">
-                                        <li>
-                                        Skill:  {{skill.name}} Level: {{skill.level}} Cost:({{skill.cost}})
-                                    </li></ul>
+                                    <ol >
+                                        <li v-for="skill in skill_list">
+                                            <b>Skill:</b>  {{skill.name}}<br/>
+                                            <b>Level:</b> {{skill.level}}<br/>
+                                            <b>Cost:</b> ({{skill.cost}})<br/>
+                                        </li>
+                                    </ol>
                                 </div>
                             </div>
                         </article>
@@ -4926,7 +4934,18 @@
             electronics_operation: 0,
             electronics_repair: 0,
             engineer: 0,
+            escape: 0,
+            forgery: 0,
+            gambling: 0,
+            hiking: 0,
+            holdout: 0,
+            influence_diplomacy: 0,
+            influence_fast_talk: 0,
+            influence_intimidation: 0,
+            influence_savoir_faire: 0,
             skill_list: [],
+            advantage_list: [],
+            disadvantage_list: [],
             error: null
         },
         methods: {
@@ -5071,7 +5090,7 @@
                 return this.greaterThanMaxDisadvantages(offset);
             },
             listDisadvantages: function () {
-                var list = [].slice.call(document.querySelector('#disadvantages').querySelectorAll('input select'));
+                var list = [].slice.call(document.querySelector('#disadvantages').querySelectorAll('input, select'));
                 var filtered = list.filter(function (val) {
                     var trueVal = val.checked || val.selected;
                     if (val.type === 'number' || val.type === 'text') {
@@ -5079,11 +5098,12 @@
                     }
                     return trueVal;
                 });
+                this.disadvantage_list = filtered;
                 this.disadvantages = filtered.length;
                 return filtered;
             },
             listAdvantages: function () {
-                var list = [].slice.call(document.querySelector('#advantages-perks').querySelectorAll('input select'));
+                var list = [].slice.call(document.querySelector('#advantages-perks').querySelectorAll('input, select'));
                 var filtered = list.filter(function (val) {
                     var trueVal = val.checked || val.selected;
                     if (val.type === 'number' || val.type === 'text') {
@@ -5092,6 +5112,7 @@
                     return trueVal;
                 });
                 this.advantages = filtered.length;
+                this.advantage_list = filtered;
                 return filtered;
             },
             listSkills: function () {
@@ -6255,6 +6276,126 @@
                     this.electronics_repair = vals.val;
                 } else {
                     this.electronics_repair = vals.oldVal;
+                }
+            },
+            engineer: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.engineer = vals.val;
+                } else {
+                    this.engineer = vals.oldVal;
+                }
+            },
+            escape: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.escape = vals.val;
+                } else {
+                    this.escape = vals.oldVal;
+                }
+            },
+            forgery: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.forgery = vals.val;
+                } else {
+                    this.forgery = vals.oldVal;
+                }
+            },
+            gambling: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.gambling = vals.val;
+                } else {
+                    this.gambling = vals.oldVal;
+                }
+            },
+            hiking: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.hiking = vals.val;
+                } else {
+                    this.hiking = vals.oldVal;
+                }
+            },
+            holdout: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.holdout = vals.val;
+                } else {
+                    this.holdout = vals.oldVal;
+                }
+            },
+            influence_diplomacy: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.influence_diplomacy = vals.val;
+                } else {
+                    this.influence_diplomacy = vals.oldVal;
+                }
+            },
+            influence_fast_talk: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.influence_fast_talk = vals.val;
+                } else {
+                    this.influence_fast_talk = vals.oldVal;
+                }
+            },
+            influence_intimidation: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.influence_intimidation = vals.val;
+                } else {
+                    this.influence_intimidation = vals.oldVal;
+                }
+            },
+            influence_savoir_faire: function (val, oldVal) {
+                var vals = this.sanitizeNumbers(
+                    val,
+                    oldVal,
+                    1
+                );
+                if (vals.canUpdate) {
+                    this.influence_savoir_faire = vals.val;
+                } else {
+                    this.influence_savoir_faire = vals.oldVal;
                 }
             },
         },
