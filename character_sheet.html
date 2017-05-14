@@ -5771,27 +5771,6 @@
             throttle: function (func, time) {
                 return func();
             },
-            mapAddSelectedWeaponsAndArmor: function (sel, type, add) {
-                if (add) {
-                    if (type === 'weapons') {
-                        return sel
-                            .map(this.extractWeapons)
-                            .filter(this.extractCost)
-                    }
-                    if (type === 'armor') {
-                        return sel.map(this.extractArmor)
-                            .filter(this.extractCost)
-                    }
-                }
-                if (type === 'weapons') {
-                    return sel.map(this.extractWeapons)
-                        .filter(this.addCostBackToWealth)
-                }
-                if (type === 'armor') {
-                    return sel.map(this.extractArmor)
-                        .filter(this.addCostBackToWealth)
-                }
-            },
             addCostBackToWealth: function (el) {
                 this.wealth += Number(el.cost);
                 return true;
