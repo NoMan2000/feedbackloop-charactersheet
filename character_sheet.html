@@ -6116,7 +6116,9 @@
                         this[info.name] = oldVal;
                     }
                     if (canUpdate) {
-                        callback();
+                        if (typeof callback === 'function') {
+                            callback();
+                        }
                     }
                     return canUpdate;
                 }.bind(this));
