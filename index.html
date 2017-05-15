@@ -5327,7 +5327,7 @@
          id="modalDisplay"
          style=""
     >
-        Show Stats <i class="fa fa-chevron-up"></i>
+        Show/Print Stats <i class="fa fa-chevron-up"></i>
     </div>
     <section class="modal fade" id="modal">
         <div class="modal-dialog" role="document">
@@ -5339,7 +5339,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <article class="row align-items-end ">
+                    <article class="row align-items-end" id="modalPrint">
                         <section class="col card m-3 pt-1">
                             <h3 class="card-title">General Stats</h3>
                             <div class="card-block">
@@ -5522,9 +5522,15 @@
                         </div>
                     </article>
                 </div>
+                <div class="modal-footer">
 
+                    <button type="button" @click="printPDF" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
             </div>
         </div>
+
 
     </section>
 
@@ -5768,6 +5774,22 @@
             error: null
         },
         methods: {
+            printPDF: function() {
+                var printContents = document.getElementById('modalPrint').innerHTML;
+                var myframe = document.createElement('IFRAME');
+                myframe.domain = document.domain;
+                myframe.style.position = "absolute";
+                myframe.style.top = "-10000px";
+                document.body.appendChild(myframe);
+                myframe.contentDocument.write(printContents);
+                setTimeout(function(){
+                    myframe.focus();
+                    myframe.contentWindow.print();
+                    myframe.parentNode.removeChild(myframe) ;// remove frame
+                }, 150); // wait for images to load inside iframe
+                window.focus();
+
+            },
             throttle: function (func, time) {
                 return func();
             },
