@@ -6186,9 +6186,11 @@
                 }
             },
             picture: function (el) {
+                $("#previewDownload").remove();
                 var preview = document.querySelector('#preview').cloneNode(true);
                 el = document.querySelector(el);
                 preview.id = 'previewDownload';
+
                 var child = preview.querySelector('.dz-image');
                 if (child) {
                     el.appendChild(child);
