@@ -2109,13 +2109,17 @@
                                 </label>
                             </div>
 
-                            <div class="form-check col">
+                            <div class="form-check col"
+                                 :class="{'text-muted': disableFlexibility}"
+                            >
                                 <label for="flexibility" class="form-check-label custom-control custom-checkbox">
 
                                     <input type="checkbox"
                                            class="form-check-input custom-control-input"
                                            name="flexibility" id="flexibility"
                                            v-model="flexibility"
+                                           :disabled="disableFlexibility"
+                                           :readonly="disableFlexibility"
                                            data-cost="5">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Flexibility (5pts)</span>
@@ -2136,12 +2140,16 @@
 
                                 </label>
                             </div>
-                            <div class="form-check col">
+                            <div class="form-check col"
+                                 :class="{'text-muted': disableDoubleJointed}"
+                            >
                                 <label for="double_jointed" class="form-check-label custom-control custom-checkbox">
 
                                     <input class="form-check-input custom-control-input"
                                            type="checkbox" name="double_jointed" id="double_jointed"
                                            v-model="double_jointed"
+                                           :disabled="disableDoubleJointed"
+                                           :readonly="disableDoubleJointed"
                                            data-cost="15">
                                     <span class="custom-control-indicator"></span>
                                     <span class="labeltext">Double-Jointed (15pts)</span>
@@ -6216,6 +6224,12 @@
         computed: {
             maxDisadvantages: function () {
                 return -(this.characterPoints / 2);
+            },
+            disableFlexibility: function () {
+                return this.double_jointed;
+            },
+            disableDoubleJointed: function () {
+                return this.flexibility;
             },
             disableBloodlust: function () {
                 return this.cannot_harm_innocents || this.reluctant_killer;
