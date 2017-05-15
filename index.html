@@ -817,6 +817,7 @@
                         <div class="form-group col">
                             <label for="sizemodifier">Size Mod</label>
                             <select name="sizemodifier" id="sizemodifier"
+                                    v-model="sizemodifier"
                                     class="form-control"
                             >
                                 <option value="skinny">Skinny</option>
@@ -839,6 +840,7 @@
                         <div class="form-group col textarea">
                             <label for="txtappearance">Appearance:</label>
                             <textarea name="txtappearance" id="txtappearance"
+                                      v-model="txtappearance"
                                       class="form-control"
                                       rows="4"></textarea>
                         </div>
@@ -5365,9 +5367,17 @@
                                     <li><span>Total Disadvantages:</span>
                                         <output>{{disadvantages_list_length}}</output>
                                     </li>
+
                                     <li><span>Player Picture:</span>
                                         <output id="outputPicture">{{picture('#outputPicture')}}</output>
                                     </li>
+                                    <li><span>
+                                        Height:
+                                    </span><output>{{height}}</output></li>
+                                    <li><span>Weight:</span>{{weight}}</li>
+                                    <li><span>Size Modifier:</span>{{sizemodifier}}</li>
+                                    <li><span>Age:</span>{{age}}</li>
+                                    <li><span>Appearance:</span>{{txtappearance}}</li>
                                 </ul>
                             </div>
 
@@ -5385,6 +5395,24 @@
                                     </li>
                                     <li><span>Dexterity:</span>
                                         <output>{{dexterity}}</output>
+                                    </li>
+                                    <li><span>Intelligence:</span>
+                                        <output>{{intelligence}}</output>
+                                    </li>
+                                    <li><span>Health:</span>
+                                        <output>{{health}}</output>
+                                    </li>
+                                    <li><span>Hit Points:</span>
+                                        <output>{{hitpoints}}</output>
+                                    </li>
+                                    <li><span>willpower:</span>
+                                        <output>{{willpower}}</output>
+                                    </li>
+                                    <li><span>perception:</span>
+                                        <output>{{perception}}</output>
+                                    </li>
+                                    <li><span>fatiguepoints:</span>
+                                        <output>{{fatiguepoints}}</output>
                                     </li>
 
                                     <li><span>Basic Lift</span>
@@ -5586,6 +5614,8 @@
     var vueInstance = new Vue({
         el: '#charSheet',
         data: {
+            txtappearance: '',
+            sizemodifier: 'average',
             baseStat: 10,
             baseStrengthCost: 10,
             baseDexterityCost: 20,
