@@ -1,27 +1,13 @@
 {
   "presets": [
-    ["env", {
-      "modules": false
-    }],
+    "env",
     "react",
-    "stage-2",
-    ["vue-app",
-      {
-        "useBuiltIns": true
-      }
-    ]
+    "stage-0"
   ],
   "plugins": [
     "transform-class-properties",
     "transform-decorators",
     "transform-react-constant-elements",
-    "transform-react-inline-elements",
-    "transform-runtime"
-  ],
-  "env": {
-    "test": {
-      "presets": ["env", "stage-2"],
-      "plugins": ["istanbul"]
-    }
-  }
+    "transform-react-inline-elements"
+  ]
 }

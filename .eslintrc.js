@@ -1,14 +1,16 @@
 module.exports = {
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
   extends: [
-    'standard', 'plugin:flowtype/recommended',
-  'plugin:vue/recommended'
+    'standard',
+    'plugin:flowtype/recommended',
+    'plugin:vue/recommended'
   ],
-  parser: 'babel-eslint',
   plugins: ['flowtype', 'html'],
   root: true,
   parserOptions: {
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaVersion: 2017,
+    parser: 'babel-eslint'
   },
   env: {
     browser: true,
