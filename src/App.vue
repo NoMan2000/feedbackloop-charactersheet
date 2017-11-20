@@ -6,18 +6,22 @@
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  import $ from 'jquery'
+  import 'jquery-migrate'
+  import 'bootstrap'
+  import 'dropzone'
+  import 'lodash'
+  import 'chosen-js'
+  export default {
+    name: 'app'
+  }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="postcss">
+  @import '~bootstrap/dist/css/bootstrap.css';
+  @import '~dropzone/dist/basic.css';
+  @import '~dropzone/dist/dropzone.css';
+  @import '~font-awesome/css/font-awesome.css';
+  @import '~chosen-js/chosen.css';
+  @import './../static/css/main.pcss';
 </style>

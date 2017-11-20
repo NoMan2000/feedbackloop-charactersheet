@@ -4,126 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Simple Character Sheet</title>
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/basic.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.7.0/chosen.min.css">
-  <style>
-    caption {
-      caption-side: top;
-    }
 
-    .dropzone {
-      margin: 1rem;
-    }
-
-    label {
-      font-weight: normal;
-    }
-
-    .stickyFooter {
-      position: fixed;
-      bottom: 0;
-      margin-left: 40%;
-      padding: 1vh;
-      text-align: center;
-    }
-
-    .modal-dialog {
-      max-width: 90%;
-    }
-
-    [disabled] {
-      border-color: red;
-    }
-
-    [readonly] {
-      background-color: grey;
-    }
-
-    .hide, .hidden {
-      visibility: hidden;
-    }
-
-    .custom-control-input:disabled ~ .custom-control-indicator {
-      background-color: grey;
-    }
-
-    .dropzone .dz-preview .dz-image {
-      border-radius: 20px;
-      overflow: visible;
-      width: 100%;
-      height: 100%;
-      position: relative;
-      display: block;
-      z-index: 10;
-    }
-
-    .dropzone .dz-preview {
-      width: 250px;
-    }
-
-
-  </style>
 </head>
 <body>
 <main id="charSheet">
   <section class="container-fluid">
 
     <div class="row">
-      <section class="card col m-3">
-        <article class="card-block">
-          <h4 class="card-title">How this page works</h4>
-          <p>
-            This page is designed to help you get up and running quickly with a new character build.
-            All of the points and deductions are calculated <i>automatically</i>. You can hover over
-            the question marks or expand the details sections by clicking on the arrow to get more
-            information, but you never
-            need to worry about how to calculate statistics, how many points you have left, etc. All of this
-            will
-            be handled automatically and reactively. As you change something, everything will update
-            accordingly.
-            Anything hidden in a details section will automatically be updated when you change the
-            appropriate stats.
-            If you can't see it, you don't need to worry about it.
-          </p>
-          <p>
-            Some attributes have a <span class="text-muted">Greyish text like this</span> on them.
-            This means that you either lack a <b>prerequisite</b> or have an <b>incompatible</b> talent.
-            There will be a question mark symbol that will explain what the prerequisite or incompatible
-            talent is.
-          </p>
-          <p>
-            For a case of the former, you cannot be an expert in parrying in unarmed combat if you do not
-            have an expert level in melee combat. In the case of the latter, you cannot be bloodthirsty and
-            also be a pacifist.
-            You also cannot <i>stack</i> the same types of advantages or disadvantages.
-          </p>
-          <p>
-            There are some differences in this ruleset. I.e. <i>The Feedback Loop</i> doesn't have any
-            requirements for
-            backpacks, and there's no indication of encumbrance statistics. Hence, we will not use them in
-            our game, but
-            they will still be included as reference material.
-          </p>
-          <p>
-            For this campaign, the player points will start at 100. Points and money will be
-            awarded based on play.
-          </p>
-          <p>When you are done with the character creation, print it out and send it to me. I will then input
-            the
-            scores into roll20 so that any rolls are done automatically.</p>
-          <h5>If you find Bugs</h5>
-          <p>Please report all bugs to <a href="https://github.com/NoMan2000/feedbackloop-charactersheet/issues">The
-            Github Issue Tracker</a>.
-            This will help me make improvements to this. Use Chrome, as I haven't tested this out very thoroughly in
-            other browsers.
-          </p>
-
-        </article>
-      </section>
+      <getting-started-summary></getting-started-summary>
 
       <form name="character_sheet"
             method="post"
@@ -133,256 +21,21 @@
         <div id="fullInstructions" class="card">
           <details class="card-block alert-info">
             <summary>About Character Points</summary>
-            <div class="">
-              <dl>
-                <dt>Feeble:</dt>
-                <dd>Small children,
-                  mindless thralls, zombies, etc.
-                </dd>
-                <dt>Average:</dt>
-                <dd>Ordinary people</dd>
-                <dt>Competent:</dt>
-                <dd>Athletes, cops, wealthy people</dd>
-                <dt>Exceptional:</dt>
-                <dd>Star athletes, seasoned cops, military</dd>
-                <dt>Heroic:</dt>
-                <dd>Special Operations, world-class scientists, millionairres</dd>
-                <dt>Larger than life:</dt>
-                <dd>Think Crouching Tiger-hidden dragon, Harry Dresden, The Demon Accords</dd>
-                <dt>Legendary</dt>
-                <dd>Beowulf, Merlin, etc.</dd>
-                <dt>Supehuman</dt>
-                <dd>Gods.</dd>
-              </dl>
-            </div>
-            <section id="instruction1" class="col-sm-12">
-              <h4>Character Points</h4>
-              <table class="table table-striped">
-                <caption>Character points</caption>
-                <thead>
-                <tr>
-                  <th><strong>Level</strong></th>
-                  <th>Feeble</th>
-                  <th>Average</th>
-                  <th>Competent</th>
-                  <th>Exceptional</th>
-                  <th>Heroic</th>
-                  <th>Larger than life</th>
-                  <th>Legendary</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td><strong>Points</strong></td>
-                  <td>0-25</td>
-                  <td>26-50</td>
-                  <td>51-75</td>
-                  <td>76-100</td>
-                  <td>101-200</td>
-                  <td>201-300</td>
-                  <td>301-500</td>
-                </tr>
-                </tbody>
-              </table>
-
-            </section>
+            <character-definitions></character-definitions>
+            <character-description></character-description>
           </details>
-
-          <section id="instruction2" class="card">
-            <div class="card-block">
-              <h4 class="card-title">Basic attributes</h4>
-              <p class="card-text">Alter your basic attributes, Strength, Dexterity, Intelligence and
-                Health.
-                Each point
-                above 10 costs you 10 character points for Strength or Health and 20 character
-                points for Dexterity or Intelligence. Each point below ten gives you that many
-                points.</p>
-            </div>
-          </section>
-          <section id="instruction3" class="card">
-            <div class="card-block">
-              <h4 class="card-title">Secondary characteristics</h4>
-              <p class="card-text">Secondary characteristics are calculated automatically, which is to say
-                they are
-                automatically equal to the base level of their corresponding basic attribute.
-                I.e. the number of hit points you have is directly related to how much health you have,
-                and
-                you cannot exceed or go below a certain limit for health points.</p>
-            </div>
-          </section>
-          <section id="instruction4" class="card">
-            <div class="card-block">
-              <h4 class="card-title">Image and Looks</h4>
-              <p class="card-text">If your character has an exceptional appearance, great charisma, a
-                resonant
-                voice or one
-                or more odious personal habits then specify them here.</p>
-            </div>
-          </section>
-          <section id="instruction6" class="card">
-            <div class="card-block">
-              <h4 class="card-title">Wealth and influence</h4>
-              <p class="card-text">This relates to your character's position in society, their wealth,
-                reputation and
-                status.</p>
-            </div>
-          </section>
-          <section id="instruction7" class="card">
-            <div class="card-block">
-              <h4 class="card-title">Advantages and disadvantages</h4>
-              <p class="card-text">Choose the advantages and disadvantages your character has.
-                Disadvantages total is limited to 50% of total points.
-              </p>
-            </div>
-          </section>
-          <section class="instruction-noncurrent card" id="instruction10">
-            <div class="card-block">
-              <h4 class="card-title">Finishing off</h4>
-              <p>This is where you buy equipment and decide what your character will take into the
-                campaign.
-                There will be opportunities before most campaigns begin to get any additional
-                equipment.</p>
-            </div>
-          </section>
-
+          <attributes-summary></attributes-summary>
 
           <section class="card alert-info">
             <details class="card-block">
               <summary>Glossary</summary>
-              <p>Skills are rated in terms of difficulty to learn, from Easy through Average to
-                Hard. Buying certain levels of a skill is dependant on the difficulty. Like most things,
-                starting off skills are generally pretty easy to get, but mastery is exceptionally
-                difficult.
-              </p>
-
-              <dl>
-                <dt>Advantage:</dt>
-                <dd>A useful trait that gives you an “edge” over another person
-                  with comparable attributes and skills.
-                </dd>
-                <dt>Attributes:</dt>
-                <dd>Four numbers – Strength, Dexterity, Intelligence, and Health
-                  – that rate a character’s most basic abilities. Higher is always better!
-                </dd>
-                <dt>Cinematic:</dt>
-                <dd>A style of play where the needs of the story outweigh those
-                  of realism, even when that would produce improbable results.
-                </dd>
-                <dt>D:</dt>
-                <dd>Short for “dice.” “<i>Roll 3d6</i>” means “roll three ordinary six-sided dice
-                  and add them up.” Roll 4d20 means roll 4d20 dice. The GURPS system only uses d6
-                  dice.
-                </dd>
-                <dt>Dexterity (DX):</dt>
-                <dd>An attribute that measures agility and coordination.</dd>
-                <dt>Disadvantage:</dt>
-                <dd>A problem that renders you less capable than your other
-                  traits would indicate.
-                </dd>
-                <dt>Enhancement:</dt>
-                <dd>An extra capability added to a trait. This increases the
-                  point cost of the trait by a percentage.
-                </dd>
-                <dt>Fatigue Points (FP):</dt>
-                <dd>A measure of resistance to exhaustion.</dd>
-                <dt>Health (HT):</dt>
-                <dd>An attribute that measures physical grit and vitality.</dd>
-                <dt>Hit Points (HP):</dt>
-                <dd>A measure of ability to absorb punishment.</dd>
-                <dt>Intelligence (IQ):</dt>
-                <dd>An attribute that measures brainpower.</dd>
-                <dt>Limitation:</dt>
-                <dd>A restriction on the use of a trait. This reduces the point cost
-                  of the trait by a percentage.
-                </dd>
-                <dt>Point:</dt>
-                <dd>The unit of “currency” spent to buy traits for a character. The
-                  more points you have, the more capable you are.
-                </dd>
-                <dt>Prerequisite:</dt>
-                <dd>A trait you must have to qualify for another trait. If the
-                  prerequisite is a skill, you must have at least one point in it.
-                </dd>
-                <dt>Skill:</dt>
-                <dd>A number defining your trained ability in an area of knowledge
-                  or broad class of tasks.
-                </dd>
-                <dt>Strength (ST):</dt>
-                <dd>An attribute that measures physical muscle and bulk.</dd>
-                <dt>Trait:</dt>
-                <dd>An advantage, attribute, disadvantage, skill, or other character
-                  “building block” that affects game play and costs points to add,
-                  modify, or remove.
-                </dd>
-              </dl>
-              <div class="">
-                Note: You can lose abilities in the GURPS system.
-              </div>
+              <glossary-summary></glossary-summary>
             </details>
           </section>
         </div> <!-- End Instructions -->
         <fieldset id="primary">
           <legend>Primary</legend>
-          <section class="card alert-info">
-            <details class="card-block">
-              <summary>
-                About your Personal History
-              </summary>
-              <ul>
-                <li> Where were they born and where
-                  did they grow up? Where do they live
-                  now?
-                </li>
-                <li> Who were their parents? (Do they
-                  know?) Are they still alive? If not,
-                  what became of them? If so, do they
-                  get along with them?
-                </li>
-                <li> What training do they have? Were
-                  they an apprentice? A student? Or are they
-                  self-taught?
-                </li>
-                <li> What is their current occupation?
-                  What other jobs have they held?
-                </li>
-                <li> What social class do they belong
-                  to? How wealthy are they?
-                </li>
-                <li> Who are their friends? Their enemies?
-                  Their closest professional associates?
-                </li>
-                <li> What were the most important
-                  moments of their life?
-                </li>
-                <li> What are their likes and dislikes?
-                  Hobbies and interests? Morals and
-                  beliefs?
-                </li>
-                <li> What are their motivations? Plans
-                  for the future?
-                </li>
-              </ul>
-              <dl>
-                <dt>Job Details.</dt>
-                <dd>It can be important to know what you do for a living when
-                  you’re not adventuring (unless adventuring is your job – lucky you!) and
-                  how long you spend doing it. This determines your income and on-the-job
-                  training opportunities. Military characters should keep a service record.
-                </dd>
-                <dt>Life History.</dt>
-                <dd>If you write down your character story, keep it in a separate
-                  file so you can easily expand it as your adventures unfold.
-                </dd>
-                <dt>Vital Statistics.</dt>
-                <dd>If you think your parents’ names, your place and date
-                  of birth (or zodiacal birth sign), your bloodline (or race – in some settings,
-                  you might need to specify that you are an ordinary human!), and similar
-                  traits are likely to matter, keep a separate “personnel file” on yourself that
-                  contains such details.
-                </dd>
-              </dl>
-            </details>
-          </section>
+
           <header class="row align-items-start">
             <div class="form-group col">
               <label for="startingpoints">Character points:</label>
@@ -405,7 +58,8 @@
               <input type="number" inputmode="numeric"
                      readonly
                      class="form-control"
-                     required id="advantagepoints" name="advantagepoints"
+                     required
+                     id="advantagepoints" name="advantagepoints"
                      v-model.number="advantages">
             </div>
             <div class="w-100"></div>
@@ -5584,21 +5238,11 @@
   </section>
 
 </main>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.0.0/jquery-migrate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.7.0/chosen.jquery.min.js"></script>
-<script src="https://unpkg.com/vue@2.3.3/dist/vue.min.js"></script>
+
+
 <script>
   // Add _.debounce to change events to prevent spamming.
-
+  /* globals Dropzone */
   Dropzone.options.preview = {
     init: function () {
       this.on('maxfilesexceeded', function (file) {
@@ -5631,23 +5275,7 @@
     data: {
       txtappearance: '',
       sizemodifier: 'average',
-      baseStat: 10,
-      baseStrengthCost: 10,
-      baseDexterityCost: 20,
-      baseIntelligenceCost: 20,
-      baseHealthCost: 10,
-      basePerceptionCost: 5,
-      baseWillpowerCost: 5,
-      baseFatigueCost: 3,
-      basicSpeedCost: 5,
-      baseHitPointsCost: 2,
-      characterPoints: 100,
-      strength: 10,
-      dexterity: 10,
-      intelligence: 10,
-      health: 10,
-      hitpoints: 10,
-      willpower: 10,
+
       height: 63,
       weight: 135,
       perception: 10,
@@ -5661,7 +5289,6 @@
       damageThrown: '1d-2',
       damageSwung: '1d',
       basicSpeed: 5,
-      basicSpeedOffset: 0,
       wealth: 30000,
       wealthAdvantage: 0,
       basicMove: 5,
@@ -5684,8 +5311,7 @@
       danger_sense: false,
       daredevil: false,
       empathy: false,
-      enhanced_block: false,
-      enhanced_dodge: false,
+
       enhanced_parry_unarmed: false,
       enhanced_parry_one_melee: false,
       enhanced_parry_all: false,
@@ -5839,7 +5465,6 @@
           myframe.parentNode.removeChild(myframe)// remove frame
         }, 150) // wait for images to load inside iframe
         window.focus()
-
       },
       throttle: function (func, time) {
         return func()
@@ -5879,7 +5504,6 @@
             cost: Number(cost)
           }
         return set
-
       },
       badSightAdjustment: function (val) {
         if (this.bad_sight_nc) {
@@ -5899,25 +5523,15 @@
         this.enhanced_parry_all = false
         _.pull(this.advantages_list, document.querySelector('#enhanced_parry_all'))
       },
-      getSelectedSkillsInformation: function (el) {
+      getSelectedSkillsInformation (el) {
         return {
           level: parseInt(Number(el.options[el.selectedIndex].dataset.level), 10),
           name: el.name,
           cost: parseInt(Number(el.options[el.selectedIndex].dataset.cost), 10)
         }
       },
-      canUpdateValue: function (offset, baseCost) {
-        baseCost = Number(baseCost)
-        offset *= baseCost
-        var canChange = true
 
-        if (offset > this.remainingCharacterPoints) {
-          canChange = false
-        }
-        this.remainingCharacterPoints -= offset
-        return canChange
-      },
-      sanitizeNumbers: function (val, oldVal, offset, min, max) {
+      sanitizeNumbers (val, oldVal, offset, min, max) {
         val = Number(val)
         oldVal = Number(oldVal)
         if (min != null && min !== '') {
@@ -5936,7 +5550,7 @@
             oldVal = max
           }
         }
-        var canUpdate = Boolean(this.canUpdateValue(
+        let canUpdate = Boolean(actions.canUpdateValue(
           offset,
           val - oldVal
         ))
@@ -5961,9 +5575,6 @@
           1,
           val - oldVal
         )
-      },
-      updateBasicLift: function () {
-        this.basicLift = Math.pow(this.strength, 2) / 5
       },
       updateThrownThrustAndSwing: function () {
         var thrown, swung
@@ -6027,7 +5638,7 @@
       updateBasicSpeedDodgeAndMove: function () {
         this.basicSpeed = ((this.dexterity + this.health) / 4) + this.basicSpeedOffset
         this.basicMove = Math.floor(this.basicSpeed)
-        this.dodge = this.basicMove + 3 + this.enhanced_dodge
+        this.dodge = this.basicMove + 3 + this.enhancedDodge
       },
       updateBasicMoveAndDodge: function () {
         this.basicMove = Math.floor(this.basicSpeed)
@@ -6268,9 +5879,6 @@
       }
     },
     computed: {
-      maxDisadvantages: function () {
-        return -(this.characterPoints / 2)
-      },
       disableFlexibility: function () {
         return this.double_jointed
       },
@@ -6359,7 +5967,7 @@
         return this.vow_major || this.vow_minor
       },
       attributepoints: function () {
-        return Number(this.strength) + Number(this.dexterity) + Number(this.intelligence) + Number(this.health) + Number(this.hitpoints) + Number(this.willpower) + Number(this.perception) + Number(this.fatiguepoints) + Number(this.basicSpeed)
+        return Number(this.strength) + Number(this.dexterity) + Number(this.intelligence) + Number(this.health) + Number(this.hitPoints) + Number(this.willpower) + Number(this.perception) + Number(this.fatiguePoints) + Number(this.basicSpeed)
       },
       enhanced_parry_unarmed_allowed: function () {
         var allowed = (this.brawling === 12 || this.karate === 12) && !this.enhanced_parry_all
@@ -6415,151 +6023,7 @@
       }
     },
     watch: {
-      characterPoints: function (val, oldVal) {
-        this.remainingCharacterPoints += val - oldVal
-      },
-      strength: function (val, oldVal) {
-        this.throttle(function () {
-          var canChange = this.canUpdateValue(
-            val - oldVal,
-            this.baseStrengthCost
-          )
-          if (canChange) {
-            this.hitpoints = val
-          } else {
-            this.strength = oldVal
-          }
-          this.updateBasicLift()
-          this.updateThrownThrustAndSwing()
-        }.bind(this))
-      },
-      dexterity: function (val, oldVal) {
-        this.throttle(function () {
-          var canChange = this.canUpdateValue(
-            val - oldVal,
-            this.baseDexterityCost
-          )
-          if (canChange) {
 
-          } else {
-            this.dexterity = oldVal
-          }
-          this.updateBasicSpeedDodgeAndMove()
-        }.bind(this))
-
-      },
-      intelligence: function (val, oldVal) {
-        this.throttle(function () {
-          val = Number(val)
-          oldVal = Number(oldVal)
-          var canChange = this.canUpdateValue(
-            val - oldVal,
-            this.baseIntelligenceCost
-          )
-          if (canChange) {
-
-            this.perception = val
-            this.willpower = val
-
-          } else {
-            this.intelligence = oldVal
-            this.perception = oldVal
-            this.willpower = oldVal
-          }
-        }.bind(this))
-      },
-      health: function (val, oldVal) {
-        this.throttle(function () {
-          var canChange = this.canUpdateValue(
-            val - oldVal,
-            this.baseHealthCost
-          )
-          if (canChange) {
-
-            this.fatiguepoints = val
-          } else {
-            this.health = oldVal
-            this.fatiguepoints = oldVal
-          }
-          this.updateBasicSpeedDodgeAndMove()
-        }.bind(this))
-      },
-      hitpoints: function (val, oldVal) {
-        this.throttle(function () {
-          var overThirty = (val / this.strength) > 1.3
-          var canChange = this.canUpdateValue(
-            val === this.strength ? 0 : val - oldVal,
-            this.baseHitPointsCost
-          ) && !overThirty
-          if (canChange) {
-
-          } else {
-            this.hitpoints = oldVal
-          }
-        }.bind(this))
-      },
-      willpower: function (val, oldVal) {
-        this.throttle(function () {
-          var canChange = this.canUpdateValue(
-            val === this.intelligence ? 0 : val - oldVal,
-            this.baseWillpowerCost
-          )
-          if (canChange) {
-
-          } else {
-            this.willpower = oldVal
-          }
-        }.bind(this))
-      },
-      fatiguepoints: function (val, oldVal) {
-        this.throttle(function () {
-          var canChange = this.canUpdateValue(
-            val === this.health ? 0 : val - oldVal,
-            this.baseFatigueCost
-          )
-          if (canChange) {
-
-          } else {
-            this.fatiguepoints = oldVal
-          }
-        }.bind(this))
-      },
-      perception: function (val, oldVal) {
-        return this.throttle(function () {
-          var canChange = this.canUpdateValue(
-            val === this.intelligence ? 0 : val - oldVal,
-            this.basePerceptionCost
-          )
-          if (canChange) {
-
-          } else {
-            this.perception = oldVal
-          }
-          return canChange
-        }.bind(this))
-      },
-      basicSpeed: function (val, oldVal) {
-        return this.throttle(function () {
-          var speed = ((this.dexterity + this.health) / 4) + this.basicSpeedOffset
-          if (speed === val) {
-            return
-          }
-          var offset = (val - oldVal) * 4
-          var totalOffset = (val - oldVal) + this.basicSpeedOffset
-          var canUpdate = this.canUpdateValue(
-            speed === val ? 0 : offset,
-            this.basicSpeedCost
-          ) && totalOffset < 2
-          if (canUpdate) {
-            this.basicSpeedOffset = totalOffset
-
-          } else {
-            this.basicSpeed = oldVal
-          }
-          this.updateBasicMoveAndDodge()
-          return canUpdate
-        }.bind(this))
-      },
       // End attributes
       // begin reaction modifiers
       appearance: function (val, oldVal) {
