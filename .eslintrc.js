@@ -1,3 +1,6 @@
+const OFF = 0
+const WARN = 1
+const ERROR = 2
 module.exports = {
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
   extends: [
@@ -18,16 +21,17 @@ module.exports = {
   // add your custom rules here
   rules: {
     // allow paren-less arrow functions
-    'arrow-parens': 0,
+    'arrow-parens': OFF,
     // allow async-await
-    'generator-star-spacing': 0,
+    'generator-star-spacing': OFF,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    "import/no-unresolved": 0,
-    "import/no-unassigned-import": 0,
+    'no-debugger': process.env.NODE_ENV === 'production' ? ERROR : OFF,
+    'import/no-unresolved': OFF,
+    'import/no-unassigned-import': OFF,
     "vue/html-no-self-closing": "error",
-    "semi": ["error", "never"],
+    semi: ['error', 'never'],
     "no-console": "off",
+    'accessor-pairs': OFF,
     "space-before-function-paren": [
       "error",
       {

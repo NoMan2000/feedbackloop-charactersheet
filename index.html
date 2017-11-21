@@ -106,55 +106,8 @@
           <!-- Add Some Descriptor here.  Primary? -->
           <div class="alert-info col card">
             <h5 class="card-title">Attributes list</h5>
-            <details class="card-block">
-              <summary>About Attributes</summary>
-              <ul>
-                <li><b>6 or less:</b> Crippling. An attribute this bad severely constrains your
-                  lifestyle.
-                </li>
-                <li><b>7: Poor.</b> Your limitations are immediately obvious to anyone who
-                  meets you. This is the lowest score you can have and still pass for “ablebodied.”
-                </li>
-                <li>
-                  <b>8 or 9:</b> Below average. Such scores are limiting, but within the human
-                  norm. The GM may forbid attributes below 8 to active adventurers.
-                </li>
-                <li><b>10: Average.</b> Most humans get by just fine with a score of 10!</li>
-                <li><b>11 or 12:</b> Above average. These scores are superior, but within the
-                  human norm.
-                </li>
-                <li><b>13 or 14:</b> Exceptional. Such an attribute is immediately apparent – as
-                  bulging muscles, feline grace, witty dialog, or glowing health – to those
-                  who meet you.
-                </li>
-                <li><b>15 or more:</b> Amazing. An attribute this high draws constant comment
-                  and probably guides your career choices.
-                </li>
-              </ul>
-              <p>The four basic attributes in GURPS are Strength (ST), Dexterity (DX),
-                Intelligence (IQ), and Health (HT). Most skills are based either on IQ or
-                on DX, which is reflected in the fact that these attributes are worth 20
-                points per level. ST and HT are worth 10 points per level.
-                Note that this only starts counting when above 10. Any stats at 10 are just
-                0 cost. You gain back an equal number of points for each negative that you take.
-              </p>
-              <p>8 is the minimum you should go for a primary stat. 10 is considered average. 13 is
-                exceptional.
-                It is recommended that you spend at least half of your points in basic attributes.
-              </p>
-            </details>
-            <details class="card-block">
-              <summary>About Strength</summary>
-              <p>Strength is very important because it equates to how much damage you can
-                take, represented as Hit Points (HP). HP can be adjusted with 2 points per
-                level, but you’ll rarely want to lower it. For any attack that uses the force of
-                your hand or arm, ST directly relates to the amount of damage that you can
-                inflict.</p>
-              <p>Encumbrance refers to how much weight you are carrying. The greater your
-                Encumbrance, the slower you move. Most characters function at Light
-                Encumbrance, which is twice your Basic Lift. Basic Lift equals the square
-                of your ST divided by 5 (ST × ST ÷ 5).</p>
-            </details>
+            <about-attributes-summary></about-attributes-summary>
+
           </div>
           <article class="row p-1 align-items-end">
 
@@ -364,95 +317,7 @@
         <fieldset id="appearanceField">
           <legend>Personal Appearance</legend>
           <div class="col card alert-info">
-            <details class="card-block">
-              <summary>Weight,Height and You</summary>
-
-              <div>
-                <table width="100%" border="1" summary="Height and Weight by Strength">
-                  <caption>
-                    Height/Weight by Strength
-                  </caption>
-                  <thead>
-                  <tr>
-                    <th>Strength</th>
-                    <th>Height</th>
-                    <th>Skinny</th>
-                    <th>Average</th>
-                    <th>Overweight</th>
-                    <th>Fat</th>
-                    <th>Very Fat</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-
-                  <tr>
-                    <td>&lt;8</td>
-                    <td>4'10&quot;-5'8&quot; (58-68)</td>
-                    <td>60-100&#32;lbs</td>
-                    <td>90-150&#32;lbs.</td>
-                    <td>120-195&#32;lbs.</td>
-                    <td>135-225&#32;lbs.</td>
-                    <td>180-300&#32;lbs.</td>
-                  </tr>
-                  <tr>
-                    <td>9</td>
-                    <td>5&rsquo;1&rdquo;-5&rsquo;11&rdquo; (61-71)</td>
-                    <td>70-110&#32;lbs.</td>
-                    <td>105-165&#32;lbs.</td>
-                    <td>140-215&#32;lbs.</td>
-                    <td>160-250&#32;lbs.</td>
-                    <td>210-330&#32;lbs.</td>
-                  </tr>
-                  <tr>
-                    <td>10</td>
-                    <td>5&rsquo;3&rdquo;-6&rsquo;1&rdquo; (63-73)</td>
-                    <td>80-120&#32;lbs.</td>
-                    <td>115-175&#32;lbs.</td>
-                    <td>150-230&#32;lbs.</td>
-                    <td>175-265&#32;lbs.</td>
-                    <td>230-350&#32;lbs.</td>
-                  </tr>
-                  <tr>
-                    <td>11</td>
-                    <td>5'5-6'3&quot; (65-73)</td>
-                    <td>90-130 lbs.</td>
-                    <td>125-185 lbs.</td>
-                    <td>160-240 lbs.</td>
-                    <td>190-280 lbs</td>
-                    <td>250-370 lbs.</td>
-                  </tr>
-                  <tr>
-                    <td>12</td>
-                    <td>5&rsquo;8&rdquo;-6&rsquo;6&rdquo; (68-78)</td>
-                    <td>95-150&#32;lbs.</td>
-                    <td>140-220&#32;lbs.</td>
-                    <td>185-290&#32;lbs.</td>
-                    <td>210-330&#32;lbs.</td>
-                    <td>280-440&#32;lbs.</td>
-                  </tr>
-                  <tr>
-                    <td>13</td>
-                    <td>5&rsquo;11&rdquo;-6&rsquo;9&rdquo; (71-81)</td>
-                    <td>105-165&#32;lbs.</td>
-                    <td>155-245&#32;lbs.</td>
-                    <td>205-320&#32;lbs.</td>
-                    <td>235-370&#32;lbs.</td>
-                    <td>310-490&#32;lbs.</td>
-                  </tr>
-                  <tr>
-                    <td>&gt;14</td>
-                    <td>6&rsquo;2&rdquo;-7&rsquo; (74-84)</td>
-                    <td>115-180&#32;lbs.</td>
-                    <td>170-270&#32;lbs.</td>
-                    <td>225-355&#32;lbs.</td>
-                    <td>255-405&#32;lbs.</td>
-                    <td>340-540&#32;lbs.</td>
-                  </tr>
-                  </tbody>
-                </table>
-
-              </div>
-            </details>
+            <personal-appearance-summary></personal-appearance-summary>
           </div>
           <section class="row align-items-end">
 
@@ -5282,7 +5147,6 @@
       charisma: 0,
       age: 30,
       fatiguepoints: 10,
-      remainingCharacterPoints: 100,
       disadvantages: 0,
       advantages: 0,
       basicLift: 20,
@@ -5304,148 +5168,8 @@
       vision: 0,
       nightvision: 0,
       fearlessness: 0,
-      ambidexterity: false,
-      animal_empathy: false,
-      catfall: false,
-      combat_reflexes: false,
-      danger_sense: false,
-      daredevil: false,
-      empathy: false,
 
-      enhanced_parry_unarmed: false,
-      enhanced_parry_one_melee: false,
-      enhanced_parry_all: false,
-      flexibility: false,
-      double_jointed: false,
-      high_pain_threshold: false,
-      luck: false,
-      extraordinary_luck: false,
-      ridiculous_luck: false,
-      perfect_balance: false,
-      resistant_disease_3: false,
-      resistant_disease_8: false,
-      resistant_poison_3: false,
-      resistant_poison_8: false,
-      total_intolerance: false,
-      intolerance: 0,
-      bad_sight_c: false,
-      bad_sight_nc: false,
-      badtemper: false,
-      bloodlust: false,
-      code_of_honor_informal_peers: false,
-      code_of_honor_formal_peers: false,
-      code_of_honor_formal_always: false,
-      curious: false,
-      delusions_minor: false,
-      delusions_major: false,
-      delusions_severe: false,
-      gluttony: false,
-      greed: false,
-      hard_of_hearing: false,
-      honesty: false,
-      impulsiveness: false,
-      jealousy: false,
-      lecherousness: false,
-      obsession_short_term: false,
-      obsession_long_term: false,
-      overconfidence: false,
-      reluctant_killer: false,
-      cannot_harm_innocents: false,
-      phobia_rare: false,
-      phobia_uncommon: false,
-      phobia_common: false,
-      sense_of_duty_individual: false,
-      sense_of_duty_small: false,
-      sense_of_duty_large: false,
-      sense_of_duty_race: false,
-      sense_of_duty_every: false,
-      truthfulness: false,
-      unluckiness: false,
-      vow_minor: false,
-      vow_major: false,
-      vow_great: false,
-      acrobatics: 0,
-      acting: 0,
-      animal_handling: 0,
-      area_knowledge: 0,
-      armoury: 0,
-      brawling: 0,
-      camouflage: 0,
-      carousing: 0,
-      climbing: 0,
-      computer_operation: 0,
-      computer_programming: 0,
-      crewman: 0,
-      criminology: 0,
-      diagnosis: 0,
-      disguise: 0,
-      disadvantages_list_length: 0,
-      electronics_operation: 0,
-      electronics_repair: 0,
-      engineer: 0,
-      escape: 0,
-      explosives: 0,
-      first_aid: 0,
-      forgery: 0,
-      gambling: 0,
-      hiking: 0,
-      holdout: 0,
-      influence_diplomacy: 0,
-      influence_fast_talk: 0,
-      influence_intimidation: 0,
-      influence_savoir_faire: 0,
-      influence_sex_appeal: 0,
-      influence_streetwise: 0,
-      interrogation: 0,
-      jumping: 0,
-      karate: 0,
-      law: 0,
-      leadership: 0,
-      lockpicking: 0,
-      mathematics: 0,
-      mechanic: 0,
-      melee_weapons_easy: 0,
-      melee_weapons_average: 0,
-      melee_weapons_hard: 0,
-      merchant: 0,
-      missile_weapons_gunner: 0,
-      missile_weapons_gun: 0,
-      missile_weapon_flamethrower: 0,
-      missile_weapon_blowpipe: 0,
-      missile_weapon_bow: 0,
-      missile_weapon_crossbow: 0,
-      natural_sciences: 0,
-      naturalist: 0,
-      navigation: 0,
-      observation: 0,
-      occultism: 0,
-      photography: 0,
-      physician: 0,
-      pickpocket: 0,
-      public_speaking: 0,
-      research: 0,
-      riding: 0,
-      scrounging: 0,
-      search: 0,
-      shadowing: 0,
-      shield: 0,
-      social_sciences: 0,
-      smuggler: 0,
-      stealth: 0,
-      survival: 0,
-      swimming: 0,
-      tactics: 0,
-      throwing: 0,
-      thrown_weapon: 0,
-      tracking: 0,
-      traps: 0,
-      vehicle_skills_easy: 0,
-      vehicle_skills_average: 0,
-      vehicle_skills_hard: 0,
-      writing: 0,
-      skill_list: [],
-      advantage_list: [],
-      disadvantage_list: [],
+
       weapons: [],
       armor: [],
       error: null
@@ -5644,9 +5368,7 @@
         this.basicMove = Math.floor(this.basicSpeed)
         this.dodge = this.basicMove + 3
       },
-      greaterThanMaxDisadvantages: function (offset) {
-        return (this.disadvantages + offset) < this.maxDisadvantages
-      },
+
       _maxdis: function (offset) {
         return this.greaterThanMaxDisadvantages(offset)
       },
@@ -5765,25 +5487,24 @@
         }.bind(this))
       },
       setPerksSelect: function (el, val, oldVal) {
-        return this.throttle(function () {
-          val = Number(val)
-          oldVal = Number(oldVal)
-          var offset = val - oldVal
-          var info = this.getSelectedSkillsInformation(el),
-            canUpdate = this.canUpdateValue(
-              1,
-              offset
-            )
+        val = Number(val)
+        oldVal = Number(oldVal)
+        var offset = val - oldVal
+        var info = this.getSelectedSkillsInformation(el),
+          canUpdate = this.canUpdateValue(
+            1,
+            offset
+          )
 
-          if (!canUpdate) {
-            this[info.name] = oldVal
-          }
-          if (canUpdate) {
-            el.dataset.cost = val
-            this.updateAdvantages(offset, el)
-          }
-          return canUpdate
-        }.bind(this))
+        if (!canUpdate) {
+          this[info.name] = oldVal
+        }
+        if (canUpdate) {
+          el.dataset.cost = val
+          this.updateAdvantages(offset, el)
+        }
+        return canUpdate
+
       },
       setSkillsSelect: function (el, val, oldVal, callback) {
         this.throttle(function () {
@@ -5965,9 +5686,6 @@
       },
       disable_vow_great: function () {
         return this.vow_major || this.vow_minor
-      },
-      attributepoints: function () {
-        return Number(this.strength) + Number(this.dexterity) + Number(this.intelligence) + Number(this.health) + Number(this.hitPoints) + Number(this.willpower) + Number(this.perception) + Number(this.fatiguePoints) + Number(this.basicSpeed)
       },
       enhanced_parry_unarmed_allowed: function () {
         var allowed = (this.brawling === 12 || this.karate === 12) && !this.enhanced_parry_all
@@ -6270,240 +5988,7 @@
         this.setDisadvantagesCheck(vow_great, val, oldVal)
       },
       // Begin Skills
-      acrobatics: function (val, oldVal) {
-        this.setSkillsSelect(acrobatics, val, oldVal)
-      },
-      acting: function (val, oldVal) {
-        this.setSkillsSelect(acting, val, oldVal)
-      },
-      animal_handling: function (val, oldVal) {
-        this.setSkillsSelect(animal_handling, val, oldVal)
-      },
-      area_knowledge: function (val, oldVal) {
-        this.setSkillsSelect(area_knowledge, val, oldVal)
-      },
-      armoury: function (val, oldVal) {
-        this.setSkillsSelect(armoury, val, oldVal)
-      },
-      brawling: function (val, oldVal) {
-        this.setSkillsSelect(brawling, val, oldVal)
-      },
-      camouflage: function (val, oldVal) {
-        this.setSkillsSelect(camouflage, val, oldVal)
-      },
-      carousing: function (val, oldVal) {
-        this.setSkillsSelect(carousing, val, oldVal)
-      },
-      climbing: function (val, oldVal) {
-        this.setSkillsSelect(climbing, val, oldVal)
-      },
-      computer_operation: function (val, oldVal) {
-        this.setSkillsSelect(computer_operation, val, oldVal)
-      },
-      computer_programming: function (val, oldVal) {
-        this.setSkillsSelect(computer_programming, val, oldVal)
-      },
-      crewman: function (val, oldVal) {
-        this.setSkillsSelect(crewman, val, oldVal)
-      },
-      criminology: function (val, oldVal) {
-        this.setSkillsSelect(criminology, val, oldVal)
-      },
-      diagnosis: function (val, oldVal) {
-        this.setSkillsSelect(diagnosis, val, oldVal)
-      },
-      disguise: function (val, oldVal) {
-        this.setSkillsSelect(disguise, val, oldVal)
-      },
-      electronics_operation: function (val, oldVal) {
-        this.setSkillsSelect(electronics_operation, val, oldVal)
-      },
-      electronics_repair: function (val, oldVal) {
-        this.setSkillsSelect(electronics_repair, val, oldVal)
-      },
-      explosives: function (val, oldVal) {
-        this.setSkillsSelect(explosives, val, oldVal)
-      },
-      engineer: function (val, oldVal) {
-        this.setSkillsSelect(engineer, val, oldVal)
-      },
-      escape: function (val, oldVal) {
-        this.setSkillsSelect(escape, val, oldVal)
-      },
-      first_aid: function (val, oldVal) {
-        this.setSkillsSelect(first_iad, val, oldVal)
-      },
-      forgery: function (val, oldVal) {
-        this.setSkillsSelect(forgery, val, oldVal)
-      },
-      gambling: function (val, oldVal) {
-        this.setSkillsSelect(gambling, val, oldVal)
-      },
-      hiking: function (val, oldVal) {
-        this.setSkillsSelect(hiking, val, oldVal)
-      },
-      holdout: function (val, oldVal) {
-        this.setSkillsSelect(holdout, val, oldVal)
-      },
-      influence_diplomacy: function (val, oldVal) {
-        this.setSkillsSelect(influence_diplomacy, val, oldVal)
-      },
-      influence_fast_talk: function (val, oldVal) {
-        this.setSkillsSelect(influence_fast_talk, val, oldVal)
-      },
-      influence_intimidation: function (val, oldVal) {
-        this.setSkillsSelect(influence_intimidation, val, oldVal)
-      },
-      influence_savoir_faire: function (val, oldVal) {
-        this.setSkillsSelect(influence_savoir_faire, val, oldVal)
-      },
-      influence_sex_appeal: function (val, oldVal) {
-        this.setSkillsSelect(influence_sex_appeal, val, oldVal)
-      },
-      influence_streetwise: function (val, oldVal) {
-        this.setSkillsSelect(influence_streetwise, val, oldVal)
-      },
-      interrogation: function (val, oldVal) {
-        this.setSkillsSelect(interrogation, val, oldVal)
-      },
-      jumping: function (val, oldVal) {
-        this.setSkillsSelect(jumping, val, oldVal)
-      },
-      karate: function (val, oldVal) {
-        this.setSkillsSelect(karate, val, oldVal)
-      },
-      law: function (val, oldVal) {
-        this.setSkillsSelect(law, val, oldVal)
-      },
-      leadership: function (val, oldVal) {
-        this.setSkillsSelect(leadership, val, oldVal)
-      },
-      lockpicking: function (val, oldVal) {
-        this.setSkillsSelect(lockpicking, val, oldVal)
-      },
-      mathematics: function (val, oldVal) {
-        this.setSkillsSelect(mathematics, val, oldVal)
-      },
-      mechanic: function (val, oldVal) {
-        this.setSkillsSelect(mechanic, val, oldVal)
-      },
-      melee_weapons_easy: function (val, oldVal) {
-        this.setSkillsSelect(melee_weapons_easy, val, oldVal)
-      },
-      melee_weapons_average: function (val, oldVal) {
-        this.setSkillsSelect(melee_weapons_average, val, oldVal)
-      },
-      melee_weapons_hard: function (val, oldVal) {
-        this.setSkillsSelect(melee_weapons_hard, val, oldVal)
-      },
-      merchant: function (val, oldVal) {
-        this.setSkillsSelect(merchant, val, oldVal)
-      },
-      missile_weapons_gunner: function (val, oldVal) {
-        this.setSkillsSelect(missile_weapons_gunner, val, oldVal)
-      },
-      missile_weapons_gun: function (val, oldVal) {
-        this.setSkillsSelect(missile_weapons_gun, val, oldVal)
-      },
-      missile_weapon_flamethrower: function (val, oldVal) {
-        this.setSkillsSelect(missile_weapon_flamethrower, val, oldVal)
-      },
-      missile_weapon_blowpipe: function (val, oldVal) {
-        this.setSkillsSelect(missile_weapon_blowpipe, val, oldVal)
-      },
-      missile_weapon_bow: function (val, oldVal) {
-        this.setSkillsSelect(missile_weapon_bow, val, oldVal)
-      },
-      missile_weapon_crossbow: function (val, oldVal) {
-        this.setSkillsSelect(missile_weapon_crossbow, val, oldVal)
-      },
-      natural_sciences: function (val, oldVal) {
-        this.setSkillsSelect(natural_sciences, val, oldVal)
-      },
-      naturalist: function (val, oldVal) {
-        this.setSkillsSelect(naturalist, val, oldVal)
-      },
-      navigation: function (val, oldVal) {
-        this.setSkillsSelect(navigation, val, oldVal)
-      },
-      observation: function (val, oldVal) {
-        this.setSkillsSelect(observation, val, oldVal)
-      },
-      occultism: function (val, oldVal) {
-        this.setSkillsSelect(occultism, val, oldVal)
-      },
-      physician: function (val, oldVal) {
-        this.setSkillsSelect(physician, val, oldVal)
-      },
-      photography: function (val, oldVal) {
-        this.setSkillsSelect(photography, val, oldVal)
-      },
-      pickpocket: function (val, oldVal) {
-        this.setSkillsSelect(pickpocket, val, oldVal)
-      },
-      public_speaking: function (val, oldVal) {
-        this.setSkillsSelect(public_speaking, val, oldVal)
-      },
-      research: function (val, oldVal) {
-        this.setSkillsSelect(research, val, oldVal)
-      },
-      riding: function (val, oldVal) {
-        this.setSkillsSelect(riding, val, oldVal)
-      },
-      scrounging: function (val, oldVal) {
-        this.setSkillsSelect(scrounging, val, oldVal)
-      },
-      search: function (val, oldVal) {
-        this.setSkillsSelect(search, val, oldVal)
-      },
-      shadowing: function (val, oldVal) {
-        this.setSkillsSelect(shadowing, val, oldVal)
-      },
-      shield: function (val, oldVal) {
-        this.setSkillsSelect(shield, val, oldVal)
-      },
-      social_sciences: function (val, oldVal) {
-        this.setSkillsSelect(social_sciences, val, oldVal)
-      },
-      smuggler: function (val, oldVal) {
-        this.setSkillsSelect(smuggler, val, oldVal)
-      },
-      stealth: function (val, oldVal) {
-        this.setSkillsSelect(stealth, val, oldVal)
-      },
-      survival: function (val, oldVal) {
-        this.setSkillsSelect(survival, val, oldVal)
-      },
-      swimming: function (val, oldVal) {
-        this.setSkillsSelect(swimming, val, oldVal)
-      },
-      tactics: function (val, oldVal) {
-        this.setSkillsSelect(tactics, val, oldVal)
-      },
-      throwing: function (val, oldVal) {
-        this.setSkillsSelect(throwing, val, oldVal)
-      },
-      thrown_weapon: function (val, oldVal) {
-        this.setSkillsSelect(thrown_weapon, val, oldVal)
-      },
-      tracking: function (val, oldVal) {
-        this.setSkillsSelect(tracking, val, oldVal)
-      },
-      traps: function (val, oldVal) {
-        this.setSkillsSelect(traps, val, oldVal)
-      },
-      vehicle_skills_easy: function (val, oldVal) {
-        this.setSkillsSelect(vehicle_skills_easy, val, oldVal)
-      },
-      vehicle_skills_average: function (val, oldVal) {
-        this.setSkillsSelect(vehicle_skills_average, val, oldVal)
-      },
-      vehicle_skills_hard: function (val, oldVal) {
-        this.setSkillsSelect(vehicle_skills_hard, val, oldVal)
-      },
-      writing: function (val, oldVal) {
-        this.setSkillsSelect(writing, val, oldVal)
-      }
+
     },
     mounted: function () {
 

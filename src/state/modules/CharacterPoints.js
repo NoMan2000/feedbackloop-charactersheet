@@ -75,19 +75,18 @@ const getters = Object.freeze({
   get remainingCharacterPoints () {
     return state.remainingCharacterPoints
   },
-  baseStat: 10,
+  BASE_STAT: 10,
   BASE_STRENGTH_COST: 10,
   BASE_DEXTERITY_COST: 20,
-  baseIntelligenceCost: 20,
-  baseHealthCost: 10,
-  basePerceptionCost: 5,
+  BASE_INTELLIGENCE_COST: 20,
+  BASE_HEALTH_COST: 10,
+  BASE_PERCEPTION_COST: 5,
   BASE_WILL_POWER_COST: 5,
   BASE_FATIGUE_COST: 3,
   BASIC_SPEED_COST: 5,
   BASE_HIT_POINTS_COST: 2,
   DODGE_DIV_BASE: 3,
-  SPEED_DIV_BASE: 4,
-  baseStrengthCost: 10
+  SPEED_DIV_BASE: 4
 })
 
 const actions = Object.freeze({
@@ -157,7 +156,7 @@ const actions = Object.freeze({
     state.damageThrown = thrown
     state.damageSwung = swung
   },
-  updateBasicSpeedDodgeAndMove: function () {
+  updateBasicSpeedDodgeAndMove () {
     state.basicSpeed = ((getters.dexterity + getters.health) / getters.SPEED_DIV_BASE) + getters.basicSpeedOffset
     state.basicMove = Math.floor(getters.basicSpeed)
     state.dodge = getters.basicMove + getters.DODGE_DIV_BASE + getters.enhancedDodge
@@ -175,7 +174,7 @@ const actions = Object.freeze({
     let canChange = false
 
     if (offset <= getters.remainingCharacterPoints) {
-      canChange = false
+      canChange = true
       state.remainingCharacterPoints -= offset
     }
     return canChange
@@ -192,6 +191,7 @@ const actions = Object.freeze({
       actions.updateBasicLift()
       actions.updateThrownThrustAndSwing()
     }
+    return canChange
   },
   set dexterity (val) {
     let canChange = actions.canUpdateValue(
@@ -202,30 +202,33 @@ const actions = Object.freeze({
       state.dexterity = val
       actions.updateBasicSpeedDodgeAndMove()
     }
+    return canChange
   },
   set intelligence (val) {
     let diff = val - getters.intelligence
     let canChange = actions.canUpdateValue(
       diff,
-      this.baseIntelligenceCost
+      getters.BASE_INTELLIGENCE_COST
     )
     if (canChange) {
       state.intelligence = val
       state.perception += diff
       state.willpower += diff
     }
+    return canChange
   },
   set health (val) {
     let diff = val - getters.health
     let canChange = actions.canUpdateValue(
       diff,
-      getters.baseHealthCost
+      getters.BASE_HEALTH_COST
     )
     if (canChange) {
       state.health = val
       state.fatiguePoints += diff
       actions.updateBasicSpeedDodgeAndMove()
     }
+    return canChange
   },
   set hitPoints (val) {
     let overThirty = (val / getters.strength) > 1.3
@@ -236,60 +239,58 @@ const actions = Object.freeze({
     if (canChange) {
       state.hitPoints = val
     }
+    return canChange
   },
   set willpower (val) {
     let canChange = actions.canUpdateValue(
       val === getters.intelligence ? 0 : val - getters.intelligence,
-      this.BASE_WILL_POWER_COST
+      getters.BASE_WILL_POWER_COST
     )
     if (canChange) {
       state.willpower = val
     }
+    return canChange
   },
   set fatiguePoints (val) {
     let canChange = actions.canUpdateValue(
       val === getters.health ? 0 : val - getters.fatiguePoints,
-      this.BASE_FATIGUE_COST
+      getters.BASE_FATIGUE_COST
     )
     if (canChange) {
       state.fatiguePoints = val
     }
+    return canChange
   },
   perception: function (val, oldVal) {
-    return this.throttle(function () {
-      var canChange = this.canUpdateValue(
-        val === this.intelligence ? 0 : val - oldVal,
-        this.basePerceptionCost
-      )
-      if (canChange) {
-
-      } else {
-        this.perception = oldVal
-      }
-      return canChange
-    }.bind(this))
+    let canChange = actions.canUpdateValue(
+      val === getters.intelligence ? 0 : val - getters.intelligence,
+      getters.BASE_PERCEPTION_COST
+    )
+    if (canChange) {
+      state.perception = val
+    }
+    return canChange
   },
-  basicSpeed: function (val, oldVal) {
-    return this.throttle(function () {
-      var speed = ((this.dexterity + this.health) / 4) + this.basicSpeedOffset
-      if (speed === val) {
-        return
-      }
-      var offset = (val - oldVal) * 4
-      var totalOffset = (val - oldVal) + this.basicSpeedOffset
-      var canUpdate = this.canUpdateValue(
-        speed === val ? 0 : offset,
-        this.BASIC_SPEED_COST
-      ) && totalOffset < 2
-      if (canUpdate) {
-        this.basicSpeedOffset = totalOffset
-
-      } else {
-        this.basicSpeed = oldVal
-      }
-      this.updateBasicMoveAndDodge()
-      return canUpdate
-    }.bind(this))
+  set basicSpeed (val) {
+    let speed = ((getters.dexterity + getters.health) / 4) + getters.basicSpeedOffset
+    if (speed === val) {
+      return
+    }
+    let offset = (val - getters.basicSpeed) * 4
+    let totalOffset = (val - getters.basicSpeed) + getters.basicSpeedOffset
+    let canUpdate = actions.canUpdateValue(
+      speed === val ? 0 : offset,
+      getters.BASIC_SPEED_COST
+    ) && totalOffset < 2
+    if (canUpdate) {
+      state.basicSpeedOffset = totalOffset
+      state.basicSpeed = val
+    }
+    actions.updateBasicMoveAndDodge()
+    return canUpdate
+  },
+  greaterThanMaxDisadvantages (offset) {
+    return (getters.disadvantages + offset) < getters.maxDisadvantages
   }
 })
 
