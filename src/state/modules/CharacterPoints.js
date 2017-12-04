@@ -1,105 +1,426 @@
-const state = {
-  characterPoints: 100,
-  totalPoints: 100,
-  strength: 10,
-  dexterity: 10,
-  intelligence: 10,
-  health: 10,
-  hitPoints: 10,
-  willpower: 10,
-  perception: 10,
-  fatiguePoints: 10,
-  remainingCharacterPoints: 100,
-  basicLift: 20,
-  basicSpeed: 5,
-  damageThrown: '1d-2',
-  damageSwung: '1d',
-  basicMove: 5,
-  dodge: 8,
-  basicSpeedOffset: 0,
-  enhanced_block: false,
-  enhancedDodge: false
-}
+import { skillPoints } from './SkillPoints'
 
-const getters = Object.freeze({
+const CharacterPoints = class CharacterPoints {
+  constructor () {
+    this._characterPoints = 100
+    this._totalPoints = 100
+    this._strength = 10
+    this._dexterity = 10
+    this._intelligence = 10
+    this._health = 10
+    this._hitPoints = 10
+    this._willpower = 10
+    this._perception = 10
+    this._fatiguePoints = 10
+    this._remainingCharacterPoints = 100
+    this._basicLift = 20
+    this._basicSpeed = 5
+    this._damageThrown = '1d-2'
+    this._damageSwung = '1d'
+    this._basicMove = 5
+    this._dodge = 8
+    this._basicSpeedOffset = 0
+    this.BASE_STAT = 10
+    this.BASE_STRENGTH_COST = 10
+    this.BASE_DEXTERITY_COST = 20
+    this.BASE_INTELLIGENCE_COST = 20
+    this.BASE_HEALTH_COST = 10
+    this.BASE_PERCEPTION_COST = 5
+    this.BASE_WILL_POWER_COST = 5
+    this.BASE_FATIGUE_COST = 3
+    this.BASIC_SPEED_COST = 5
+    this.BASE_HIT_POINTS_COST = 2
+    this.DODGE_DIV_BASE = 3
+    this.SPEED_DIV_BASE = 4
+    this.disadvantages = 0
+    this._maxDisadvantages = -(this._characterPoints / 2)
+  }
+
+  /**
+   * @returns {number}
+   */
   get attributepoints () {
-    return Number(getters.strength) +
-      Number(getters.dexterity) +
-      Number(getters.intelligence) +
-      Number(getters.health) +
-      Number(getters.hitPoints) +
-      Number(getters.willpower) +
-      Number(getters.perception) +
-      Number(getters.fatiguePoints) +
-      Number(getters.basicSpeed)
-  },
-  get strength () {
-    return state.strength
-  },
-  get dexterity () {
-    return state.dexterity
-  },
-  get intelligence () {
-    return state.intelligence
-  },
-  get health () {
-    return state.health
-  },
-  get hitPoints () {
-    return state.hitPoints
-  },
-  get willpower () {
-    return state.willpower
-  },
-  get characterPoints () {
-    return state.characterPoints
-  },
-  get perception () {
-    return state.perception
-  },
-  get fatiguePoints () {
-    return state.fatiguePoints
-  },
-  get basicSpeed () {
-    return state.basicSpeed
-  },
-  get basicMove () {
-    return state.basicMove
-  },
-  get basicLift () {
-    return state.basicLift
-  },
-  get enhancedDodge () {
-    return state.enhancedDodge
-  },
-  get remainingCharacterPoints () {
-    return state.remainingCharacterPoints
-  },
-  BASE_STAT: 10,
-  BASE_STRENGTH_COST: 10,
-  BASE_DEXTERITY_COST: 20,
-  BASE_INTELLIGENCE_COST: 20,
-  BASE_HEALTH_COST: 10,
-  BASE_PERCEPTION_COST: 5,
-  BASE_WILL_POWER_COST: 5,
-  BASE_FATIGUE_COST: 3,
-  BASIC_SPEED_COST: 5,
-  BASE_HIT_POINTS_COST: 2,
-  DODGE_DIV_BASE: 3,
-  SPEED_DIV_BASE: 4
-})
+    return Number(this.strength) +
+      Number(this.dexterity) +
+      Number(this.intelligence) +
+      Number(this.health) +
+      Number(this.hitPoints) +
+      Number(this.willpower) +
+      Number(this.perception) +
+      Number(this.fatiguePoints) +
+      Number(this.basicSpeed)
+  }
 
-const actions = Object.freeze({
-  maxDisadvantages () {
-    return -(getters.characterPoints / 2)
-  },
-  updateBasicLift () {
-    state.basicLift = Math.pow(getters.strength, 2) / 5
-  },
+  /**
+   * @returns {number}
+   */
+  get strength () {
+    return Number(this._strength)
+  }
+
+  /**
+   * @param {number} val
+   */
+  set strength (val) {
+    val = Number(val)
+    let diff = val - this.strength
+    if (!diff) {
+      return
+    }
+    let canChange = this.canUpdateValue(
+      diff,
+      this.BASE_STRENGTH_COST
+    )
+    if (canChange) {
+      this._strength = val
+      this.hitPoints += diff
+      this.basicLift = Math.pow(this.strength, 2) / 5
+      this.updateThrownThrustAndSwing()
+    }
+  }
+
+  /**
+   * @returns {number}
+   */
+  get dodge () {
+    return this._dodge
+  }
+
+  /**
+   * @param {number} val
+   */
+  set dodge (val) {
+    this._dodge = Number(val)
+  }
+
+  /**
+   * @returns {number}
+   */
+  get dexterity () {
+    return Number(this._dexterity)
+  }
+
+  /**
+   * @param {number} val
+   */
+  set dexterity (val) {
+    val = Number(val)
+    let diff = val - this.dexterity
+    if (!diff) {
+      return
+    }
+    let canChange = this.canUpdateValue(
+      diff,
+      this.BASE_DEXTERITY_COST
+    )
+    if (canChange) {
+      this._dexterity = val
+      this.updateBasicSpeedDodgeAndMove()
+    }
+  }
+
+  /**
+   * @returns {number}
+   */
+  get intelligence () {
+    return Number(this._intelligence)
+  }
+
+  /**
+   * @param {number} val
+   */
+  set intelligence (val) {
+    val = Number(val)
+    let diff = val - this.intelligence
+    if (!diff) {
+      return
+    }
+    let canChange = this.canUpdateValue(
+      diff,
+      this.BASE_INTELLIGENCE_COST
+    )
+    if (canChange) {
+      this._intelligence = val
+      this._perception += diff
+      this._willpower += diff
+    }
+  }
+
+  /**
+   * @returns {number}
+   */
+  get health () {
+    return this._health
+  }
+
+  /**
+   * @param {number} val
+   */
+  set health (val) {
+    val = Number(val)
+    let diff = val - this.health
+    if (!diff) {
+      return
+    }
+    let canChange = this.canUpdateValue(
+      diff,
+      this.BASE_HEALTH_COST
+    )
+    if (canChange) {
+      this._health = val
+      this._fatiguePoints += diff
+      this.updateBasicSpeedDodgeAndMove()
+    }
+  }
+
+  /**
+   * @returns {number}
+   */
+  get hitPoints () {
+    return this._hitPoints
+  }
+
+  /**
+   * @param {number} val
+   */
+  set hitPoints (val) {
+    val = Number(val)
+    let overThirty = (val / this.strength) > 1.3
+    let canChange = this.canUpdateValue(
+      val === this.strength ? 0 : val - this.strength,
+      this.BASE_HIT_POINTS_COST
+    ) && !overThirty
+    if (canChange) {
+      this._hitPoints = val
+    }
+  }
+
+  /**
+   * @returns {number}
+   */
+  get willpower () {
+    return this._willpower
+  }
+
+  /**
+   * @param {number} val
+   * @returns {boolean}
+   */
+  set willpower (val) {
+    val = Number(val)
+    let canChange = this.canUpdateValue(
+      val === this.intelligence ? 0 : val - this.intelligence,
+      this.BASE_WILL_POWER_COST
+    )
+    if (canChange) {
+      this._willpower = val
+    }
+    return canChange
+  }
+
+  /**
+   * @returns {number}
+   */
+  get characterPoints () {
+    return this._characterPoints
+  }
+
+  /**
+   * @param {number} val
+   */
+  set characterPoints (val) {
+    val = Number(val)
+    this._characterPoints = val
+  }
+
+  /**
+   * @returns {number}
+   */
+  get perception () {
+    return this._perception
+  }
+
+  /**
+   * @param {number} val
+   * @returns {boolean}
+   */
+  set perception (val) {
+    val = Number(val)
+    let canChange = this.canUpdateValue(
+      val === this.intelligence ? 0 : val - this.intelligence,
+      this.BASE_PERCEPTION_COST
+    )
+    if (canChange) {
+      this._perception = val
+    }
+  }
+
+  /**
+   * @returns {number}
+   */
+  get fatiguePoints () {
+    return this._fatiguePoints
+  }
+
+  /**
+   * @param {number} val
+   */
+  set fatiguePoints (val) {
+    val = Number(val)
+    let canChange = this.canUpdateValue(
+      val === this.health ? 0 : val - this.fatiguePoints,
+      this.BASE_FATIGUE_COST
+    )
+    if (canChange) {
+      this._fatiguePoints = val
+    }
+  }
+
+  /**
+   * @returns {number}
+   */
+  get basicSpeed () {
+    return this._basicSpeed
+  }
+
+  /**
+   * @param {number} val
+   */
+  set basicSpeed (val) {
+    val = Number(val)
+    let speed = ((this.dexterity + this.health) / 4) + this.basicSpeedOffset
+    if (speed === val) {
+      return
+    }
+    let offset = (val - this.basicSpeed) * 4
+    let totalOffset = (val - this.basicSpeed) + this.basicSpeedOffset
+    let canUpdate = this.canUpdateValue(
+      speed === val ? 0 : offset,
+      this.BASIC_SPEED_COST
+    ) && totalOffset < 2
+    if (canUpdate) {
+      this.basicSpeedOffset = totalOffset
+      this._basicSpeed = val
+    }
+    this.updateBasicMoveAndDodge()
+  }
+
+  /**
+   * @returns {number}
+   */
+  get basicMove () {
+    return this._basicMove
+  }
+
+  /**
+   * @param {number} val
+   */
+  set basicMove (val) {
+    this._basicMove = val
+  }
+
+  /**
+   * @returns {number}
+   */
+  get basicLift () {
+    return this._basicLift
+  }
+
+  /**
+   * @param {number} val
+   */
+  set basicLift (val) {
+    this._basicLift = Number(val)
+  }
+
+  /**
+   * @returns {number}
+   */
+  get remainingCharacterPoints () {
+    return this._remainingCharacterPoints
+  }
+
+  /**
+   * @param {number} val
+   */
+  set remainingCharacterPoints (val) {
+    val = Number(val)
+    this._remainingCharacterPoints = val
+  }
+
+  /**
+   * @returns {number}
+   */
+  get maxDisadvantages () {
+    return this._maxDisadvantages
+  }
+
+  /**
+   * @param {number} val
+   */
+  set maxDisadvantages (val) {
+    this._maxDisadvantages = -(val / 2)
+  }
+
+  /**
+   * @returns {string}
+   */
+  get damageThrown () {
+    return this._damageThrown
+  }
+
+  /**
+   * @param {string} val
+   */
+  set damageThrown (val) {
+    this._damageThrown = val
+  }
+
+  /**
+   * @returns {string}
+   */
+  get damageSwung () {
+    return this._damageSwung
+  }
+
+  /**
+   * @param {string} val
+   */
+  set damageSwung (val) {
+    val = Number(val)
+    this._damageSwung = val
+  }
+
+  /**
+   * @returns {number}
+   */
+  get basicSpeedOffset () {
+    return this._basicSpeedOffset
+  }
+
+  /**
+   * @param {number} val
+   */
+  set basicSpeedOffset (val) {
+    val = Number(val)
+    this._basicSpeedOffset = val
+  }
+
+  addDisadvantages () {
+    this.disadvantages += 1
+  }
+
+  removeDisadvantage () {
+    this.disadvantages -= 1
+  }
+
+  /**
+   *
+   */
   updateThrownThrustAndSwing () {
     let thrown = null
     let swung = null
-    switch (Number(getters.strength)) {
+    switch (Number(this.strength)) {
       case 8:
         thrown = '1d-3'
         swung = '1d-2'
@@ -153,149 +474,52 @@ const actions = Object.freeze({
         swung = '3d+2'
         break
     }
-    state.damageThrown = thrown
-    state.damageSwung = swung
-  },
+    this.damageThrown = thrown
+    this.damageSwung = swung
+  }
+
+  /**
+   *
+   */
   updateBasicSpeedDodgeAndMove () {
-    state.basicSpeed = ((getters.dexterity + getters.health) / getters.SPEED_DIV_BASE) + getters.basicSpeedOffset
-    state.basicMove = Math.floor(getters.basicSpeed)
-    state.dodge = getters.basicMove + getters.DODGE_DIV_BASE + getters.enhancedDodge
-  },
+    this.basicSpeed = ((this.dexterity + this.health) / this.SPEED_DIV_BASE) + this.basicSpeedOffset
+    this.basicMove = Math.floor(this.basicSpeed)
+    this.dodge = this.basicMove + this.DODGE_DIV_BASE + skillPoints.enhancedDodge
+  }
+
+  /**
+   *
+   */
   updateBasicMoveAndDodge () {
-    state.basicMove = Math.floor(getters.basicSpeed)
-    state.dodge = getters.basicMove + getters.DODGE_DIV_BASE
-  },
-  set characterPoints (val) {
-    state.remainingCharacterPoints += val - getters.remainingCharacterPoints
-  },
+    this._basicMove = Math.floor(this.basicSpeed)
+    this._dodge = this.basicMove + this.DODGE_DIV_BASE
+  }
+
+  /**
+   * @param {number} offset
+   * @param {number} baseCost
+   * @returns {boolean}
+   */
   canUpdateValue (offset, baseCost) {
     baseCost = Number(baseCost)
+    offset = Number(offset)
     offset *= baseCost
     let canChange = false
 
-    if (offset <= getters.remainingCharacterPoints) {
+    if (offset <= this.remainingCharacterPoints) {
       canChange = true
-      state.remainingCharacterPoints -= offset
+      this._remainingCharacterPoints -= offset
     }
     return canChange
-  },
-  set strength (val) {
-    let diff = val - getters.strength
-    let canChange = actions.canUpdateValue(
-      diff,
-      getters.BASE_STRENGTH_COST
-    )
-    if (canChange) {
-      state.strength = val
-      state.hitPoints += diff
-      actions.updateBasicLift()
-      actions.updateThrownThrustAndSwing()
-    }
-    return canChange
-  },
-  set dexterity (val) {
-    let canChange = actions.canUpdateValue(
-      val - getters.dexterity,
-      getters.BASE_DEXTERITY_COST
-    )
-    if (canChange) {
-      state.dexterity = val
-      actions.updateBasicSpeedDodgeAndMove()
-    }
-    return canChange
-  },
-  set intelligence (val) {
-    let diff = val - getters.intelligence
-    let canChange = actions.canUpdateValue(
-      diff,
-      getters.BASE_INTELLIGENCE_COST
-    )
-    if (canChange) {
-      state.intelligence = val
-      state.perception += diff
-      state.willpower += diff
-    }
-    return canChange
-  },
-  set health (val) {
-    let diff = val - getters.health
-    let canChange = actions.canUpdateValue(
-      diff,
-      getters.BASE_HEALTH_COST
-    )
-    if (canChange) {
-      state.health = val
-      state.fatiguePoints += diff
-      actions.updateBasicSpeedDodgeAndMove()
-    }
-    return canChange
-  },
-  set hitPoints (val) {
-    let overThirty = (val / getters.strength) > 1.3
-    let canChange = actions.canUpdateValue(
-      val === getters.strength ? 0 : val - getters.strength,
-      getters.BASE_HIT_POINTS_COST
-    ) && !overThirty
-    if (canChange) {
-      state.hitPoints = val
-    }
-    return canChange
-  },
-  set willpower (val) {
-    let canChange = actions.canUpdateValue(
-      val === getters.intelligence ? 0 : val - getters.intelligence,
-      getters.BASE_WILL_POWER_COST
-    )
-    if (canChange) {
-      state.willpower = val
-    }
-    return canChange
-  },
-  set fatiguePoints (val) {
-    let canChange = actions.canUpdateValue(
-      val === getters.health ? 0 : val - getters.fatiguePoints,
-      getters.BASE_FATIGUE_COST
-    )
-    if (canChange) {
-      state.fatiguePoints = val
-    }
-    return canChange
-  },
-  perception: function (val, oldVal) {
-    let canChange = actions.canUpdateValue(
-      val === getters.intelligence ? 0 : val - getters.intelligence,
-      getters.BASE_PERCEPTION_COST
-    )
-    if (canChange) {
-      state.perception = val
-    }
-    return canChange
-  },
-  set basicSpeed (val) {
-    let speed = ((getters.dexterity + getters.health) / 4) + getters.basicSpeedOffset
-    if (speed === val) {
-      return
-    }
-    let offset = (val - getters.basicSpeed) * 4
-    let totalOffset = (val - getters.basicSpeed) + getters.basicSpeedOffset
-    let canUpdate = actions.canUpdateValue(
-      speed === val ? 0 : offset,
-      getters.BASIC_SPEED_COST
-    ) && totalOffset < 2
-    if (canUpdate) {
-      state.basicSpeedOffset = totalOffset
-      state.basicSpeed = val
-    }
-    actions.updateBasicMoveAndDodge()
-    return canUpdate
-  },
-  greaterThanMaxDisadvantages (offset) {
-    return (getters.disadvantages + offset) < getters.maxDisadvantages
   }
-})
 
-export default {
-  state,
-  getters,
-  actions
+  /**
+   * @param {number} offset
+   * @returns {boolean}
+   */
+  greaterThanMaxDisadvantages (offset) {
+    return (this.disadvantages + offset) < this.maxDisadvantages
+  }
 }
+
+export const characterPoints = new CharacterPoints()

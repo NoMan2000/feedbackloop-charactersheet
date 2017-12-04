@@ -12,9 +12,20 @@
   import 'dropzone'
   import 'lodash'
   import 'chosen-js'
-  export default {
-    name: 'app'
-  }
+  import Vue from 'vue'
+
+  const bus = new Vue()
+  Object.defineProperty(Vue.prototype, '$bus', {
+    get () {
+      return this.$root.bus
+    }
+  })
+  export default new Vue({
+    name: 'app',
+    data: {
+      bus
+    }
+  })
 </script>
 
 <style lang="postcss">

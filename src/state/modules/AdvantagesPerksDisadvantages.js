@@ -6,7 +6,6 @@ const state = {
   danger_sense: false,
   daredevil: false,
   empathy: false,
-
   enhanced_parry_unarmed: false,
   enhanced_parry_one_melee: false,
   enhanced_parry_all: false,
@@ -58,5 +57,7 @@ const state = {
   unluckiness: false,
   vow_minor: false,
   vow_major: false,
-  vow_great: false
+  vow_great: false,
+  advantage_list: [],
+  disadvantage_list: []
 }
